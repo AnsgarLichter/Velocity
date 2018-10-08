@@ -1,0 +1,19 @@
+{
+  "name": "velocity",
+  "version": "1.0.0",
+  "description": "Anwendung zur Verwaltung von Trainingsergebnissen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnsgarLichter/Velocity.git"
+  },
+  "author": "Ansgar Lichter, Patrick Fichtner, Toni Coric",
+  "license": "CC-BY-4.0",
+  "bugs": {
+    "url": "https://github.com/AnsgarLichter/Velocity/issues"
+  },
+  "homepage": "https://github.com/AnsgarLichter/Velocity#readme"
+}
