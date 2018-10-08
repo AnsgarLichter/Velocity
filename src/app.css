@@ -1,0 +1,190 @@
+/*
+ * My Songbook - Beispielanwendung der Anleitung zur Entwicklung einer Browser App
+ *
+ * © 2018 Dennis Schulmeister-Zimolong <dhbw@windows3.de>
+ * Lizenz: Creative Commons Namensnennung 4.0 International
+ *
+ * Sie dürfen:
+ *
+ *     Teilen — das Material in jedwedem Format oder Medium vervielfältigen
+ *     und weiterverbreiten
+ *
+ *     Bearbeiten — das Material remixen, verändern und darauf aufbauen
+ *     und zwar für beliebige Zwecke, sogar kommerziell.
+ *
+ * Unter folgenden Bedingungen:
+ *
+ *     Namensnennung — Sie müssen angemessene Urheber- und Rechteangaben
+ *     machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen
+ *     vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art
+ *     und Weise gemacht werden, allerdings nicht so, dass der Eindruck
+ *     entsteht, der Lizenzgeber unterstütze gerade Sie oder Ihre Nutzung
+ *     besonders.
+ *
+ *     Keine weiteren Einschränkungen — Sie dürfen keine zusätzlichen Klauseln
+ *     oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas
+ *     untersagen, was die Lizenz erlaubt.
+ *
+ * Es werden keine Garantien gegeben und auch keine Gewähr geleistet.
+ * Die Lizenz verschafft Ihnen möglicherweise nicht alle Erlaubnisse,
+ * die Sie für die jeweilige Nutzung brauchen. Es können beispielsweise
+ * andere Rechte wie Persönlichkeits- und Datenschutzrechte zu beachten
+ * sein, die Ihre Nutzung des Materials entsprechend beschränken.
+ */
+
+/*
+ * Dieses Stylesheet darf nur Selektoren beinhalten, die mit #app beginnen.
+ * Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen der
+ * Anwendung überschrieben werden.
+ */
+#app {
+    background-color: white;
+    flex: 1;
+}
+
+/*
+ * Kopfbereich über dem Inhalt
+ */
+#app header {
+    background-color: var(--header-normal-background-color);
+    color: var(--header-normal-font-color);
+}
+
+#app header > *,
+#app header input,
+#app header .item {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#app header > .top {
+    font-size: 80%;
+
+    border: 0px solid var(--header-active-background-color);
+    border-bottom-width: 1px;
+}
+
+#app header > .top .item,
+#app header > .top input {
+    padding: 0.5rem;
+}
+
+#app header > .bottom {
+    border: 0px solid var(--header-active-background-color);
+    border-bottom-width: 1px;
+}
+
+#app header > .bottom .item,
+#app header > .bottom input {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+}
+
+#app header .active,
+#app header .item:not(.inactive):hover {
+    background-color: var(--header-active-background-color);
+    color: var(--header-active-font-color);
+}
+
+#app header .item:not(.inactive) {
+    cursor: pointer;
+}
+
+#app header a,
+#app header a:visited {
+    color: var(--header-normal-font-color);
+    text-decoration: none;
+}
+
+#app header a:hover {
+    color: var(--header-active-font-color);
+    text-decoration: underline;
+}
+
+#app header input {
+    background: none;
+    color: var(--header-normal-font-color);
+    border: 0;
+}
+
+/*
+ * Hauptinhalt
+ */
+#app main {
+    /*
+     * Temporärer Inhalt, solange es noch keinen richtigen Inhalt gibt
+     * Bild: https://pixabay.com/de/handwerker-baustelle-arbeiter-3094035/
+     */
+    background-image: url(construction.jpg);2
+    background-size: 100% auto;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+
+    color: rgb(255, 246, 23);
+    text-shadow: 1px 1px 2px black;
+    font-size: 300%;
+    font-weight: bold;
+    text-align: center;
+}
+
+/*
+ * Anpassung an große Bildschirme, sobald in der index.css das große
+ * Hintergrundbild eingeschaltet wird
+ */
+@media screen and (min-width: 85em) {
+    /* Rahmen um den Hauptbereich zeichnen */
+    #app {
+        max-width: 80em;
+        margin-top: 2em;
+        margin-bottom: 2em;
+
+        border: 1px solid rgba(32,32,32, 0.2);
+        box-shadow: 1px 1px 3px rgba(0,0,0, 0.1);
+    }
+
+    /* Topbar- und Toolbar-Inhalte nebeneinander */
+    #app header {
+        display: grid;
+        grid-template-columns: auto 20em;
+    }
+
+    #app header .top {
+        grid-row: 1;
+    }
+
+    #app header .bottom {
+        grid-row: 2;
+    }
+
+    #app header .left {
+        grid-column: 1;
+
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    #app header .right{
+        grid-column: 2;
+
+        display: flex;
+        justify-content: flex-start;
+
+        background-color: var(--header-active-background-color);
+        color: var(--header-active-font-color);
+    }
+
+    #app header .item {
+        width: auto;
+    }
+
+    /* Nur den Bereich unterhalb der Toolbar scrollen */
+    #app {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #app > main {
+        flex: 1;
+        overflow: auto;
+    }
+}

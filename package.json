@@ -1,19 +1,38 @@
 {
-  "name": "velocity",
+  "name": "my-songbook",
   "version": "1.0.0",
-  "description": "Anwendung zur Verwaltung von Trainingsergebnissen",
+  "description": "Eine musikerfreundliche App zur Verwaltung von Songtexten",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "node scripts/clean.js",
+    "build": "npm run clean && parcel build src/*.html --public-url . --detailed-report --experimental-scope-hoisting",
+    "watch": "npm run clean && parcel watch src/*.html --public-url . --detailed-report --experimental-scope-hoisting",
+    "start": "parcel src/index.html --open"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AnsgarLichter/Velocity.git"
+    "url": "git+https://github.com/DennisSchulmeister/dhbwka-wwi-webprog-my-songbook.git"
   },
-  "author": "Ansgar Lichter, Patrick Fichtner, Toni Coric",
+  "keywords": [
+    "Songtext",
+    "Lyrics",
+    "Browser",
+    "App",
+    "Single",
+    "Page",
+    "App",
+    "Beispiel",
+    "Demo"
+  ],
+  "author": "Dennis Schulmeister-Zimolong",
   "license": "CC-BY-4.0",
   "bugs": {
-    "url": "https://github.com/AnsgarLichter/Velocity/issues"
+    "url": "https://github.com/DennisSchulmeister/dhbwka-wwi-webprog-my-songbook/issues"
   },
-  "homepage": "https://github.com/AnsgarLichter/Velocity#readme"
+  "homepage": "https://github.com/DennisSchulmeister/dhbwka-wwi-webprog-my-songbook#readme",
+  "devDependencies": {
+    "navigo": "^7.1.2",
+    "parcel-bundler": "^1.9.7",
+    "shelljs": "^0.8.2"
+  }
 }

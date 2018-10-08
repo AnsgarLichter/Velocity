@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>My Songbook</title>
+        <link rel="shortcut icon" href="favicon.svg">
+
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <!-- ========================= -->
+        <!-- Grundgerüst der Anwendung -->
+        <!-- ========================= -->
+        <section id="app">
+            <!-- Topbar -->
+            <header>
+                <!-- Obere Zeile (fester Inhalt) -->
+                <div class="top left">
+                    <div class="item inactive">
+                        <b>
+                            Beispiel einer Browser App: My Songbook
+                        </b>
+                    </div>
+                </div>
+                <div class="top right">
+                    <div class="item">
+                        <a href="https://github.com/DennisSchulmeister/dhbwka-wwi-webprog-my-songbook" target="_blank">GitHub</a>
+                    </div>
+                    <div class="item">
+                        <a href="https://www.wpvs.de/browser-app/" target="_blank">Programmieranleitung</a>
+                    </div>
+                </div>
+
+                <!-- Untere Zeile (dynamisch je nach View) -->
+            </header>
+
+            <!-- Hauptbereich (dynamisch je nach View) -->
+            <main>
+            </main>
+        </section>
+
+        <!-- ====================== -->
+        <!-- View: Vorhandene Songs -->
+        <!-- ====================== -->
+        <section id="song-overview" class="hidden">
+            <!-- Topbar -->
+            <header>
+                <div class="left">
+                    <div class="item">
+                        <a href="/song/new/" data-navigo>
+                            Song hinzufügen
+                        </a>
+                    </div>
+                    <div class="item">
+                        Sortierung nach Titel
+                    </div>
+                </div>
+                <div class="right">
+                    <input placeholder="Suchen" />
+                </div>
+            </header>
+
+            <!-- Hauptbereich -->
+            <main>
+                <div class="padding">
+                    Übersicht
+                </div>
+            </main>
+        </section>
+
+        <!-- ================================== -->
+        <!-- View: Song anzeigen und bearbeiten -->
+        <!-- ================================== -->
+        <section id="song-display-edit" class="hidden">
+            <!-- Topbar -->
+            <header>
+                <div class="left">
+                    <!-- Leer -->
+                </div>
+                <div class="right">
+                    <div class="item">
+                        <a href="/" data-navigo>
+                            Zurück zur Übersicht
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Hauptbereich -->
+            <main>
+                <div class="padding">
+                    Song anzeigen/bearbeiten
+                </div>
+            </main>
+        </section>
+    </body>
+</html>
