@@ -36,8 +36,8 @@
 import stylesheet from "./app.css";
 
 import Navigo from "navigo/lib/navigo.js";
-import SongDisplayEdit from "./song-display-edit/song-display-edit.js";
-import SongOverview from "./song-overview/song-overview.js";
+import RunDisplayEdit from "./run-display-edit/run-display-edit.js";
+import RunOverview from "./run-overview/run-overview.js";
 
 /**
  * Hauptklasse der Anwendung. Kümmert sich darum, die Anwendung auszuführen
@@ -48,7 +48,7 @@ class App {
      * Konstruktor.
      */
     constructor() {
-        this._title = "My Songbook";
+        this._title = "Velocity";
         this._currentView = null;
 
         // Single Page Router aufsetzen
@@ -57,10 +57,10 @@ class App {
         this._navAborted = false;
 
         this._router.on({
-            "*":                       () => this.showSongOverview(),
-            "/song/new/":              () => this.showSongDisplayEdit("", "new"),
-            "/song/display/:id/":  params => this.showSongDisplayEdit(params.id, "display"),
-            "/song/edit/:id/":     params => this.showSongDisplayEdit(params.id, "edit"),
+            "*":                       () => this.showRunOverview(),
+            "/run/new/":              () => this.showRunDisplayEdit("", "new"),
+            "/run/display/:id/":  params => this.showRunDisplayEdit(params.id, "display"),
+            "/run/edit/:id/":     params => this.showRunDisplayEdit(params.id, "edit"),
         });
 
         this._router.hooks({
@@ -89,23 +89,23 @@ class App {
     }
 
     /**
-     * Aufruf der Übersichtsseite der vorhandenen Songs.
+     * Aufruf der Übersichtsseite der vorhandenen Laufergebnisse.
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
-    showSongOverview() {
-        let view = new SongOverview(this);
+    showRunOverview() {
+        let view = new RunOverview(this);
         this._switchVisibleView(view);
     }
 
     /**
      * Aufruf der Detailseite zur Anzeige oder zum Bearbeiten eines Songs.
      *
-     * @param  {String} id Song-ID
+     * @param  {String} id Run-ID
      * @param  {String} mode "new", "display" oder "edit"
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
-    showSongDisplayEdit(id, mode) {
-        let view = new SongDisplayEdit(this, id, mode);
+    showRunDisplayEdit(id, mode) {
+        let view = new RunDisplayEdit(this, id, mode);
         this._switchVisibleView(view);
     }
 

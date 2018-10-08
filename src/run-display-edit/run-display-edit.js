@@ -31,20 +31,25 @@
  * andere Rechte wie Persönlichkeits- und Datenschutzrechte zu beachten
  * sein, die Ihre Nutzung des Materials entsprechend beschränken.
  */
-"use strict";
+ "use strict";
 
-import stylesheet from "./song-overview.css";
+import stylesheet from "./run-display-edit.css";
 
-/**
- * View mit der Übersicht der vorhandenen Songs.
- */
-class SongOverview {
+ /**
+  * View zur Anzeige oder zum Bearbeiten eines Songs.
+  */
+class RunDisplayEdit {
     /**
-     * Konstruktor,
+     * Konstruktor.
+     *
      * @param {Objekt} app Zentrales App-Objekt der Anwendung
+     * @param {String} id   ID des darzustellenden Songs
+     * @param {String} mode "new", "display" oder "edit"
      */
-    constructor(app) {
+    constructor(app, id, mode) {
         this._app = app;
+        this._id = id;
+        this._mode = mode;
     }
 
     /**
@@ -57,10 +62,10 @@ class SongOverview {
      * Methode App._switchVisibleContent()
      */
     onShow() {
-        let section = document.querySelector("#song-overview").cloneNode(true);
+        let section = document.querySelector("#run-display-edit").cloneNode(true);
 
         return {
-            className: "song-overview",
+            className: "run-display-edit",
             topbar: section.querySelectorAll("header > *"),
             main: section.querySelectorAll("main > *"),
         };
@@ -74,7 +79,7 @@ class SongOverview {
      * @param  {Function} goon Callback, um den Seitenwechsel zu einem späteren
      * Zeitpunkt fortzuführen, falls wir hier false zurückgeben
      * @return {Boolean} true, wenn der Seitenwechsel erlaubt ist, sonst false
-     */
+    */
     onLeave(goon) {
         return true;
     }
@@ -83,8 +88,15 @@ class SongOverview {
      * @return {String} Titel für die Titelzeile des Browsers
      */
     get title() {
-        return "Übersicht";
+        switch (this._mode) {
+            case "new":
+                return "Run hinzufügen";
+            case "edit":
+                return "Run bearbeiten";
+            default:
+                return "Run anzeigen";
+        }
     }
 }
 
-export default SongOverview;
+export default RunDisplayEdit;

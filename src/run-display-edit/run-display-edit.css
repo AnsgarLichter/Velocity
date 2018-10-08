@@ -37,6 +37,6 @@
   * beginnen. Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen
   * der Anwendung überschrieben werden.
   */
-.song-display-edit main {
+.run-display-edit main {
     color: orchid !important;
 }

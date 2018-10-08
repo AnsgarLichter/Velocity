@@ -31,25 +31,20 @@
  * andere Rechte wie Persönlichkeits- und Datenschutzrechte zu beachten
  * sein, die Ihre Nutzung des Materials entsprechend beschränken.
  */
- "use strict";
+"use strict";
 
-import stylesheet from "./song-display-edit.css";
+import stylesheet from "./run-overview.css";
 
- /**
-  * View zur Anzeige oder zum Bearbeiten eines Songs.
-  */
-class SongDisplayEdit {
+/**
+ * View mit der Übersicht der vorhandenen Songs.
+ */
+class RunOverview {
     /**
-     * Konstruktor.
-     *
+     * Konstruktor,
      * @param {Objekt} app Zentrales App-Objekt der Anwendung
-     * @param {String} id   ID des darzustellenden Songs
-     * @param {String} mode "new", "display" oder "edit"
      */
-    constructor(app, id, mode) {
+    constructor(app) {
         this._app = app;
-        this._id = id;
-        this._mode = mode;
     }
 
     /**
@@ -62,10 +57,10 @@ class SongDisplayEdit {
      * Methode App._switchVisibleContent()
      */
     onShow() {
-        let section = document.querySelector("#song-display-edit").cloneNode(true);
+        let section = document.querySelector("#run-overview").cloneNode(true);
 
         return {
-            className: "song-display-edit",
+            className: "run-overview",
             topbar: section.querySelectorAll("header > *"),
             main: section.querySelectorAll("main > *"),
         };
@@ -79,7 +74,7 @@ class SongDisplayEdit {
      * @param  {Function} goon Callback, um den Seitenwechsel zu einem späteren
      * Zeitpunkt fortzuführen, falls wir hier false zurückgeben
      * @return {Boolean} true, wenn der Seitenwechsel erlaubt ist, sonst false
-    */
+     */
     onLeave(goon) {
         return true;
     }
@@ -88,15 +83,8 @@ class SongDisplayEdit {
      * @return {String} Titel für die Titelzeile des Browsers
      */
     get title() {
-        switch (this._mode) {
-            case "new":
-                return "Song hinzufügen";
-            case "edit":
-                return "Song bearbeiten";
-            default:
-                return "Song anzeigen";
-        }
+        return "Übersicht";
     }
 }
 
-export default SongDisplayEdit;
+export default SongOverview;
