@@ -88,7 +88,8 @@ body {
     /* Hintergrundbild hinter dem Hauptbereich der App */
     html {
         /* https://pixabay.com/de/computer-notebook-kaffee-820281/ */
-        background-image: url(background.jpg);
+        /*backround-image: url(background.jpg);*/
+        background-color: white;
         background-attachment: fixed;
         background-size: cover;
         background-position: center;
