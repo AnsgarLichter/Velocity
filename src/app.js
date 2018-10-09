@@ -32,12 +32,14 @@
  * sein, die Ihre Nutzung des Materials entsprechend beschränken.
  */
 "use strict";
+import "regenerator-runtime/runtime";
 
 import stylesheet from "./app.css";
 
 import Navigo from "navigo/lib/navigo.js";
 import RunDisplayEdit from "./run-display-edit/run-display-edit.js";
 import RunOverview from "./run-overview/run-overview.js";
+import Database from "./database.js";
 
 /**
  * Hauptklasse der Anwendung. Kümmert sich darum, die Anwendung auszuführen
@@ -62,6 +64,58 @@ class App {
             "/run/display/:id/":  params => this.showRunDisplayEdit(params.id, "display"),
             "/run/edit/:id/":     params => this.showRunDisplayEdit(params.id, "edit"),
         });
+
+        //Test der Datenbankklasse für Laufergebnisse
+        let test = async () => {
+            let runsDB = new Database.Runs();
+            await runsDB.clear();
+
+            let runs = await runsDB.search();
+            console.log("Alle Ergebnisse: ", runs);
+
+            if(runs.length == 0) {
+                console.log("Bisher noch keine Trainningsdaten vorhanden, lege daher Testdaten an");
+
+                await Promise.all([
+                    runsDB.saveNew({
+                        strecke: "6km",
+                        dauer: "30:00",
+                        geschwindigkeitPerKm: "5:00",
+                        art: "Joggen",
+                        datum: "09.10.2018",
+                        format: "html",
+                        data: "HTML-Code für ...",
+                    }),
+                    runsDB.saveNew({
+                        strecke: "8km",
+                        dauer: "35:00",
+                        geschwindigkeitPerKm: "4:30",
+                        art: "Joggen",
+                        datum: "10.10.2018",
+                        format: "html",
+                        data: "HTML-Code für ...",
+                    }),
+                    runsDB.saveNew({
+                        strecke: "10km",
+                        dauer: "50:10",
+                        geschwindigkeitPerKm: "5:01",
+                        art: "Joggen",
+                        datum: "03.10.2018",
+                        format: "html",
+                        data: "HTML-Code für ...",
+                    }),
+                ]);
+
+                let runs = await runsDB.search();
+                console.log("Gespeicherte Traininsdaten: ", runs);
+            }
+
+            runs = await runsDB.search("6km");
+            console.log("Suche nach 6km", runs);
+        }
+
+        test();
+        //Ende des Testcodes
 
         this._router.hooks({
             after: (params) => {

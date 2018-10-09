@@ -36,5 +36,8 @@
     "navigo": "^7.1.2",
     "parcel-bundler": "^1.9.7",
     "shelljs": "^0.8.2"
+  },
+  "dependencies": {
+    "regenerator-runtime": "^0.12.1"
   }
 }

@@ -77,7 +77,7 @@ class Runs {
      *@return {Promise} Asynchrones Promise-Objekt
     */
     async clear() {
-        return.database.runs.clear();
+        return database.runs.clear();
     }
 
     /**
@@ -86,7 +86,7 @@ class Runs {
      *@return {Promise} Asynchrones Promise-Objekt mit dem gewünschten Ergebnis
     */
     async getByID(id) {
-        return.database.runs.get(id);
+        return database.runs.get(id);
     }
 
     /**
@@ -119,7 +119,7 @@ class Runs {
 
 }
 
-export default
+export default {
     database,
     Runs,
 };
