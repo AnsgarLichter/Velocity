@@ -61,17 +61,54 @@ class RunOverview {
         //Datenbankergebnisse in lokaler Variable speichern
         let runsList = runsDB.search();
 
+
         //Passende Elemente vom HTML aufrufen und in Sections speichern
         let section = document.querySelector("#run-overview").cloneNode(true);
-        let table = section.querySelector("#uebersicht").cloneNode(true);
+        //Übersichtstabelle in table zur Bearbeitung speichern
+        let table = section.querySelector("#uebersicht");
 
-        //Tabellenzeile für jedes Ergebnis liefern
-        /*let newTR = document.createElement("TR");
-        let newTH = document.createElement("TH");
-        let newTHText = document.createElement("aaa");
-        section.querySelector("#uebersicht").appendChild(newTR);
-        section.querySelector("#uebersicht").firstChild.appendChild(newTH);
-        section.querySelector("#uebersicht").firstChild.firstChild.appendChild(newTHText);*/
+        //Gefundene Ergebnisse der Tabelle hinzufügen
+        for(let run in runsList) {
+            //Tabellenzeile für jedes Ergebnis erstellen
+            let newTR = document.createElement("TR");
+            /*Einzelne Eigenschaften in <TD>-Elementen speichern
+            *und der neuen Zeile als Kind hinzufügen
+            *Eigenschaften / Spalten der Tabelle:
+            *Name
+            *Datum
+            *Distanz in km
+            *Zeit
+            *Art
+            *Velocity in min/km*/
+            let tdName = document.createElement("TD");
+            let tdDatum = document.createElement("TD");
+            let tdDistanz = document.createElement("TD");
+            let tdZeit = document.createElement("TD");
+            let tdArt = document.createElement("TD");
+            let tdVelocity = document.createElement("TD");
+            //Einzelne Elemente mit Inhalt befüllen
+            tdName.innerHTML = e.name;
+            tdDatum.innerHTML = e.datum;
+            tdDistanz.innerHTML = e.strecke;
+            tdZeit.innerHTML = e.dauer;
+            tdArt.innerHTML = e.art;
+            tdVelocity.innerHTML = e.minutenPerKm;
+            //Einzelne TDs der Table Row als Kind hinzufügen
+
+            //Reihenfolge der Tabellenspalten sollte mit der
+            //Reihenfolge der Anweisungen übereinstimmen1
+            newTR.appendChild(tdName);
+            newTR.appendChild(tdDatum);
+            newTR.appendChild(tdDistanz);
+            newTR.appendChild(tdZeit);
+            newTR.appendChild(tdArt);
+            newTR.appendChild(tdVelocity);
+
+            //Tabellenzeile zu Section hinzufügen, damit
+            // diese auch auf dem Bildschirm angezeigt wird
+            section.querySelector("#uebersicht").appendChild(newTR);
+
+        }
 
         return {
             className: "run-overview",

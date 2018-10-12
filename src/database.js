@@ -5,6 +5,7 @@ import Dexie from "dexie/dist/dexie.js";
 //Datenbankdefinition:
 //
 // ++id --> automatisch hochgezählter Datenbankschlüssel
+// Name
 // Strecke
 // Dauer
 // Minuten / km
@@ -13,7 +14,7 @@ import Dexie from "dexie/dist/dexie.js";
 //
 // Folgende Felder sind keine Indexfelder für WHERE-Abfragen,
 // daher müssen diese nicht definiert werden:
-//  Namen
+//  Bewertung
 //  Beschreibung
 //
 //
@@ -21,7 +22,7 @@ import Dexie from "dexie/dist/dexie.js";
 let database = new Dexie("Velocity");
 
 database.version(1).stores({
-    runs: "++id, strecke, dauer, minutenPerKm, art, datum",
+    runs: "++id, name, strecke, dauer, minutenPerKm, art, datum",
 });
 
 /**
@@ -105,12 +106,13 @@ class Runs {
 
         //Ergebnis definieren
         let result = database.runs.filter(run => {
+            let name = run.name.toUpperCase();
             let strecke = run.strecke.toUpperCase();
             let dauer = run.dauer.toUpperCase();
             let minutenPerKm = run.minutenPerKm.toUpperCase();
             let art = run.art.toUpperCase();
             let datum = run.datum.toUpperCase();
-            return strecke.search(query) > -1 | dauer.search(query) > -1  | minutenPerKm.search(query) > -1  | art.search(query) > -1  | datum.search(query) > -1;
+            return name.search(query) > -1 | strecke.search(query) > -1 | dauer.search(query) > -1  | minutenPerKm.search(query) > -1  | art.search(query) > -1  | datum.search(query) > -1;
         });
 
         // Suchergebnis zurückgegeben

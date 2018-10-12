@@ -81,6 +81,7 @@ class App {
 
                 await Promise.all([
                     this._runsDB.saveNew({
+                        name: "Test1",
                         strecke: "6km",
                         dauer: "30:00",
                         minutenPerKm: "5:00",
@@ -90,6 +91,7 @@ class App {
                         data: "HTML-Code für ...",
                     }),
                     this._runsDB.saveNew({
+                        name: "Test2",
                         strecke: "8km",
                         dauer: "35:00",
                         minutenPerKm: "4:30",
@@ -99,6 +101,7 @@ class App {
                         data: "HTML-Code für ...",
                     }),
                     this._runsDB.saveNew({
+                        name: "Test2",
                         strecke: "10km",
                         dauer: "50:10",
                         minutenPerKm: "5:01",
@@ -110,7 +113,7 @@ class App {
                 ]);
 
                 let runs = await this._runsDB.search();
-                console.log("Gespeicherte Traininsdaten: ", runs);
+                console.log("Gespeicherte Trainingsdaten: ", runs);
             }
 
             runs = await this._runsDB.search("6km");
