@@ -32,7 +32,7 @@
  * sein, die Ihre Nutzung des Materials entsprechend beschränken.
  */
 "use strict";
-import "regenerator-runtime/runtime";
+//import "regenerator-runtime/runtime";
 
 import stylesheet from "./app.css";
 
