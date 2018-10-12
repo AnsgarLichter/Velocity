@@ -38,5 +38,6 @@
   * der Anwendung überschrieben werden.
   */
 .run-overview main {
-    color: orangered !important;
+    font-color: white;
+    background-color: #B7DFDD;
 }

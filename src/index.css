@@ -84,15 +84,16 @@ body {
 /*
  * Flächendeckender Seitenhintergrund auf großen Bildschirmen
  */
+
 @media (min-width: 85em) {
     /* Hintergrundbild hinter dem Hauptbereich der App */
     html {
         /* https://pixabay.com/de/computer-notebook-kaffee-820281/ */
         /*backround-image: url(background.jpg);*/
         background-color: white;
-        background-attachment: fixed;
+        /*background-attachment: fixed;
         background-size: cover;
-        background-position: center;
+        background-position: center;*/
     }
 
     /* Hauptbereich der App vergrößern */
