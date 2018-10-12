@@ -38,6 +38,22 @@
   * der Anwendung überschrieben werden.
   */
 .run-overview main {
-    font-color: white;
+    font-color: #3c3c3c;
     background-color: #B7DFDD;
+}
+
+.table table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table td, th {
+    border: 2px solid #3c3c3c;
+    text-align: left;
+    padding: 4px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #001676;
 }

@@ -50,8 +50,12 @@ class App {
      * Konstruktor.
      */
     constructor() {
+        //Titel deklarieren
         this._title = "Velocity";
         this._currentView = null;
+
+        //Datenbank deklarieren
+        this._runsDB = new Database.Runs();
 
         // Single Page Router aufsetzen
         this._router = new Navigo();
@@ -67,38 +71,37 @@ class App {
 
         //Test der Datenbankklasse für Laufergebnisse
         let test = async () => {
-            let runsDB = new Database.Runs();
-            await runsDB.clear();
+            await this._runsDB.clear();
 
-            let runs = await runsDB.search();
+            let runs = await this._runsDB.search();
             console.log("Alle Ergebnisse: ", runs);
 
             if(runs.length == 0) {
                 console.log("Bisher noch keine Trainningsdaten vorhanden, lege daher Testdaten an");
 
                 await Promise.all([
-                    runsDB.saveNew({
+                    this._runsDB.saveNew({
                         strecke: "6km",
                         dauer: "30:00",
-                        geschwindigkeitPerKm: "5:00",
+                        minutenPerKm: "5:00",
                         art: "Joggen",
                         datum: "09.10.2018",
                         format: "html",
                         data: "HTML-Code für ...",
                     }),
-                    runsDB.saveNew({
+                    this._runsDB.saveNew({
                         strecke: "8km",
                         dauer: "35:00",
-                        geschwindigkeitPerKm: "4:30",
+                        minutenPerKm: "4:30",
                         art: "Joggen",
                         datum: "10.10.2018",
                         format: "html",
                         data: "HTML-Code für ...",
                     }),
-                    runsDB.saveNew({
+                    this._runsDB.saveNew({
                         strecke: "10km",
                         dauer: "50:10",
-                        geschwindigkeitPerKm: "5:01",
+                        minutenPerKm: "5:01",
                         art: "Joggen",
                         datum: "03.10.2018",
                         format: "html",
@@ -106,11 +109,11 @@ class App {
                     }),
                 ]);
 
-                let runs = await runsDB.search();
+                let runs = await this._runsDB.search();
                 console.log("Gespeicherte Traininsdaten: ", runs);
             }
 
-            runs = await runsDB.search("6km");
+            runs = await this._runsDB.search("6km");
             console.log("Suche nach 6km", runs);
         }
 
@@ -195,7 +198,7 @@ class App {
         document.title = `${this._title} – ${view.title}`;
 
         this._currentView = view;
-        this._switchVisibleContent(view.onShow());
+        this._switchVisibleContent(view.onShow(this._runsDB));
         return true;
     }
 

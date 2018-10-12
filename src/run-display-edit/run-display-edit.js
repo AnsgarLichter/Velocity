@@ -58,10 +58,11 @@ class RunDisplayEdit {
      * _switchVisibleContent() der Klasse App übergeben werden kann, um ihr
      * die darzustellenden DOM-Elemente mitzuteilen.
      *
+     * @param {Object} runsDB Datenbank mit Ergebnissen als Inhalt
      * @return {Object} Darzustellende DOM-Elemente gemäß Beschreibung der
      * Methode App._switchVisibleContent()
      */
-    onShow() {
+    onShow(runsDB) {
         let section = document.querySelector("#run-display-edit").cloneNode(true);
 
         return {

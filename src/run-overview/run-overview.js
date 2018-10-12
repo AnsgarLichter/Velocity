@@ -53,11 +53,25 @@ class RunOverview {
      * _switchVisibleContent() der Klasse App übergeben werden kann, um ihr
      * die darzustellenden DOM-Elemente mitzuteilen.
      *
+     * @param {Object} runsDB Datenbank mit Ergebnissen als Inhalt
      * @return {Object} Darzustellende DOM-Elemente gemäß Beschreibung der
      * Methode App._switchVisibleContent()
      */
-    onShow() {
+    onShow(runsDB) {
+        //Datenbankergebnisse in lokaler Variable speichern
+        let runsList = runsDB.search();
+
+        //Passende Elemente vom HTML aufrufen und in Sections speichern
         let section = document.querySelector("#run-overview").cloneNode(true);
+        let table = section.querySelector("#uebersicht").cloneNode(true);
+
+        //Tabellenzeile für jedes Ergebnis liefern
+        /*let newTR = document.createElement("TR");
+        let newTH = document.createElement("TH");
+        let newTHText = document.createElement("aaa");
+        section.querySelector("#uebersicht").appendChild(newTR);
+        section.querySelector("#uebersicht").firstChild.appendChild(newTH);
+        section.querySelector("#uebersicht").firstChild.firstChild.appendChild(newTHText);*/
 
         return {
             className: "run-overview",

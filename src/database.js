@@ -7,7 +7,7 @@ import Dexie from "dexie/dist/dexie.js";
 // ++id --> automatisch hochgezählter Datenbankschlüssel
 // Strecke
 // Dauer
-// Geschwinndigkeit / km
+// Minuten / km
 // Art
 // Datum
 //
@@ -21,7 +21,7 @@ import Dexie from "dexie/dist/dexie.js";
 let database = new Dexie("Velocity");
 
 database.version(1).stores({
-    runs: "++id, strecke, dauer, geschwindigkeitPerKm, art, datum",
+    runs: "++id, strecke, dauer, minutenPerKm, art, datum",
 });
 
 /**
@@ -39,7 +39,7 @@ class Runs {
      * {
      *     name: "Name des Trainings",
      *     strecke: "Strecke in Kilometern",
-     *     geschwindigkeit/km: "Geschwindigkeit pro Kilometer"
+     *     minuten/km: "Minuten pro Kilometer"
      *     dauer: "Dauer des Trainings",
      *     datum: "Datum des Trainings"
      *     format: "html",
@@ -91,7 +91,7 @@ class Runs {
 
     /**
      *Liste mit allen vorhandenen Ergebnissen zurückgeben, deren
-     *Strecke, Dauer, Geschwinndigkeit / km, Art, Datum den gewünschten weiter
+     *Strecke, Dauer, Minuten / km, Art, Datum den gewünschten weiter
      *enthalten.
      *@param {String} query Suchbegriff
      *@return {Promise} Asynchrones Promise-Objekt mit dem Suchergebnise
@@ -107,10 +107,10 @@ class Runs {
         let result = database.runs.filter(run => {
             let strecke = run.strecke.toUpperCase();
             let dauer = run.dauer.toUpperCase();
-            let geschwindigkeitPerKm = run.geschwindigkeitPerKm.toUpperCase();
+            let minutenPerKm = run.minutenPerKm.toUpperCase();
             let art = run.art.toUpperCase();
             let datum = run.datum.toUpperCase();
-            return strecke.search(query) > -1 | dauer.search(query) > -1  | geschwindigkeitPerKm.search(query) > -1  | art.search(query) > -1  | datum.search(query) > -1;
+            return strecke.search(query) > -1 | dauer.search(query) > -1  | minutenPerKm.search(query) > -1  | art.search(query) > -1  | datum.search(query) > -1;
         });
 
         // Suchergebnis zurückgegeben
