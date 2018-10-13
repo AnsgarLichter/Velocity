@@ -61,12 +61,31 @@ class RunOverview {
         //Passende Elemente vom HTML aufrufen und in Sections speichern
         let section = document.querySelector("#run-overview").cloneNode(true);
 
-        //Datenbankergebnisse in lokaler Variable speichern
-        let runsList = runsDB.search();
+        /*Datenbankergebnisse in lokaler Variable speichern
+        *Abfrage aller vorhandenen Ergebnisse muss in eine async-Funktion
+        *gepackt werden, damit auch auf das Ergebnis der Datenbankabfrage
+        *gewartet wird.
+        */
+
+        //!!! Problem: nur beim Debuggen funktioniert der Algorithmus,
+        //ohne Debuggen werdn keine Erggebnisse angezeigt:
+        //Grund: ohne beim Debuggen in die async-Funktion getRunsList
+        //zu gehen, wird in Zeile 128 (TR der section hinzufügen)
+        //ein Fehler geworfen
+        //!!!!
+
+
+        let getRunsList = async () => {
+            let runsList = await runsDB.search();
+            return runsList;
+        }
+        let runsList = getRunsList();
+
         //Ergebnisse verarbeiten
         //Then-Methode eines Promise-Objekts liefert Zugriff auf Value
         //die im Promise gespeichert sind.
         runsList.then(function(e) {
+            
             //e ist nun ein Array --> durchlaufen der einzelnen Ergebnissen
             //mit Hilfe einer forEach-Schleife.
             e.forEach(function(run) {
@@ -111,8 +130,6 @@ class RunOverview {
             });
         });
 
-        //Test
-        let mainNew = section.querySelectorAll("main > *");
         return {
             className: "run-overview",
             topbar: section.querySelectorAll("header > *"),
