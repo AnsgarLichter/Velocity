@@ -58,58 +58,61 @@ class RunOverview {
      * Methode App._switchVisibleContent()
      */
     onShow(runsDB) {
-        //Datenbankergebnisse in lokaler Variable speichern
-        let runsList = runsDB.search();
-
-
         //Passende Elemente vom HTML aufrufen und in Sections speichern
         let section = document.querySelector("#run-overview").cloneNode(true);
-        //Übersichtstabelle in table zur Bearbeitung speichern
-        let table = section.querySelector("#uebersicht");
 
-        //Gefundene Ergebnisse der Tabelle hinzufügen
-        for(let run in runsList) {
-            //Tabellenzeile für jedes Ergebnis erstellen
-            let newTR = document.createElement("TR");
-            /*Einzelne Eigenschaften in <TD>-Elementen speichern
-            *und der neuen Zeile als Kind hinzufügen
-            *Eigenschaften / Spalten der Tabelle:
-            *Name
-            *Datum
-            *Distanz in km
-            *Zeit
-            *Art
-            *Velocity in min/km*/
-            let tdName = document.createElement("TD");
-            let tdDatum = document.createElement("TD");
-            let tdDistanz = document.createElement("TD");
-            let tdZeit = document.createElement("TD");
-            let tdArt = document.createElement("TD");
-            let tdVelocity = document.createElement("TD");
-            //Einzelne Elemente mit Inhalt befüllen
-            tdName.innerHTML = e.name;
-            tdDatum.innerHTML = e.datum;
-            tdDistanz.innerHTML = e.strecke;
-            tdZeit.innerHTML = e.dauer;
-            tdArt.innerHTML = e.art;
-            tdVelocity.innerHTML = e.minutenPerKm;
-            //Einzelne TDs der Table Row als Kind hinzufügen
+        //Datenbankergebnisse in lokaler Variable speichern
+        let runsList = runsDB.search();
+        //Ergebnisse verarbeiten
+        //Then-Methode eines Promise-Objekts liefert Zugriff auf Value
+        //die im Promise gespeichert sind.
+        runsList.then(function(e) {
+            //e ist nun ein Array --> durchlaufen der einzelnen Ergebnissen
+            //mit Hilfe einer forEach-Schleife.
+            e.forEach(function(run) {
+                //Tabellenzeile für jedes Ergebnis erstellen
+                let newTR = document.createElement("TR");
+                /*Einzelne Eigenschaften in <TD>-Elementen speichern
+                *und der neuen Zeile als Kind hinzufügen
+                *Eigenschaften / Spalten der Tabelle:
+                *Name
+                *Datum
+                *Distanz in km
+                *Zeit
+                *Art
+                *Velocity in min/km*/
+                let tdName = document.createElement("TD");
+                let tdDatum = document.createElement("TD");
+                let tdDistanz = document.createElement("TD");
+                let tdZeit = document.createElement("TD");
+                let tdArt = document.createElement("TD");
+                let tdVelocity = document.createElement("TD");
+                //Einzelne Elemente mit Inhalt befüllen
+                tdName.textContent      = run.name;
+                tdDatum.textContent     = run.datum;
+                tdDistanz.textContent   = run.strecke;
+                tdZeit.textContent      = run.dauer;
+                tdArt.textContent       = run.art;
+                tdVelocity.textContent  = run.minutenPerKm;
 
-            //Reihenfolge der Tabellenspalten sollte mit der
-            //Reihenfolge der Anweisungen übereinstimmen1
-            newTR.appendChild(tdName);
-            newTR.appendChild(tdDatum);
-            newTR.appendChild(tdDistanz);
-            newTR.appendChild(tdZeit);
-            newTR.appendChild(tdArt);
-            newTR.appendChild(tdVelocity);
+                //Einzelne TDs der Table Row als Kind hinzufügen:
+                //Reihenfolge der Tabellenspalten sollte mit der
+                //Reihenfolge der Anweisungen übereinstimmen1
+                newTR.appendChild(tdName);
+                newTR.appendChild(tdDatum);
+                newTR.appendChild(tdDistanz);
+                newTR.appendChild(tdZeit);
+                newTR.appendChild(tdArt);
+                newTR.appendChild(tdVelocity);
 
-            //Tabellenzeile zu Section hinzufügen, damit
-            // diese auch auf dem Bildschirm angezeigt wird
-            section.querySelector("#uebersicht").appendChild(newTR);
+                //Tabellenzeile zur Tabelle (Id: uebersicht) hinzufügen, damit
+                // diese auch auf dem Bildschirm angezeigt wird
+                section.querySelector("#uebersicht").appendChild(newTR);
+            });
+        });
 
-        }
-
+        //Test
+        let mainNew = section.querySelectorAll("main > *");
         return {
             className: "run-overview",
             topbar: section.querySelectorAll("header > *"),
