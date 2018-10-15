@@ -60,7 +60,7 @@ class RunOverview {
     onShow(runsDB) {
         //Passende Elemente vom HTML aufrufen und in Sections speichern
         let section = document.querySelector("#run-overview").cloneNode(true);
-
+        let tBody   = section.querySelector("#uebersicht");
         /*Datenbankergebnisse in lokaler Variable speichern
         *Abfrage aller vorhandenen Ergebnisse muss in eine async-Funktion
         *gepackt werden, damit auch auf das Ergebnis der Datenbankabfrage
@@ -85,7 +85,7 @@ class RunOverview {
         //Then-Methode eines Promise-Objekts liefert Zugriff auf Value
         //die im Promise gespeichert sind.
         runsList.then(function(e) {
-            
+
             //e ist nun ein Array --> durchlaufen der einzelnen Ergebnissen
             //mit Hilfe einer forEach-Schleife.
             e.forEach(function(run) {
@@ -126,7 +126,7 @@ class RunOverview {
 
                 //Tabellenzeile zur Tabelle (Id: uebersicht) hinzufügen, damit
                 // diese auch auf dem Bildschirm angezeigt wird
-                section.querySelector("#uebersicht").appendChild(newTR);
+                tBody.appendChild(newTR);
             });
         });
 
