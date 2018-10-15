@@ -70,7 +70,7 @@ class App {
         });
 
         //Test der Datenbankklasse für Laufergebnisse
-        /*<let test = async () => {
+        /*let test = async () => {
             await this._runsDB.clear();
 
             let runs = await this._runsDB.search();

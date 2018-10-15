@@ -46,6 +46,8 @@
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    font-size: small;
+    font-family: sans-serif;
 }
 
 .table td, th {
@@ -54,6 +56,12 @@
     padding: 4px;
 }
 
+#t1 {
+    background-color: #202124;
+    color: white;
+
+}
+
 .table tr:nth-child(even) {
-    background-color: #001676;
+    background-color: #FFFFFF;
 }
