@@ -66,7 +66,7 @@ class Runs {
     /**
      *Vorhandenes Ergebnis anhand seiner ID löschen.
      *
-     *@param {Object} run zu löschendes Ergebnisse
+     *@param {Object} id zu löschende ID
      *@return {Promise} Asynchrones Promise Objekt
     */
     async delete(id) {

@@ -70,7 +70,7 @@ class App {
         });
 
         //Test der Datenbankklasse für Laufergebnisse
-        let test = async () => {
+        /*<let test = async () => {
             await this._runsDB.clear();
 
             let runs = await this._runsDB.search();
@@ -120,7 +120,7 @@ class App {
             console.log("Suche nach 6km", runs);
         }
 
-        test();
+        test();*/
         //Ende des Testcodes
 
         this._router.hooks({
