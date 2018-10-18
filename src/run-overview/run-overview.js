@@ -130,6 +130,27 @@ class RunOverview {
             });
         });
 
+        //Event-Listener für Suchfeld in der NavBar
+        //Suchfeld
+        let search = section.querySelector("#suche");
+        //EventLisener hinzufügen
+        search.addEventListener("input", function() {
+            //Suchbegriff auslesen
+            let searchString = document.getElementById("suche").value;
+
+            //In aktueller HTML-Seite nach dem Suchbegriff suchen
+            let inhalt = document.querySelector("main").innerHTML
+            //String mit search nach Suchbegriff durchsuchen, search
+            // liefert die Position zurück.
+            let position = inhalt.search(searchString);
+            let test = "23";
+            //Ergebnis verarbeiten
+            /*if (result)
+                alert("Der Suchbegriff \""+searchString+"\" wurde " + result.length + " mal gefunden.");
+            else
+                alert("Der Suchbegriff \""+searchString+"\" wurde nicht gefunden.");*/
+        });
+
         return {
             className: "run-overview",
             topbar: section.querySelectorAll("header > *"),
