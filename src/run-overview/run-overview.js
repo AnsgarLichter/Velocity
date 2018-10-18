@@ -134,21 +134,43 @@ class RunOverview {
         //Suchfeld
         let search = section.querySelector("#suche");
         //EventLisener hinzufügen
-        search.addEventListener("input", function() {
+        search.addEventListener("change", function() {
+            //Search-Funktion
+            let search = function(element) {
+                if(element.childElementCount > 0) {
+                    //Element hat Kinder
+                    element.childNodes.forEach(search);
+                }
+                else{
+                    //Element hat keine Kinder
+                    //--> Inhalt überprüfen
+                    if(element.textContent.match(searchString)) {
+                        //Suchbegriff gefunden - Element hervorheben
+                        element.className = "searchResult";
+                    }
+                }
+            }
+
             //Suchbegriff auslesen
             let searchString = document.getElementById("suche").value;
 
+            //Alte Ergebnisse löschen
+            let oldSearchResult = document.getElementsByClassName("searchResult");
+            if (oldSearchResult.length > 0) {
+                //oldSearchResult.forEach(e => e.className = "");
+                for(let i = 0; i < oldSearchResult.length;) {
+                    oldSearchResult[i].className = "";
+                }
+            }
+
+            //Suchanfragen ohne Eingabe abfangen
+            if(searchString == "") {
+                return;
+            }
+
             //In aktueller HTML-Seite nach dem Suchbegriff suchen
-            let inhalt = document.querySelector("main").innerHTML
-            //String mit search nach Suchbegriff durchsuchen, search
-            // liefert die Position zurück.
-            let position = inhalt.search(searchString);
-            let test = "23";
-            //Ergebnis verarbeiten
-            /*if (result)
-                alert("Der Suchbegriff \""+searchString+"\" wurde " + result.length + " mal gefunden.");
-            else
-                alert("Der Suchbegriff \""+searchString+"\" wurde nicht gefunden.");*/
+            let inhalt = document.querySelector("main");
+            inhalt.childNodes.forEach(search);
         });
 
         return {
