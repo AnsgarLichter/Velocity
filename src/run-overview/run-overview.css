@@ -65,3 +65,7 @@
 .table tr:nth-child(even) {
     background-color: #FFFFFF;
 }
+
+.table td {
+    cursor: pointer;
+}

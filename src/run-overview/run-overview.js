@@ -132,7 +132,7 @@ class RunOverview {
         * asc für ascendign und desc für descending
         *
         */
-        function sortTable(n, dir) {
+        let sortTable = (n, dir) => {
             /*Boolean, ob getauscht wurde --> auf true setzen, damti überhaupt
             mit tauschen begonnen wird*/
             let switching = true;
@@ -163,22 +163,36 @@ class RunOverview {
                     /*Überprüfen, ob getasucht werden sollen in Abhängigkeit
                     *der Sortierreihenfolge*/
                     if (dir == "asc") {
-
+                        if(x.innerHTML.toLowerCase() > y.innerhTML.toLowerCase()) {
+                            //Elemente sollen getauscht werden --> markieren
+                            tauschen = true;
+                            break;
+                        }
                     }
                     else if(dir = "desc") {
-
+                        if(x.innerHTML.toLowerCase() < y.innerhTML.toLowerCase()) {
+                            //Elemente sollen getauscht werden --> markieren
+                            tauschen = true;
+                            break;
+                        }
                     }
                 }
                 //Ende for-Schleife
-                if(tausche) {
-
-                }
-                else {
-
+                if(tauschen) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
                 }
             }
-            //Ende While-Schleife
-        }
+        };
+
+        //EventListener für jede Spalte registrieren
+        document.querySelector("#tdName").addEventListener("click", alert("Click"));
+        //document.querySelector("#tdName").addEventListener("click", sortTable(1, "asc"));
+        document.querySelector("#tdDatum").addEventListener("click", sortTable(2, "asc"));
+        document.querySelector("#tdDistanz").addEventListener("click", sortTable(3, "asc"));
+        document.querySelector("#tdZeit").addEventListener("click", sortTable(4, "asc"));
+        document.querySelector("#tdArt").addEventListener("click", sortTable(5, "asc"));
+        document.querySelector("#tdVelocity").addEventListener("click", sortTable(6, "asc"));
 
         return {
             className: "run-overview",
