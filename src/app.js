@@ -57,7 +57,7 @@ class App {
         //Datenbank deklarieren
         this._runsDB = new Database.Runs();
 
-        // Single Page Router aufsetzen
+            // Single Page Router aufsetzen
         this._router = new Navigo();
         this._currentUrl = "";
         this._navAborted = false;
@@ -202,6 +202,50 @@ class App {
 
         this._currentView = view;
         this._switchVisibleContent(view.onShow(this._runsDB));
+
+        //Event-Listener für Suchfeld in der NavBar
+        //Suchfeld
+        let search = document.querySelector("#suche");
+        //EventLisener hinzufügen
+        search.addEventListener("change", function() {
+            //Search-Funktion
+            let search = function(element) {
+                if(element.childElementCount > 0) {
+                    //Element hat Kinder
+                    element.childNodes.forEach(search);
+                }
+                else{
+                    //Element hat keine Kinder
+                    //--> Inhalt überprüfen
+                    if(element.textContent.match(searchString)) {
+                        //Suchbegriff gefunden - Element hervorheben
+                        element.className = "searchResult";
+                    }
+                }
+            }
+
+            //Suchbegriff auslesen
+            let searchString = document.getElementById("suche").value;
+
+            //Alte Ergebnisse löschen
+            let oldSearchResult = document.getElementsByClassName("searchResult");
+            if (oldSearchResult.length > 0) {
+                //oldSearchResult.forEach(e => e.className = "");
+                for(let i = 0; i < oldSearchResult.length;) {
+                    oldSearchResult[i].className = "";
+                }
+            }
+
+            //Suchanfragen ohne Eingabe abfangen
+            if(searchString == "") {
+                return;
+            }
+
+            //In aktueller HTML-Seite nach dem Suchbegriff suchen
+            let inhalt = document.querySelector("main");
+            inhalt.childNodes.forEach(search);
+        });
+
         return true;
     }
 

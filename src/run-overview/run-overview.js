@@ -53,6 +53,9 @@ class RunOverview {
      * _switchVisibleContent() der Klasse App übergeben werden kann, um ihr
      * die darzustellenden DOM-Elemente mitzuteilen.
      *
+     * Desweiteren wird hier die Funktion, um die Tabelle auf der
+     * Übersichtsseite zu sortieren, realisiert.
+     *
      * @param {Object} runsDB Datenbank mit Ergebnissen als Inhalt
      * @return {Object} Darzustellende DOM-Elemente gemäß Beschreibung der
      * Methode App._switchVisibleContent()
@@ -66,14 +69,6 @@ class RunOverview {
         *gepackt werden, damit auch auf das Ergebnis der Datenbankabfrage
         *gewartet wird.
         */
-
-        //!!! Problem: nur beim Debuggen funktioniert der Algorithmus,
-        //ohne Debuggen werdn keine Erggebnisse angezeigt:
-        //Grund: ohne beim Debuggen in die async-Funktion getRunsList
-        //zu gehen, wird in Zeile 128 (TR der section hinzufügen)
-        //ein Fehler geworfen
-        //!!!!
-
 
         let getRunsList = async () => {
             let runsList = await runsDB.search();
@@ -130,48 +125,60 @@ class RunOverview {
             });
         });
 
-        //Event-Listener für Suchfeld in der NavBar
-        //Suchfeld
-        let search = section.querySelector("#suche");
-        //EventLisener hinzufügen
-        search.addEventListener("change", function() {
-            //Search-Funktion
-            let search = function(element) {
-                if(element.childElementCount > 0) {
-                    //Element hat Kinder
-                    element.childNodes.forEach(search);
-                }
-                else{
-                    //Element hat keine Kinder
-                    //--> Inhalt überprüfen
-                    if(element.textContent.match(searchString)) {
-                        //Suchbegriff gefunden - Element hervorheben
-                        element.className = "searchResult";
+        /*Sortieren der Tabelle, falls vom Anwender gewünscht
+        *n entspricht Spaltennummer:
+        * Name = 1, Datum = 2, Distanz = 3, Zeit = 4, Art = 5, Velocity = 6
+        *dir steht für die Sortierreihenfolge:
+        * asc für ascendign und desc für descending
+        *
+        */
+        function sortTable(n, dir) {
+            /*Boolean, ob getauscht wurde --> auf true setzen, damti überhaupt
+            mit tauschen begonnen wird*/
+            let switching = true;
+            //Alle Tabellenzeilen
+            let rows;
+            //Tabellenzeile 1 zum Verlgeichen
+            let x;
+            //Tabellenzeile 2 zum Vergleichen
+            let y;
+            //Boolean, ob getauscht werden soll
+            let tauschen;
+            //Zaehlervariable für die for-Schleife
+            // Zeile mit Spaltennamen soll nicht mit soritert werden --> i = 1
+            let i;
+
+            //While-Schleife bis nicht mehr getauscht wurde
+            while(switching) {
+                //Es wurde nicht getauscht
+                switching = false;
+                rows = tBody.rows;
+                /*Über alle Zeilen drübergehen (außer die erste Zeile mit
+                *den Spaltennamen)*/
+                for(i = 1; i < (rows.lenght -1); i++) {
+                    tauschen = false;
+                    //Zellen holen, die verglichen werden scrollen
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    x = rows[i+1].getElementsByTagName("TD")[n];
+                    /*Überprüfen, ob getasucht werden sollen in Abhängigkeit
+                    *der Sortierreihenfolge*/
+                    if (dir == "asc") {
+
+                    }
+                    else if(dir = "desc") {
+
                     }
                 }
-            }
+                //Ende for-Schleife
+                if(tausche) {
 
-            //Suchbegriff auslesen
-            let searchString = document.getElementById("suche").value;
+                }
+                else {
 
-            //Alte Ergebnisse löschen
-            let oldSearchResult = document.getElementsByClassName("searchResult");
-            if (oldSearchResult.length > 0) {
-                //oldSearchResult.forEach(e => e.className = "");
-                for(let i = 0; i < oldSearchResult.length;) {
-                    oldSearchResult[i].className = "";
                 }
             }
-
-            //Suchanfragen ohne Eingabe abfangen
-            if(searchString == "") {
-                return;
-            }
-
-            //In aktueller HTML-Seite nach dem Suchbegriff suchen
-            let inhalt = document.querySelector("main");
-            inhalt.childNodes.forEach(search);
-        });
+            //Ende While-Schleife
+        }
 
         return {
             className: "run-overview",
