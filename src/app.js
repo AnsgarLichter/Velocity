@@ -82,7 +82,7 @@ class App {
                 await Promise.all([
                     this._runsDB.saveNew({
                         name: "Test1",
-                        strecke: "6km",
+                        strecke: "8,56",
                         dauer: "30:00",
                         minutenPerKm: "5:00",
                         art: "Joggen",
@@ -92,7 +92,7 @@ class App {
                     }),
                     this._runsDB.saveNew({
                         name: "Test2",
-                        strecke: "8km",
+                        strecke: "8,21",
                         dauer: "35:00",
                         minutenPerKm: "4:30",
                         art: "Joggen",
@@ -102,7 +102,7 @@ class App {
                     }),
                     this._runsDB.saveNew({
                         name: "Test2",
-                        strecke: "10km",
+                        strecke: "10,31",
                         dauer: "50:10",
                         minutenPerKm: "5:01",
                         art: "Joggen",

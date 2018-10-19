@@ -155,15 +155,15 @@ class RunOverview {
                 rows = tBody.rows;
                 /*Über alle Zeilen drübergehen (außer die erste Zeile mit
                 *den Spaltennamen)*/
-                for(i = 1; i < (rows.lenght -1); i++) {
+                for(i = 1; i < (rows.length -1); i++) {
                     tauschen = false;
                     //Zellen holen, die verglichen werden scrollen
                     x = rows[i].getElementsByTagName("TD")[n];
-                    x = rows[i+1].getElementsByTagName("TD")[n];
+                    y = rows[i+1].getElementsByTagName("TD")[n];
                     /*Überprüfen, ob getasucht werden sollen in Abhängigkeit
                     *der Sortierreihenfolge*/
                     if (dir == "asc") {
-                        if(x.innerHTML.toLowerCase() > y.innerhTML.toLowerCase()) {
+                        if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                             //Elemente sollen getauscht werden --> markieren
                             tauschen = true;
                             break;
@@ -186,13 +186,12 @@ class RunOverview {
         };
 
         //EventListener für jede Spalte registrieren
-        document.querySelector("#tdName").addEventListener("click", alert("Click"));
-        //document.querySelector("#tdName").addEventListener("click", sortTable(1, "asc"));
-        document.querySelector("#tdDatum").addEventListener("click", sortTable(2, "asc"));
-        document.querySelector("#tdDistanz").addEventListener("click", sortTable(3, "asc"));
-        document.querySelector("#tdZeit").addEventListener("click", sortTable(4, "asc"));
-        document.querySelector("#tdArt").addEventListener("click", sortTable(5, "asc"));
-        document.querySelector("#tdVelocity").addEventListener("click", sortTable(6, "asc"));
+        section.querySelector("#tdName").addEventListener("click",() => { sortTable(0, "asc")});
+        section.querySelector("#tdDatum").addEventListener("click",() => { sortTable(1, "asc")} );
+        section.querySelector("#tdDistanz").addEventListener("click",() => { sortTable(2, "asc")});
+        section.querySelector("#tdZeit").addEventListener("click",() => { sortTable(3, "asc")});
+        section.querySelector("#tdArt").addEventListener("click",() => { sortTable(4, "asc")});
+        section.querySelector("#tdVelocity").addEventListener("click",() => { sortTable(5, "asc")});
 
         return {
             className: "run-overview",
