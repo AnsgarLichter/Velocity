@@ -160,17 +160,28 @@ class RunOverview {
                     //Zellen holen, die verglichen werden scrollen
                     x = rows[i].getElementsByTagName("TD")[n];
                     y = rows[i+1].getElementsByTagName("TD")[n];
+
+                    let stringX = x.innerHTML.toLowerCase();
+                    let stringY = y.innerHTML.toLowerCase();
+
+                    /*Datum können im Format TT.MM.YYYY nicht richtig Vergleichen.
+                    * Daher muss das Datum in YYYYMMTT umgewandelt werden.
+                    */
+                    if(n == 1) {
+                        stringX = stringX.substring(6,10)+stringX.substring(3,5)+stringX.substring(0,2);
+                        stringY = stringY.substring(6,10)+stringY.substring(3,5)+stringY.substring(0,2);
+                    }
                     /*Überprüfen, ob getasucht werden sollen in Abhängigkeit
                     *der Sortierreihenfolge*/
                     if (dir == "asc") {
-                        if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        if(stringX > stringY) {
                             //Elemente sollen getauscht werden --> markieren
                             tauschen = true;
                             break;
                         }
                     }
                     else if(dir = "desc") {
-                        if(x.innerHTML.toLowerCase() < y.innerhTML.toLowerCase()) {
+                        if(stringX < stringY) {
                             //Elemente sollen getauscht werden --> markieren
                             tauschen = true;
                             break;

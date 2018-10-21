@@ -69,3 +69,6 @@
 .table td {
     cursor: pointer;
 }
+.table p {
+    display: inline;
+}
