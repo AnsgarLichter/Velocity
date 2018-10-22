@@ -152,6 +152,7 @@ class RunOverview {
             let tdZeit = document.createElement("TD");
             let tdArt = document.createElement("TD");
             let tdVelocity = document.createElement("TD");
+
             //Einzelne Elemente mit Inhalt befüllen
             tdName.textContent      = run.name;
             tdDatum.textContent     = run.datum;
@@ -170,6 +171,25 @@ class RunOverview {
             newTR.appendChild(tdArt);
             newTR.appendChild(tdVelocity);
 
+            //Text Content der einzelnen Zellen in Links für die Detailansicht einrahmen
+            //Anzahl Kinder bestimen
+            let i = newTR.childElementCount -1;
+
+            //ChildNodes holen
+            let children = newTR.childNodes;
+
+            for(i; i > -1; i--) {
+                //<a></a> erstelen und Attribute einsetzen
+                let a = document.createElement("a");
+                a.setAttribute("href", "/run/display/"+ run.id + "/");
+                a.setAttribute("data-navigo", "");
+
+                //textContent des Elternelements innerhalb des Links speichern
+                a.textContent = children[i].textContent;
+                children[i].textContent = "";
+                //Link als Kind hinzufügen
+                children[i].appendChild(a);
+            }
             //Tabellenzeile zur Tabelle (Id: uebersicht) hinzufügen, damit
             // diese auch auf dem Bildschirm angezeigt wird
             tBody.appendChild(newTR);
