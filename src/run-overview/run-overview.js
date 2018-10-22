@@ -35,6 +35,8 @@
 
 import stylesheet from "./run-overview.css";
 
+import Database from "../database.js";
+
 /**
  * View mit der Übersicht der vorhandenen Songs.
  */
@@ -45,6 +47,9 @@ class RunOverview {
      */
     constructor(app) {
         this._app = app;
+
+        //Datenbank deklarieren
+        this._runsDB = new Database.Runs();
     }
 
     /**
@@ -56,11 +61,66 @@ class RunOverview {
      * Desweiteren wird hier die Funktion, um die Tabelle auf der
      * Übersichtsseite zu sortieren, realisiert.
      *
-     * @param {Object} runsDB Datenbank mit Ergebnissen als Inhalt
      * @return {Object} Darzustellende DOM-Elemente gemäß Beschreibung der
      * Methode App._switchVisibleContent()
      */
-    onShow(runsDB) {
+    async onShow() {
+/*
+        //Test der Datenbankklasse für Laufergebnisse
+        console.log("1", this._runsDB);
+        await this._runsDB.clear();
+        console.log("2");
+
+        let runs = await this._runsDB.search();
+        console.log("Alle Ergebnisse: ", runs);
+        console.log("3");
+
+        if(runs.length == 0) {
+            console.log("Bisher noch keine Trainningsdaten vorhanden, lege daher Testdaten an");
+
+            await Promise.all([
+                this._runsDB.saveNew({
+                    name: "Test1",
+                    strecke: "8,56",
+                    dauer: "30:00",
+                    minutenPerKm: "5:00",
+                    art: "Joggen",
+                    datum: "09.10.2018",
+                }),
+                this._runsDB.saveNew({
+                    name: "Test2",
+                    strecke: "8,21",
+                    dauer: "35:00",
+                    minutenPerKm: "4:30",
+                    art: "Joggen",
+                    datum: "09.11.2017",
+                }),
+                this._runsDB.saveNew({
+                    name: "Test3",
+                    strecke: "10,31",
+                    dauer: "50:10",
+                    minutenPerKm: "5:01",
+                    art: "Joggen",
+                    datum: "03.10.2018",
+                }),
+                this._runsDB.saveNew({
+                    name: "Test4",
+                    strecke: "15,31",
+                    dauer: "90:34",
+                    minutenPerKm: "5:54",
+                    art: "Joggen",
+                    datum: "03.01.2017",
+                }),
+            ]);
+
+            let runs = await this._runsDB.search();
+            console.log("Gespeicherte Trainingsdaten: ", runs);
+        }
+
+        runs = await this._runsDB.search("6km");
+        console.log("Suche nach 6km", runs);
+        //Ende des Testcodes
+*/
         //Passende Elemente vom HTML aufrufen und in Sections speichern
         let section = document.querySelector("#run-overview").cloneNode(true);
         let tBody   = section.querySelector("#uebersicht");
@@ -70,59 +130,49 @@ class RunOverview {
         *gewartet wird.
         */
 
-        let getRunsList = async () => {
-            let runsList = await runsDB.search();
-            return runsList;
-        }
-        let runsList = getRunsList();
+        let runsList = await this._runsDB.search();
 
-        //Ergebnisse verarbeiten
-        //Then-Methode eines Promise-Objekts liefert Zugriff auf Value
-        //die im Promise gespeichert sind.
-        runsList.then(function(e) {
+        //e ist nun ein Array --> durchlaufen der einzelnen Ergebnissen
+        //mit Hilfe einer forEach-Schleife.
+        runsList.forEach(function(run) {
+            //Tabellenzeile für jedes Ergebnis erstellen
+            let newTR = document.createElement("TR");
+            /*Einzelne Eigenschaften in <TD>-Elementen speichern
+            *und der neuen Zeile als Kind hinzufügen
+            *Eigenschaften / Spalten der Tabelle:
+            *Name
+            *Datum
+            *Distanz in km
+            *Zeit
+            *Art
+            *Velocity in min/km*/
+            let tdName = document.createElement("TD");
+            let tdDatum = document.createElement("TD");
+            let tdDistanz = document.createElement("TD");
+            let tdZeit = document.createElement("TD");
+            let tdArt = document.createElement("TD");
+            let tdVelocity = document.createElement("TD");
+            //Einzelne Elemente mit Inhalt befüllen
+            tdName.textContent      = run.name;
+            tdDatum.textContent     = run.datum;
+            tdDistanz.textContent   = run.strecke;
+            tdZeit.textContent      = run.dauer;
+            tdArt.textContent       = run.art;
+            tdVelocity.textContent  = run.minutenPerKm;
 
-            //e ist nun ein Array --> durchlaufen der einzelnen Ergebnissen
-            //mit Hilfe einer forEach-Schleife.
-            e.forEach(function(run) {
-                //Tabellenzeile für jedes Ergebnis erstellen
-                let newTR = document.createElement("TR");
-                /*Einzelne Eigenschaften in <TD>-Elementen speichern
-                *und der neuen Zeile als Kind hinzufügen
-                *Eigenschaften / Spalten der Tabelle:
-                *Name
-                *Datum
-                *Distanz in km
-                *Zeit
-                *Art
-                *Velocity in min/km*/
-                let tdName = document.createElement("TD");
-                let tdDatum = document.createElement("TD");
-                let tdDistanz = document.createElement("TD");
-                let tdZeit = document.createElement("TD");
-                let tdArt = document.createElement("TD");
-                let tdVelocity = document.createElement("TD");
-                //Einzelne Elemente mit Inhalt befüllen
-                tdName.textContent      = run.name;
-                tdDatum.textContent     = run.datum;
-                tdDistanz.textContent   = run.strecke;
-                tdZeit.textContent      = run.dauer;
-                tdArt.textContent       = run.art;
-                tdVelocity.textContent  = run.minutenPerKm;
+            //Einzelne TDs der Table Row als Kind hinzufügen:
+            //Reihenfolge der Tabellenspalten sollte mit der
+            //Reihenfolge der Anweisungen übereinstimmen1
+            newTR.appendChild(tdName);
+            newTR.appendChild(tdDatum);
+            newTR.appendChild(tdDistanz);
+            newTR.appendChild(tdZeit);
+            newTR.appendChild(tdArt);
+            newTR.appendChild(tdVelocity);
 
-                //Einzelne TDs der Table Row als Kind hinzufügen:
-                //Reihenfolge der Tabellenspalten sollte mit der
-                //Reihenfolge der Anweisungen übereinstimmen1
-                newTR.appendChild(tdName);
-                newTR.appendChild(tdDatum);
-                newTR.appendChild(tdDistanz);
-                newTR.appendChild(tdZeit);
-                newTR.appendChild(tdArt);
-                newTR.appendChild(tdVelocity);
-
-                //Tabellenzeile zur Tabelle (Id: uebersicht) hinzufügen, damit
-                // diese auch auf dem Bildschirm angezeigt wird
-                tBody.appendChild(newTR);
-            });
+            //Tabellenzeile zur Tabelle (Id: uebersicht) hinzufügen, damit
+            // diese auch auf dem Bildschirm angezeigt wird
+            tBody.appendChild(newTR);
         });
 
         /*Sortieren der Tabelle, falls vom Anwender gewünscht
@@ -220,7 +270,7 @@ class RunOverview {
      * Zeitpunkt fortzuführen, falls wir hier false zurückgeben
      * @return {Boolean} true, wenn der Seitenwechsel erlaubt ist, sonst false
      */
-    onLeave(goon) {
+    async onLeave(goon) {
         return true;
     }
 

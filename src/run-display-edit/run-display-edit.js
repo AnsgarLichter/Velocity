@@ -35,6 +35,8 @@
 
 import stylesheet from "./run-display-edit.css";
 
+import Database from "../database.js";
+
  /**
   * View zur Anzeige oder zum Bearbeiten eines Songs.
   */
@@ -50,6 +52,9 @@ class RunDisplayEdit {
         this._app = app;
         this._id = id;
         this._mode = mode;
+
+        //Datenbank deklarieren
+        this._runsDB = new Database.Runs();
     }
 
     /**
@@ -58,11 +63,10 @@ class RunDisplayEdit {
      * _switchVisibleContent() der Klasse App übergeben werden kann, um ihr
      * die darzustellenden DOM-Elemente mitzuteilen.
      *
-     * @param {Object} runsDB Datenbank mit Ergebnissen als Inhalt
      * @return {Object} Darzustellende DOM-Elemente gemäß Beschreibung der
      * Methode App._switchVisibleContent()
      */
-    onShow(runsDB) {
+    async onShow() {
         let section = document.querySelector("#run-display-edit").cloneNode(true);
 
         //TODO: Datenbank auslesen für Anzeige bei mode == display oder edit
@@ -98,7 +102,7 @@ class RunDisplayEdit {
      * Zeitpunkt fortzuführen, falls wir hier false zurückgeben
      * @return {Boolean} true, wenn der Seitenwechsel erlaubt ist, sonst false
     */
-    onLeave(goon) {
+    async onLeave(goon) {
         return true;
     }
 

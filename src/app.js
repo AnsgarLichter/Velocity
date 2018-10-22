@@ -63,67 +63,11 @@ class App {
         this._navAborted = false;
         //TODO: Aufruf für /run/new ändern, sobald Klasse für Run hinzufügen existiert
         this._router.on({
-            "*":                       () => this.showRunOverview(),
+            "*":                      () => this.showRunOverview(),
             "/run/new/":              () => this.showRunDisplayEdit("", "new"),
             "/run/display/:id/":  params => this.showRunDisplayEdit(params.id, "display"),
             "/run/edit/:id/":     params => this.showRunDisplayEdit(params.id, "edit"),
         });
-
-        //Test der Datenbankklasse für Laufergebnisse
-        /*let test = async () => {
-            await this._runsDB.clear();
-
-            let runs = await this._runsDB.search();
-            console.log("Alle Ergebnisse: ", runs);
-
-            if(runs.length == 0) {
-                console.log("Bisher noch keine Trainningsdaten vorhanden, lege daher Testdaten an");
-
-                await Promise.all([
-                    this._runsDB.saveNew({
-                        name: "Test1",
-                        strecke: "8,56",
-                        dauer: "30:00",
-                        minutenPerKm: "5:00",
-                        art: "Joggen",
-                        datum: "09.10.2018",
-                    }),
-                    this._runsDB.saveNew({
-                        name: "Test2",
-                        strecke: "8,21",
-                        dauer: "35:00",
-                        minutenPerKm: "4:30",
-                        art: "Joggen",
-                        datum: "09.11.2017",
-                    }),
-                    this._runsDB.saveNew({
-                        name: "Test3",
-                        strecke: "10,31",
-                        dauer: "50:10",
-                        minutenPerKm: "5:01",
-                        art: "Joggen",
-                        datum: "03.10.2018",
-                    }),
-                    this._runsDB.saveNew({
-                        name: "Test4",
-                        strecke: "15,31",
-                        dauer: "90:34",
-                        minutenPerKm: "5:54",
-                        art: "Joggen",
-                        datum: "03.01.2017",
-                    }),
-                ]);
-
-                let runs = await this._runsDB.search();
-                console.log("Gespeicherte Trainingsdaten: ", runs);
-            }
-
-            runs = await this._runsDB.search("6km");
-            console.log("Suche nach 6km", runs);
-        }
-
-        test();*/
-        //Ende des Testcodes
 
         this._router.hooks({
             after: (params) => {
@@ -183,7 +127,7 @@ class App {
      * @param  {Object} view View-Objekt mit einer onShow()-Methode
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
-    _switchVisibleView(view) {
+    async _switchVisibleView(view) {
         // Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
         // späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
         // false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
@@ -196,16 +140,20 @@ class App {
         }
 
         // Aktuelle View fragen, ob eine neue View aufgerufen werden darf
-        if (this._currentView && !this._currentView.onLeave(goon)) {
-            this._navAborted = true;
-            return false;
+        if (this._currentView) {
+            let goonAllowed = await this._currentView.onLeave(goon);
+
+            if (!goonAllowed) {
+                this._navAborted = true;
+                return false;
+            }
         }
 
         // Alles klar, aktuelle View nun wechseln
         document.title = `${this._title} – ${view.title}`;
 
         this._currentView = view;
-        this._switchVisibleContent(view.onShow(this._runsDB));
+        this._switchVisibleContent(await view.onShow());
 
         //Event-Listener für Suchfeld in der NavBar
         //Suchfeld
@@ -293,6 +241,8 @@ class App {
      * @param {Object} content Objekt mit den anzuzeigenden DOM-Elementen
      */
     _switchVisibleContent(content) {
+        console.log("_switchVisibleContent", content); // TODO: Entfernen
+
         // <header> und <main> des HTML-Grundgerüsts ermitteln
         let app = document.querySelector("#app");
         let header = document.querySelector("#app > header");
