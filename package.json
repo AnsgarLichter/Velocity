@@ -1,5 +1,5 @@
 {
-  "name": "my-songbook",
+  "name": "velocity",
   "version": "1.0.0",
   "description": "Eine musikerfreundliche App zur Verwaltung von Songtexten",
   "main": "index.js",
@@ -14,17 +14,15 @@
     "url": "git+https://github.com/DennisSchulmeister/dhbwka-wwi-webprog-my-songbook.git"
   },
   "keywords": [
-    "Songtext",
-    "Lyrics",
+    "Runs",
+    "Training",
     "Browser",
     "App",
     "Single",
     "Page",
-    "App",
-    "Beispiel",
-    "Demo"
+    "App"
   ],
-  "author": "Dennis Schulmeister-Zimolong",
+  "author": "Ansgar Lichter  Toni Coric  Patrick Fichtner",
   "license": "CC-BY-4.0",
   "bugs": {
     "url": "https://github.com/DennisSchulmeister/dhbwka-wwi-webprog-my-songbook/issues"
