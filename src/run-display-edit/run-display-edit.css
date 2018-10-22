@@ -38,5 +38,33 @@
   * der Anwendung überschrieben werden.
   */
 .run-display-edit main {
-    color: orchid !important;
+    color: black !important;
+    background-color: #B7DFDD !important;
+    line-height: 1.0;
+}
+
+.detailview label, input, textarea {
+    width: 10em;
+    display: block;
+    float: left;
+    font-size: 15pt;
+    font-family: sans-serif;
+}
+
+.detailview textarea {
+    width:400px;
+    height: 3rem;
+}
+
+.detailview button {
+    display: block;
+    float: left;
+}
+
+#loeschen {
+    background-color: red;
+}
+
+#bearbeiten {
+    background-color: green;
 }

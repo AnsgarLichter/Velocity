@@ -72,6 +72,21 @@ class RunDisplayEdit {
         };
     }
 
+    /*Lauergbis aus Übersichtstabelle auslesen*/
+    /*function doIt()
+	{
+		var y = document.getElementById("table").getElementsByTagName("td")[1].innerHTML;
+		alert( y );
+	}*/
+
+
+    /*let getRunsList = async () => {
+        let runsList = await runsDB.search();
+        return runsList;
+    }
+    let runsList = getRunsList();*/
+
+
     /**
      * Von der Klasse App aufgerufene Methode, um festzustellen, ob der Wechsel
      * auf eine neue Seite erlaubt ist. Wird hier true zurückgegeben, wird der

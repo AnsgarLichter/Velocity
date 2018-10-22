@@ -59,6 +59,11 @@
                     <div class="item">
                         Sortieren der Ergebnisse
                     </div>
+                    <!--<div class="item">
+                        <a href="/run/new/" data-navigo>
+                            Ergebnis anzeigen
+                        </a>
+                    </div>-->
                 </div>
                 <div class="right">
                     <input type"search" id="suche" placeholder="Suchen" />
@@ -110,6 +115,38 @@
                 <div class="padding">
                     Laufergebnisse anzeigen
                 </div>
+
+                <div class="detailview" >
+                    <label for="Datum">Datum:</label>
+                    <input type="string" id="Datum" disabled/><br />
+                    <label for="Distanz">Distanz:</label>
+                    <input type="string" id="Distanz" disabled/><br />
+                    <label for="Zeit">Zeit:</label>
+                    <input type="string" id="Zeit" disabled/><br />
+                    <label for="Art">Art:</label>
+                    <input type="string" id="Art" disabled/><br />
+                    <label for="minutenPerKm">Velocity min/km:</label>
+                    <input type="string" id="minutenPerKm" disabled/><br />
+                    <label for="kilometerPerStd">Velocity km/h:</label>
+                    <input type="string" id="kilometerPerStd" disabled/><br />
+                    <label for="Beschreibung">Beschreibung:</label>
+                    <textarea id="text" name="text" disabled></textarea> <br />
+                    <label for="Bewertung:">Bewertung:</label> <br />
+
+                    <iframe style="height:50px; width:100%;" id="pageSternecode1" name="page"
+                        src="https://websynthesis.org/tools/stars/iframe.php?quantity=5&color=000000&img1=&img2=&name=Sternecode1"
+                        frameborder="0" scrolling="no">
+                    </iframe>
+                    <script type="text/javascript" src="https://websynthesis.org/tools/stars/js.php?id=Sternecode1">
+                    </script>
+
+
+                    <button type ="button" id="loeschen">loeschen</button>
+                    <button type ="button" id="bearbeiten">bearbeiten</button>
+                    <button type ="button" id="vorherige">vorherige</button>
+                    <button type ="button" id="naechste">naechste</button>
+                </div>
+
             </main>
         </section>
     </body>
