@@ -96,17 +96,27 @@ class App {
                         dauer: "35:00",
                         minutenPerKm: "4:30",
                         art: "Joggen",
-                        datum: "10.10.2018",
+                        datum: "09.11.2017",
                         format: "html",
                         data: "HTML-Code für ...",
                     }),
                     this._runsDB.saveNew({
-                        name: "Test2",
+                        name: "Test3",
                         strecke: "10,31",
                         dauer: "50:10",
                         minutenPerKm: "5:01",
                         art: "Joggen",
                         datum: "03.10.2018",
+                        format: "html",
+                        data: "HTML-Code für ...",
+                    }),
+                    this._runsDB.saveNew({
+                        name: "Test4",
+                        strecke: "15,31",
+                        dauer: "90:34",
+                        minutenPerKm: "5:54",
+                        art: "Joggen",
+                        datum: "03.01.2017",
                         format: "html",
                         data: "HTML-Code für ...",
                     }),
@@ -214,12 +224,19 @@ class App {
                     //Element hat Kinder
                     element.childNodes.forEach(search);
                 }
-                else{
-                    //Element hat keine Kinder
+
+                if(element.childElementCount == 0 || element.nodeName == "#text") {
                     //--> Inhalt überprüfen
                     if(element.textContent.match(searchString)) {
                         //Suchbegriff gefunden - Element hervorheben
-                        element.className = "searchResult";
+                        //element.className = "searchResult";
+                        if(element.nodeName == "#text") {
+                            let index = element.parentNode.innerHTML.indexOf(searchString);
+                            element.parentNode.innerHTML = element.parentNode.innerHTML.substring(0, index) + "<mark>" + element.parentNode.innerHTML.substring(index, index+searchString.length) + "</mark>" + element.parentNode.innerHTML.substring(index+searchString.length);
+                        }else{
+                            let index = element.innerHTML.indexOf(searchString);
+                            element.innerHTML = element.innerHTML.substring(0, index) + "<mark>" + element.innerHTML.substring(index, index+searchString.length) + "</mark>" + element.innerHTML.substring(index+searchString.length);
+                        }
                     }
                 }
             }
@@ -228,11 +245,21 @@ class App {
             let searchString = document.getElementById("suche").value;
 
             //Alte Ergebnisse löschen
-            let oldSearchResult = document.getElementsByClassName("searchResult");
+            /*let oldSearchResult = document.getElementsByClassName("searchResult");
             if (oldSearchResult.length > 0) {
-                //oldSearchResult.forEach(e => e.className = "");
                 for(let i = 0; i < oldSearchResult.length;) {
                     oldSearchResult[i].className = "";
+                }
+            }*/
+            let oldSearchResults = document.getElementsByTagName("mark");
+            if (oldSearchResults.length > 0) {
+                let i = 0;
+                //for(i; i < oldSearchResults.length;) {
+                while(oldSearchResults.length > 0) {
+                    let innerHTML = oldSearchResults[i].parentNode.innerHTML;
+                    innerHTML = innerHTML.replace("<mark>", "");
+                    innerHTML = innerHTML.replace("</mark>", "");
+                    oldSearchResults[i].parentNode.innerHTML = innerHTML;
                 }
             }
 

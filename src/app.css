@@ -53,7 +53,7 @@
 #app header > *,
 #app header input,
 #app header .item {
-    display: block;
+    display: inline;
     box-sizing: border-box;
     width: 100%;
 }
