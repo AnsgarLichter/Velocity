@@ -65,6 +65,8 @@ class RunDisplayEdit {
     onShow(runsDB) {
         let section = document.querySelector("#run-display-edit").cloneNode(true);
 
+        //TODO: Datenbank auslesen für Anzeige bei mode == display oder edit
+
         return {
             className: "run-display-edit",
             topbar: section.querySelectorAll("header > *"),
@@ -105,6 +107,7 @@ class RunDisplayEdit {
      */
     get title() {
         switch (this._mode) {
+            //TODO: Sobald Klasse für Run hinzufügen existiert, muss case "new" entfernt werden
             case "new":
                 return "Run hinzufügen";
             case "edit":

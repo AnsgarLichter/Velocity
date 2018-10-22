@@ -61,7 +61,7 @@ class App {
         this._router = new Navigo();
         this._currentUrl = "";
         this._navAborted = false;
-
+        //TODO: Aufruf für /run/new ändern, sobald Klasse für Run hinzufügen existiert
         this._router.on({
             "*":                       () => this.showRunOverview(),
             "/run/new/":              () => this.showRunDisplayEdit("", "new"),
@@ -87,8 +87,6 @@ class App {
                         minutenPerKm: "5:00",
                         art: "Joggen",
                         datum: "09.10.2018",
-                        format: "html",
-                        data: "HTML-Code für ...",
                     }),
                     this._runsDB.saveNew({
                         name: "Test2",
@@ -97,8 +95,6 @@ class App {
                         minutenPerKm: "4:30",
                         art: "Joggen",
                         datum: "09.11.2017",
-                        format: "html",
-                        data: "HTML-Code für ...",
                     }),
                     this._runsDB.saveNew({
                         name: "Test3",
@@ -107,8 +103,6 @@ class App {
                         minutenPerKm: "5:01",
                         art: "Joggen",
                         datum: "03.10.2018",
-                        format: "html",
-                        data: "HTML-Code für ...",
                     }),
                     this._runsDB.saveNew({
                         name: "Test4",
@@ -117,8 +111,6 @@ class App {
                         minutenPerKm: "5:54",
                         art: "Joggen",
                         datum: "03.01.2017",
-                        format: "html",
-                        data: "HTML-Code für ...",
                     }),
                 ]);
 
@@ -178,6 +170,8 @@ class App {
         let view = new RunDisplayEdit(this, id, mode);
         this._switchVisibleView(view);
     }
+
+    //TODO: Methode showRunNew() hinzufügen
 
     /**
      * Hilfsklasse zum Umschalten auf eine neue Seite. Sie ruft zunächst die

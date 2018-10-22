@@ -43,8 +43,6 @@ class Runs {
      *     minuten/km: "Minuten pro Kilometer"
      *     dauer: "Dauer des Trainings",
      *     datum: "Datum des Trainings"
-     *     format: "html",
-     *     data: "HTML-String",
      * }
      *
      * @param  {Object}  run Zu speichernder Songtext
