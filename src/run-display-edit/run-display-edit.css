@@ -43,7 +43,7 @@
     line-height: 1.0;
 }
 
-.detailview label, input, textarea {
+.detailview label {
     width: 10em;
     display: block;
     float: left;
@@ -51,9 +51,22 @@
     font-family: sans-serif;
 }
 
+.detailview input {
+    width: 10em;
+    display: block;
+    float: left;
+    font-size: 15pt;
+    font-family: sans-serif;
+
+}
+
 .detailview textarea {
     width:400px;
     height: 3rem;
+    display: block;
+    float: left;
+    font-size: 15pt;
+    font-family: sans-serif;
 }
 
 .detailview button {

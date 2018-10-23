@@ -57,6 +57,8 @@ class RunDisplayEdit {
         this._runsDB = new Database.Runs();
     }
 
+
+
     /**
      * Von der Klasse App aufgerufene Methode, um die Seite anzuzeigen. Die
      * Methode gibt daher ein passendes Objekt zurück, das an die Methode
@@ -70,6 +72,14 @@ class RunDisplayEdit {
         let section = document.querySelector("#run-display-edit").cloneNode(true);
 
         //TODO: Datenbank auslesen für Anzeige bei mode == display oder edit
+        /*Laufergbis aus Übersichtstabelle auslesen*/
+        //let url = document.URL;
+        //let id = url.substring(url.lastIndexOf('/') + 1);
+
+        alert(this._id);
+        let run = await this._runsDB.getByID(this._id);
+        alert(run);
+
 
         return {
             className: "run-display-edit",
@@ -78,12 +88,7 @@ class RunDisplayEdit {
         };
     }
 
-    /*Lauergbis aus Übersichtstabelle auslesen*/
-    /*function doIt()
-	{
-		var y = document.getElementById("table").getElementsByTagName("td")[1].innerHTML;
-		alert( y );
-	}*/
+
 
 
     /*let getRunsList = async () => {
