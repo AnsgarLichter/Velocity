@@ -76,9 +76,24 @@ class RunDisplayEdit {
         //let url = document.URL;
         //let id = url.substring(url.lastIndexOf('/') + 1);
 
-        alert(this._id);
+        this._id = parseInt(this._id);
         let run = await this._runsDB.getByID(this._id);
-        alert(run);
+        /*alert(run.name);
+        alert(run.datum);
+        alert(run.strecke);
+        alert(run.dauer);
+        alert(run.art);
+        alert(run.minutenPerKm);*/
+
+        //let inputdate = run.datum.toString();
+        document.getElementById('Datum').value=run.datum;
+        document.getElementById('Distanz').value=run.strecke;
+        document.getElementById('Art').value=run.art;
+        document.getElementById('Zeit').value=run.dauer;
+        document.getElementById('minutenPerKm').value=run.minutenPerKm;
+        document.getElementById('kilometerPerStd').value=run.kilometerPerStd;
+        //document.getElementById('Beschreibung').value=
+        //document.getElementById('Bewertung').value=
 
 
         return {
