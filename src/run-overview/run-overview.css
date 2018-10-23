@@ -78,3 +78,7 @@
 .run-overview p {
     display: inline;
 }
+
+.run-overview .hidden {
+    display: none;
+}
