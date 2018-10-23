@@ -202,12 +202,12 @@ class RunOverview {
         * asc für ascendign und desc für descending
         *
         */
-        let sortTable = (n, dir) => {
+        let sortTable = (n) => {
             /*Boolean, ob getauscht wurde --> auf true setzen, damti überhaupt
             mit tauschen begonnen wird*/
             let switching = true;
             //Alle Tabellenzeilen
-            let rows;
+            let rows = tBody.rows;
             //Tabellenzeile 1 zum Verlgeichen
             let x;
             //Tabellenzeile 2 zum Vergleichen
@@ -217,12 +217,25 @@ class RunOverview {
             //Zaehlervariable für die for-Schleife
             // Zeile mit Spaltennamen soll nicht mit soritert werden --> i = 1
             let i;
+            //Standardmäßig wird ascendig sortiert, daher dir auf asc setzen
+            let dir = "asc";
+            /*Zähler, wie oft getauscht wurde
+            * wird benötigt, damit, wenn kein Tausch bei "asc" vorgenommen wurde,
+            * descendig sortiert werden kann*/
+            let zaehler = 0;
+
+            //Bevor das Tauschen beginnen kann, müssen die alten Triangle wieder
+            //versteckt werden
+            let triangles = document.getElementsByClassName("display");
+            for(i=0; i < triangles.length; i++) {
+                triangles[i].className = "hidden";
+            }
+
 
             //While-Schleife bis nicht mehr getauscht wurde
             while(switching) {
                 //Es wurde nicht getauscht
                 switching = false;
-                rows = tBody.rows;
                 /*Über alle Zeilen drübergehen (außer die erste Zeile mit
                 *den Spaltennamen)*/
                 for(i = 1; i < (rows.length -1); i++) {
@@ -231,8 +244,8 @@ class RunOverview {
                     x = rows[i].getElementsByTagName("TD")[n];
                     y = rows[i+1].getElementsByTagName("TD")[n];
 
-                    let stringX = x.innerHTML.toLowerCase();
-                    let stringY = y.innerHTML.toLowerCase();
+                    let stringX = x.firstChild.innerHTML.toLowerCase();
+                    let stringY = y.firstChild.innerHTML.toLowerCase();
 
                     /*Datum können im Format TT.MM.YYYY nicht richtig Vergleichen.
                     * Daher muss das Datum in YYYYMMTT umgewandelt werden.
@@ -262,17 +275,36 @@ class RunOverview {
                 if(tauschen) {
                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                     switching = true;
+                    zaehler++;
+                }else{
+                    //Wenn kein Tausch erfolgt ist und dir Richtung "asc" ist,
+                    //soll descendig sortiert werden
+                    if(zaehler == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
                 }
+            }
+
+            //Abhängig von der Sortierrichtung die entsprechende Triangle einblenden
+            if(dir == "asc") {
+                //Triangle nach unten
+                rows[0].getElementsByTagName("TD")[n].querySelector("#asc").className="display";
+                rows[0].getElementsByTagName("TD")[n].querySelector("#desc").className="hidden";
+            }else{
+                //Triangle nach oben
+                rows[0].getElementsByTagName("TD")[n].querySelector("#desc").className="display";
+                rows[0].getElementsByTagName("TD")[n].querySelector("#asc").className="hidden";
             }
         };
 
         //EventListener für jede Spalte registrieren
-        section.querySelector("#tdName").addEventListener("click",() => { sortTable(0, "asc")});
-        section.querySelector("#tdDatum").addEventListener("click",() => { sortTable(1, "asc")} );
-        section.querySelector("#tdDistanz").addEventListener("click",() => { sortTable(2, "asc")});
-        section.querySelector("#tdZeit").addEventListener("click",() => { sortTable(3, "asc")});
-        section.querySelector("#tdArt").addEventListener("click",() => { sortTable(4, "asc")});
-        section.querySelector("#tdVelocity").addEventListener("click",() => { sortTable(5, "asc")});
+        section.querySelector("#tdName").addEventListener("click",() => { sortTable(0)});
+        section.querySelector("#tdDatum").addEventListener("click",() => { sortTable(1)} );
+        section.querySelector("#tdDistanz").addEventListener("click",() => { sortTable(2)});
+        section.querySelector("#tdZeit").addEventListener("click",() => { sortTable(3)});
+        section.querySelector("#tdArt").addEventListener("click",() => { sortTable(4)});
+        section.querySelector("#tdVelocity").addEventListener("click",() => { sortTable(5)});
 
         return {
             className: "run-overview",
