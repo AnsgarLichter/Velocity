@@ -94,6 +94,13 @@ class App {
         this._router.resolve();
     }
 
+
+    /*Navigate-Methode*/
+
+    navigate(url) {
+        this._router.navigate(url);
+    }
+
     /**
      * Aufruf der Übersichtsseite der vorhandenen Laufergebnisse.
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte

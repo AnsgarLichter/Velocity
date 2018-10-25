@@ -79,6 +79,9 @@ class RunDisplayEdit {
         //alert(id);
         this._id = parseInt(this._id);
         let run = await this._runsDB.getByID(this._id);
+        /*while(run == undefined){
+            run = await this._runsDB.getByID(this._id-1);
+        }*/
 
         /*alert(run.name);
         alert(run.datum);
@@ -194,7 +197,23 @@ class RunDisplayEdit {
             let url = document.URL;
             let changeId = url.substring(url.lastIndexOf('/') + 1);
                 changeId = parseInt(changeId);
-                alert(changeId);
+
+            let getList = async () => {
+                return await this._runsDB.search();
+            }
+            let listId = getList();
+            let current = parseInt(listId[0].id);
+            listId.forEach((run) =>{
+                let runId = parseInt(run.id);
+                if ((changeId - current) > (changeId-runId)){
+                    if (runId < changeId){
+                        current = runId;
+                    }
+                }
+            });
+
+            this._app.navigate("/run/display/"+current+"/");
+                /*alert(changeId);
             let preId = changeId-1;
 
              while (typeof(preId) == "undefined"){
@@ -203,13 +222,14 @@ class RunDisplayEdit {
              }
 
             alert("PreId"+preId);
-             window.location = "/run/display/"+preId+"/";
 
-             /*preId = parseInt(preId);
+
+
+             preId = parseInt(preId);
              let preRun = this._runsDB.getByID(preId);
-             alert(preRun.name);
+             alert("PreRun:"+preRun.name);*/
 
-
+/*
              document.getElementById('Name').value=preRun.name;
              document.getElementById('Datum').value=preRun.datum;
              document.getElementById('Distanz').value=preRun.strecke;
