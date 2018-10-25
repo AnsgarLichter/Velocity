@@ -79,6 +79,7 @@ class RunDisplayEdit {
         //alert(id);
         this._id = parseInt(this._id);
         let run = await this._runsDB.getByID(this._id);
+
         /*alert(run.name);
         alert(run.datum);
         alert(run.strecke);
@@ -86,12 +87,20 @@ class RunDisplayEdit {
         alert(run.art);
         alert(run.minutenPerKm);*/
 
-        document.getElementById('Name').value=run.name;
-        document.getElementById('Datum').value=run.datum;
-        document.getElementById('Distanz').value=run.strecke;
-        document.getElementById('Art').value=run.art;
-        document.getElementById('Zeit').value=run.dauer;
-        document.getElementById('minutenPerKm').value=run.minutenPerKm;
+        /*section.getElementById('Name').value=run.name;
+        section.getElementById('Datum').value=run.datum;
+        section.getElementById('Distanz').value=run.strecke;
+        section.getElementById('Art').value=run.art;
+        section.getElementById('Zeit').value=run.dauer;
+        section.getElementById('minutenPerKm').value=run.minutenPerKm;*/
+
+        section.querySelector('#Name').value=run.name;
+        section.querySelector('#Datum').value=run.datum;
+        section.querySelector('#Distanz').value=run.strecke;
+        section.querySelector('#Art').value=run.art;
+        section.querySelector('#Zeit').value=run.dauer;
+        section.querySelector('#minutenPerKm').value=run.minutenPerKm;
+
         //alert(run.strecke);
 
         /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
@@ -101,7 +110,9 @@ class RunDisplayEdit {
             sekunde = parseFloat(run.dauer)*60;
         let kmPerStd = ((meter/sekunde)/1000)/(1/3600);
 
-        document.getElementById('kilometerPerStd').value=kmPerStd;
+        /*document.getElementById('kilometerPerStd').value=kmPerStd;*/
+        document.querySelector('#kilometerPerStd').value=kmPerStd;
+
         //document.getElementById('Beschreibung').value=
         //document.getElementById('Bewertung').value=
 
@@ -185,16 +196,16 @@ class RunDisplayEdit {
                 changeId = parseInt(changeId);
                 alert(changeId);
             let preId = changeId-1;
-                alert(preId);
 
-             /*while (preId === undefined){
+             while (typeof(preId) == "undefined"){
                  preId = preId-1;
-             }*/
+                 alert("keine ID vorhanden");
+             }
 
-             alert("PreId"+preId);
-             //window.location.href = "localhost:1234/run/display/"+preId;
-             //this._runsDB.getByID(preId);
-             preId = parseInt(preId);
+            alert("PreId"+preId);
+             window.location = "/run/display/"+preId+"/";
+
+             /*preId = parseInt(preId);
              let preRun = this._runsDB.getByID(preId);
              alert(preRun.name);
 
@@ -207,14 +218,13 @@ class RunDisplayEdit {
              document.getElementById('minutenPerKm').value=preRun.minutenPerKm;
 
              /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
-             let meter = preRun.strecke.replace( /,/,"." );
+            /* let meter = preRun.strecke.replace( /,/,"." );
                  meter = parseFloat(meter)*1000;
              let sekunde = preRun.dauer.replace( /,/,"." );
                  sekunde = parseFloat(preRun.dauer)*60;
              let kmPerStd = ((meter/sekunde)/1000)/(1/3600);
 
-             document.getElementById('kilometerPerStd').value=kmPerStd;
-
+             document.getElementById('kilometerPerStd').value=kmPerStd;*/
 
 
          });
