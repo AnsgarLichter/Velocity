@@ -214,9 +214,8 @@ class RunDisplayEdit {
             //}
             //let listId = getList();
             //let current = parseInt(listId[0].id);
-
-
-            this._app.navigate("/run/display/"+this._preId + "/");
+            let redirectID = this._predId;
+            this._app.navigate("/run/display/"+ redirectID + "/");
 
                 /*alert(changeId);
             let preId = changeId-1;
