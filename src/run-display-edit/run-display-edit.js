@@ -73,9 +73,10 @@ class RunDisplayEdit {
 
         //TODO: Datenbank auslesen für Anzeige bei mode == display oder edit
         /*Laufergbis aus Übersichtstabelle auslesen*/
+
         //let url = document.URL;
         //let id = url.substring(url.lastIndexOf('/') + 1);
-
+        //alert(id);
         this._id = parseInt(this._id);
         let run = await this._runsDB.getByID(this._id);
         /*alert(run.name);
@@ -128,18 +129,20 @@ class RunDisplayEdit {
         });
         /*Event für Sichern-Button*/
         section.querySelector("#sichern").addEventListener("click",() => {
-            //alert(run.datum);
             let changeName = document.querySelector("#Name").value;
             let changeDatum = document.querySelector("#Datum").value;
             let changeDistanz = document.querySelector("#Distanz").value;
-            let changeZeit = document.querySelector("#Distanz").value;
+            let changeZeit = document.querySelector("#Zeit").value;
             let changeArt = document.querySelector("#Art").value;
             let changeMinutenPerKm = document.querySelector("#minutenPerKm").value;
             //let changeKilometerperStd = document.querySelector("#KilometerPerStd").value;
             let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
 
-
+            let url = document.URL;
+            let changeId = url.substring(url.lastIndexOf('/') + 1);
+                changeId = parseInt(changeId);
             this._runsDB.update({
+                id: changeId,
                 name: changeName,
                 strecke: changeDistanz,
                 dauer: changeZeit,
@@ -147,12 +150,74 @@ class RunDisplayEdit {
                 art: changeArt,
                 datum: changeDatum,
             });
-            //alert(run.name);
+
+            //alert(run);
             //run.datum.update("1");
             //alert(run.datum);
             //update(this._runsDB);
             //alert(this._runsDB);
+
+            /*Eingabefelder nach dem Sichern grau hinterlegen,
+            sodass keine Bearbeitung mehr möglich ist*/
+            document.getElementById('Name').setAttribute('disabled', 'disabled');
+            document.getElementById('Datum').setAttribute('disabled', 'disabled');
+            document.getElementById('Distanz').setAttribute('disabled', 'disabled');
+            document.getElementById('Zeit').setAttribute('disabled', 'disabled');
+            document.getElementById('Art').setAttribute('disabled', 'disabled');
+            document.getElementById('minutenPerKm').setAttribute('disabled', 'disabled');
+            document.getElementById('kilometerPerStd').setAttribute('disabled', 'disabled');
+            document.getElementById('Beschreibungstext').setAttribute('disabled', 'disabled');
         });
+
+        /*Loeschen-Event Deatailergebnis löschen aus Datenbank*/
+        section.querySelector("#loeschen").addEventListener("click",() => {
+            let url = document.URL;
+            let changeId = url.substring(url.lastIndexOf('/') + 1);
+                changeId = parseInt(changeId);
+            this._runsDB.delete(changeId);
+            alert("Die Id "+changeId+" wurde gelöscht!");
+        });
+
+
+        section.querySelector("#vorherige").addEventListener("click",() => {
+            let url = document.URL;
+            let changeId = url.substring(url.lastIndexOf('/') + 1);
+                changeId = parseInt(changeId);
+                alert(changeId);
+            let preId = changeId-1;
+                alert(preId);
+
+             /*while (preId === undefined){
+                 preId = preId-1;
+             }*/
+
+             alert("PreId"+preId);
+             //window.location.href = "localhost:1234/run/display/"+preId;
+             //this._runsDB.getByID(preId);
+             preId = parseInt(preId);
+             let preRun = this._runsDB.getByID(preId);
+             alert(preRun.name);
+
+
+             document.getElementById('Name').value=preRun.name;
+             document.getElementById('Datum').value=preRun.datum;
+             document.getElementById('Distanz').value=preRun.strecke;
+             document.getElementById('Art').value=preRun.art;
+             document.getElementById('Zeit').value=preRun.dauer;
+             document.getElementById('minutenPerKm').value=preRun.minutenPerKm;
+
+             /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
+             let meter = preRun.strecke.replace( /,/,"." );
+                 meter = parseFloat(meter)*1000;
+             let sekunde = preRun.dauer.replace( /,/,"." );
+                 sekunde = parseFloat(preRun.dauer)*60;
+             let kmPerStd = ((meter/sekunde)/1000)/(1/3600);
+
+             document.getElementById('kilometerPerStd').value=kmPerStd;
+
+
+
+         });
 
 
         return {
@@ -162,12 +227,6 @@ class RunDisplayEdit {
         };
 
     }
-
-
-
-
-
-
 
 
     /*let getRunsList = async () => {

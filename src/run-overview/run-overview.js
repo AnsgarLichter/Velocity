@@ -65,9 +65,9 @@ class RunOverview {
      * Methode App._switchVisibleContent()
      */
     async onShow() {
-/*
+
         //Test der Datenbankklasse für Laufergebnisse
-        console.log("1", this._runsDB);
+        /*console.log("1", this._runsDB);
         await this._runsDB.clear();
         console.log("2");
 
