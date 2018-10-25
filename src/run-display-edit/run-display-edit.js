@@ -192,27 +192,32 @@ class RunDisplayEdit {
             alert("Die Id "+changeId+" wurde gelöscht!");
         });
 
+        let listId = await this._runsDB.search();
+        let current = parseInt(listId[0].id);
+        listId.forEach((run) =>{
+            let runId = parseInt(run.id);
+            if ((this._id - current) > (this._id - runId)){
+                if (runId < this._id){
+                    current = runId;
+                }
+            }
+        });
+        this._predId = current;
 
         section.querySelector("#vorherige").addEventListener("click",() => {
-            let url = document.URL;
-            let changeId = url.substring(url.lastIndexOf('/') + 1);
-                changeId = parseInt(changeId);
+            //let url = document.URL;
+            //let changeId = url.substring(url.lastIndexOf('/') + 1);
+            //    changeId = parseInt(changeId);
 
-            let getList = async () => {
-                return await this._runsDB.search();
-            }
-            let listId = getList();
-            let current = parseInt(listId[0].id);
-            listId.forEach((run) =>{
-                let runId = parseInt(run.id);
-                if ((changeId - current) > (changeId-runId)){
-                    if (runId < changeId){
-                        current = runId;
-                    }
-                }
-            });
+            //let getList = async () => {
+            //    return await this._runsDB.search();
+            //}
+            //let listId = getList();
+            //let current = parseInt(listId[0].id);
 
-            this._app.navigate("/run/display/"+current+"/");
+
+            this._app.navigate("/run/display/"+this._preId + "/");
+
                 /*alert(changeId);
             let preId = changeId-1;
 
