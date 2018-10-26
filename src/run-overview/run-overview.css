@@ -87,3 +87,18 @@
 .run-overview .hidden {
     display: none;
 }
+
+/*
+* Die Triangles sollen bei Bildschirmen mit einer Breite unter 600px nicht
+* angezeigt werden. Daher wird bei der Klasse display die Eigensschaft display
+* auf none gestellt.
+*/
+.run-overview .display {
+    display: none;
+}
+
+@media screen and (min-width: 600px) {
+    .run-overview .display{
+        display: inline;
+    }
+}

@@ -39,8 +39,43 @@
  */
 
 #app {
-    background-color: white;
+    /*background-color: white;*/
     flex: 1;
+}
+
+#app header {
+    display: grid;
+    /*grid-template-columns: auto 10em;*/
+}
+
+#app header .bottom {
+    grid-row: 1;
+}
+
+#app header .left {
+    grid-column: 1;
+
+    display: flex;
+    justify-content: flex-start;
+}
+
+#app header .right{
+    grid-column: 3;
+
+    display: flex;
+
+
+    background-color: var(--header-active-background-color);
+    color: var(--header-active-font-color);
+}
+
+#app header .item {
+    /*width: auto;*/
+
+    grid-column: 2;
+
+    display: flex;
+    justify-content: center;
 }
 
 /*
@@ -122,8 +157,7 @@
     background-repeat: no-repeat;
 
     color: #3c3c3c;
-    text-shadow: 1px 1px 2px black;
-    font-size: 300%;
+    font-size: 200%;
     font-weight: bold;
     text-align: center;
 }
@@ -134,14 +168,14 @@
  */
 @media screen and (min-width: 85em) {
     /* Rahmen um den Hauptbereich zeichnen */
-    #app {
+    /*#app {
         max-width: 80em;
         margin-top: 2em;
         margin-bottom: 2em;
 
         border: 1px solid rgba(32,32,32, 0.2);
         box-shadow: 1px 1px 3px rgba(0,0,0, 0.1);
-    }
+    }*/
 
     /* Topbar- und Toolbar-Inhalte nebeneinander */
     #app header {
