@@ -1,7 +1,7 @@
 /*
- * My Songbook - Beispielanwendung der Anleitung zur Entwicklung einer Browser App
+ * Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
  *
- * © 2018 Dennis Schulmeister-Zimolong <dhbw@windows3.de>
+ * © 2018 Ansgar Lichter, Patrick Fichtner, Toni Coric
  * Lizenz: Creative Commons Namensnennung 4.0 International
  *
  * Sie dürfen:
@@ -32,23 +32,20 @@
  * sein, die Ihre Nutzung des Materials entsprechend beschränken.
  */
 "use strict";
-//import "regenerator-runtime/runtime";
 
 import stylesheet from "./app.css";
-
 import Navigo from "navigo/lib/navigo.js";
 import RunDisplayEdit from "./run-display-edit/run-display-edit.js";
 import RunOverview from "./run-overview/run-overview.js";
 import Database from "./database.js";
 
 /**
- * Hauptklasse der Anwendung. Kümmert sich darum, die Anwendung auszuführen
- * und die angeforderten Bildschirmseiten anzuzeigen.
+ * Hauptklasse der Anwendung.
+ * Diese Klasse hat die Aufgabe die angeforderten Bildschirmseiten
+ * anzuzeigen und auszuführen.
  */
 class App {
-    /**
-     * Konstruktor.
-     */
+     //Konstruktor
     constructor() {
         //Titel deklarieren
         this._title = "Velocity";
@@ -57,10 +54,11 @@ class App {
         //Datenbank deklarieren
         this._runsDB = new Database.Runs();
 
-            // Single Page Router aufsetzen
+        // Single Page Router aufsetzen
         this._router = new Navigo();
         this._currentUrl = "";
         this._navAborted = false;
+
         //TODO: Aufruf für /run/new ändern, sobald Klasse für Run hinzufügen existiert
         this._router.on({
             "*":                      () => this.showRunOverview(),
@@ -75,8 +73,11 @@ class App {
                     // Navigation durchführen, daher die neue URL merken
                     this._currentUrl = this._router.lastRouteResolved().url;
                 } else {
-                    // Navigation abbrechen, daher die URL in der Adresszeile
-                    // auf den alten Wert der bisherigen View zurücksetzen
+                    /*
+                    * Navigation abbrechen:
+                    * Die URL in der Adresszeile auf den alten Wert der
+                    * bisherigen View zurücksetzen.
+                    */
                     this._router.pause(true);
                     this._router.navigate(this._currentUrl);
                     this._router.pause(false);
@@ -88,20 +89,22 @@ class App {
     }
 
     /**
-     * Ab hier beginnt die Anwendung zu laufen.
+     * Anwendung starten
      */
     start() {
         this._router.resolve();
     }
 
 
-    /*Navigate-Methode*/
-
+    /*
+    * Navigations-Methode, damit auch von einem Button aus eine neue Seitenwechsel
+    * aufgerufen werden kann.
+    */
     navigate(url) {
         this._router.navigate(url);
     }
 
-    /**
+    /*
      * Aufruf der Übersichtsseite der vorhandenen Laufergebnisse.
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
@@ -110,11 +113,12 @@ class App {
         this._switchVisibleView(view);
     }
 
-    /**
-     * Aufruf der Detailseite zur Anzeige oder zum Bearbeiten eines Songs.
+    /*
+     * Aufruf der Detailseite zur genaueren Ansicht oder zur Bearbeitung
+     * eines Trainingsergebnisses.
      *
      * @param  {String} id Run-ID
-     * @param  {String} mode "new", "display" oder "edit"
+     * @param  {String} mode "display" oder "edit"
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
     showRunDisplayEdit(id, mode) {
@@ -125,21 +129,26 @@ class App {
     //TODO: Methode showRunNew() hinzufügen
 
     /**
-     * Hilfsklasse zum Umschalten auf eine neue Seite. Sie ruft zunächst die
-     * Methode onLeave() der gerade sichtbaren View auf und prüft damit, ob
-     * die View verlassen werden kann. Falls ja ruft sie die Methode onShow()
-     * der neuen View auf und übergibt das Ergebnis an die eigene Methode
-     * _switchVisibleContent(), um den sichtbaren Inhalt der Seite auszutauschen.
+     * Hilfsmethoden zum Anzeigen einer einer neuen Seite, falls diese
+     * angefordert worden ist.
+     * Sie ruft zunächst die Methode onLeave() der gerade sichtbaren View auf.
+     * Dadruch wird geprüft, ob die View verlassen werden kann.
+     * Falls diese verlassen werden darf, wird die Methode onShow() der neuen
+     * Vie aufgerufen. Das Ergebnis wird an die eigene Methode
+     * _switchVisibleContent() übergeben, um den sichtbaren Inhalt
+     * der Seite auszutauschen.
      *
      * @param  {Object} view View-Objekt mit einer onShow()-Methode
      * @return {Boolean} Flag, ob die neue Seite aufgerufen werden konnte
      */
     async _switchVisibleView(view) {
-        // Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
-        // späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
-        // false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
-        // zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
-        // bevor er die Seite verlässt.
+        /*
+        * Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
+        * späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
+        * false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
+        * zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
+        * bevor er die Seite verlässt.
+        */
         let newUrl = this._router.lastRouteResolved().url;
         let goon = () => {
             // ?goon an die URL hängen, weil der Router sonst nicht weiternavigiert
@@ -156,19 +165,29 @@ class App {
             }
         }
 
-        // Alles klar, aktuelle View nun wechseln
+        // Aktuelle View darf gewechselt werden.
         document.title = `${this._title} – ${view.title}`;
 
         this._currentView = view;
         this._switchVisibleContent(await view.onShow());
 
-        //Event-Listener für Suchfeld in der NavBar
-        //Suchfeld
+        /*
+        * Hier folgt nun der Suchalgorithmus, der das Suchfeld in der NavBar
+        * steuert. Falls ein Treeffer für den angegeben Suchstring gefunden
+        * worden ist, wird dieser auf der Seite mit Hilfe des <mark>-Elements
+        * hervorgehoben.
+        *
+        * Das Suchfeld reagiert nur auf das Event onChange. Das bedeutet für
+        * den Benutzer, dass er seine Eingabe mit der Enter-Taste bestaetigen
+        * muss.
+        */
+
+        //Suchfeld in einer Variablen speichern
         let search = document.querySelector("#suche");
-        //EventLisener hinzufügen
+        //Dem Suchfeld einen EventLisener hinzufügen
         search.addEventListener("change", function() {
-            //Search-Funktion
-            let search = function(element) {
+            //Definition der search-function
+            let search = (element) =>  {
                 if(element.childElementCount > 0) {
                     //Element hat Kinder
                     element.childNodes.forEach(search);
