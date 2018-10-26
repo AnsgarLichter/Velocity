@@ -1,7 +1,7 @@
 /*
- * My Songbook - Beispielanwendung der Anleitung zur Entwicklung einer Browser App
+ * Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
  *
- * © 2018 Dennis Schulmeister-Zimolong <dhbw@windows3.de>
+ * © 2018 Ansgar Lichter, Patrick Fichtner, Toni Coric
  * Lizenz: Creative Commons Namensnennung 4.0 International
  *
  * Sie dürfen:
@@ -33,10 +33,11 @@
  */
 
  /*
-  * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .song-overview
-  * beginnen. Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen
-  * der Anwendung überschrieben werden.
+  * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .run-overview
+  * beginnen. Es sollen nämlich keine Eigenschaften aus anderen Bereichen
+  * überschrieben werden.
   */
+
 .run-overview main {
     font-color: #3c3c3c;
     background-color: #B7DFDD;
@@ -78,7 +79,11 @@
 .run-overview p {
     display: inline;
 }
-
+/*
+* Die Klasse hidden muss hier nochmal implementiert werden, da der Effekt dieser
+* nicht erfolgte. Der Grund dafür war, dass die Eigenschaft der Klasse durch
+* CSS-Anweisungen der Klasse run-overview überschrieben wurde
+*/
 .run-overview .hidden {
     display: none;
 }

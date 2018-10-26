@@ -1,7 +1,7 @@
 /*
- * My Songbook - Beispielanwendung der Anleitung zur Entwicklung einer Browser App
+ * Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
  *
- * © 2018 Dennis Schulmeister-Zimolong <dhbw@windows3.de>
+ * © 2018 Ansgar Lichter, Patrick Fichtner, Toni Coric
  * Lizenz: Creative Commons Namensnennung 4.0 International
  *
  * Sie dürfen:
@@ -38,7 +38,7 @@ import theme from "./theme.css";
 
 import App from "./app.js";
 
-// Erst loslaufen, wenn das Document Object Modul bereit ist
+// Die Anwendung soll erst gestartet werden, sobald das DOM bereit ist.
 window.addEventListener("load", () => {
     // Anwendung starten
     let app = new App();
