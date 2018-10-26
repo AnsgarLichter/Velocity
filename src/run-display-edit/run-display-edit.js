@@ -126,13 +126,15 @@ class RunDisplayEdit {
             document.getElementById('Distanz').removeAttribute('disabled');
             document.getElementById('Zeit').removeAttribute('disabled');
             document.getElementById('Art').removeAttribute('disabled');
-            document.getElementById('minutenPerKm').removeAttribute('disabled');
-            document.getElementById('kilometerPerStd').removeAttribute('disabled');
+            document.getElementById('minutenPerKm').setAttribute('disabled', true);
+            document.getElementById('kilometerPerStd').setAttribute('disabled', true);
             document.getElementById('Beschreibungstext').removeAttribute('disabled');
 
-
+            document.getElementById('sichern').style.display="block";
             document.getElementById('div_aendern').style.display="block";
             document.getElementById('div_ergebnis_wechseln').style.display="none";
+            document.getElementById('bearbeiten').style.display="none";
+
 
 
         });
@@ -149,6 +151,7 @@ class RunDisplayEdit {
 
             document.getElementById('div_aendern').style.display="none";
             document.getElementById('div_ergebnis_wechseln').style.display="block";
+            document.getElementById('bearbeiten').style.display="block";
         });
         /*Event für Sichern-Button*/
         section.querySelector("#sichern").addEventListener("click",() => {
@@ -161,6 +164,10 @@ class RunDisplayEdit {
             //let changeKilometerperStd = document.querySelector("#KilometerPerStd").value;
             let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
             document.getElementById('div_ergebnis_wechseln').style.display="block";
+            document.getElementById('bearbeiten').style.display="block";
+            document.getElementById('sichern').style.display="none";
+            document.getElementById('abbrechen').style.display="none";
+
 
             let url = document.URL;
             let changeId = url.substring(url.lastIndexOf('/') + 1);
