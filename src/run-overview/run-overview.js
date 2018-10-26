@@ -1,7 +1,7 @@
 /*
- * My Songbook - Beispielanwendung der Anleitung zur Entwicklung einer Browser App
+ * Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
  *
- * © 2018 Dennis Schulmeister-Zimolong <dhbw@windows3.de>
+ * © 2018 Ansgar Lichter, Patrick Fichtner, Toni Coric
  * Lizenz: Creative Commons Namensnennung 4.0 International
  *
  * Sie dürfen:
@@ -38,7 +38,7 @@ import stylesheet from "./run-overview.css";
 import Database from "../database.js";
 
 /**
- * View mit der Übersicht der vorhandenen Songs.
+ * View mit der Übersicht der vorhandenen Trainingsergebnisse.
  */
 class RunOverview {
     /**
@@ -53,10 +53,9 @@ class RunOverview {
     }
 
     /**
-     * Von der Klasse App aufgerufene Methode, um die Seite anzuzeigen. Die
-     * Methode gibt daher ein passendes Objekt zurück, das an die Methode
-     * _switchVisibleContent() der Klasse App übergeben werden kann, um ihr
-     * die darzustellenden DOM-Elemente mitzuteilen.
+     * Folgende Methode wird von der Klasse App aufgerufen, um die Übersicht
+     * der vorhandenen Ergebnisse anzuzeigen. Es sollen also die darzustellenden
+     * DOM-Elemente zurückgegeben werden
      *
      * Desweiteren wird hier die Funktion, um die Tabelle auf der
      * Übersichtsseite zu sortieren, realisiert.
@@ -121,31 +120,45 @@ class RunOverview {
         console.log("Suche nach 6km", runs);
         //Ende des Testcodes
 */
-        //Passende Elemente vom HTML aufrufen und in Sections speichern
+        //Passende Elemente vom HTML suchen und eine Kopie in Section speichern
         let section = document.querySelector("#run-overview").cloneNode(true);
-        let tBody   = section.querySelector("#uebersicht");
-        /*Datenbankergebnisse in lokaler Variable speichern
-        *Abfrage aller vorhandenen Ergebnisse muss in eine async-Funktion
-        *gepackt werden, damit auch auf das Ergebnis der Datenbankabfrage
-        *gewartet wird.
+        /*
+        * Tabelle in der Section suchen und speichern, um das Füllen der
+        * Tabelle zu erleichtern.
         */
+        let tBody   = section.querySelector("#uebersicht");
 
+        /*
+        * Datenbankergebnisse in lokaler Variable speichern
+        * Abfrage aller vorhandenen Ergebnisse muss in eine async-Funktion
+        * gepackt werden, damit auch auf das Ergebnis der Datenbankabfrage
+        * gewartet wird.
+        */
         let runsList = await this._runsDB.search();
 
-        //e ist nun ein Array --> durchlaufen der einzelnen Ergebnissen
-        //mit Hilfe einer forEach-Schleife.
+        /*
+        * runsList ist ein Array und enthaelt alle vorhandenen Trainings-
+        * ergebnisse. Da jedes Ergebnis in der Tabelle auf der Uebersichts-
+        * seite dargestellt werden soll, wird der Array mit Hilfe einer
+        * forEach-Schleife durchlaufen.
+        * Innerhalb dieser forEach-Schleife wird pro vorhandenem Trainings-
+        * ergebnis eine Zeile mit den entsprechenden Daten hinzugefügt.
+        */
         runsList.forEach(function(run) {
             //Tabellenzeile für jedes Ergebnis erstellen
             let newTR = document.createElement("TR");
-            /*Einzelne Eigenschaften in <TD>-Elementen speichern
-            *und der neuen Zeile als Kind hinzufügen
-            *Eigenschaften / Spalten der Tabelle:
-            *Name
-            *Datum
-            *Distanz in km
-            *Zeit
-            *Art
-            *Velocity in min/km*/
+
+            /*
+            * Einzelne Eigenschaften in <TD>-Elementen speichern
+            * und der neuen Zeile als Kind hinzufügen
+            * Eigenschaften / Spalten der Tabelle:
+            * Name
+            * Datum
+            * Distanz in km
+            * Zeit
+            * Art
+            * Velocity in min/km
+            */
             let tdName = document.createElement("TD");
             let tdDatum = document.createElement("TD");
             let tdDistanz = document.createElement("TD");
@@ -153,7 +166,7 @@ class RunOverview {
             let tdArt = document.createElement("TD");
             let tdVelocity = document.createElement("TD");
 
-            //Einzelne Elemente mit Inhalt befüllen
+            //Einzelne <TD>-Elemente mit dem entsprechenden Inhalt befüllen
             tdName.textContent      = run.name;
             tdDatum.textContent     = run.datum;
             tdDistanz.textContent   = run.strecke;
@@ -161,9 +174,11 @@ class RunOverview {
             tdArt.textContent       = run.art;
             tdVelocity.textContent  = run.minutenPerKm;
 
-            //Einzelne TDs der Table Row als Kind hinzufügen:
-            //Reihenfolge der Tabellenspalten sollte mit der
-            //Reihenfolge der Anweisungen übereinstimmen1
+            /*
+            * Einzelne <TD>-Elemente der Tabellenzeile als Kind hinzufügen:
+            * Achtung: Reihenfolge der Tabellenspalten sollte mit der
+            *          Reihenfolge der Anweisungen übereinstimmen
+            */
             newTR.appendChild(tdName);
             newTR.appendChild(tdDatum);
             newTR.appendChild(tdDistanz);
@@ -171,40 +186,62 @@ class RunOverview {
             newTR.appendChild(tdArt);
             newTR.appendChild(tdVelocity);
 
-            //Text Content der einzelnen Zellen in Links für die Detailansicht einrahmen
+            /*
+            * Text Content der einzelnen Zellen in Links für die Detailansicht
+            * einrahmen. Damit wirrd gewährleistet, das mit einem Klick auf den
+            * Text innerhalb einer Tabellenzelle auf die Detailansicht ge-
+            * sprungen werden kann.
+            */
+
             //Anzahl Kinder bestimen
             let i = newTR.childElementCount -1;
-
-            //ChildNodes holen
+            //Alle Kinder holen und in einer Variablen speichern
             let children = newTR.childNodes;
 
+            /*
+            * In dieser for-Schleife wird innerhalb jeder Tabellenzelle
+            * der eigentliche Inhalt mti einem <a>-Element "umrahmt".
+            */
             for(i; i > -1; i--) {
-                //<a></a> erstelen und Attribute einsetzen
+                //<a>-Element erstelen und Attribute setzen
                 let a = document.createElement("a");
                 a.setAttribute("href", "/run/display/"+ run.id + "/");
+                //Data-Navigo Attribut - ohne funktioniert der Router nicht.
                 a.setAttribute("data-navigo", "");
 
-                //textContent des Elternelements innerhalb des Links speichern
+                /*
+                * textContent des Elternelements im textContent des <a>-Elements
+                * speichern.
+                */
                 a.textContent = children[i].textContent;
                 children[i].textContent = "";
-                //Link als Kind hinzufügen
+
+                //<a>-Element der Tabellenzelle als Kind hinzufügen.
                 children[i].appendChild(a);
             }
-            //Tabellenzeile zur Tabelle (Id: uebersicht) hinzufügen, damit
-            // diese auch auf dem Bildschirm angezeigt wird
+            /*
+            * Tabellenzeile zur Tabelle (tBody) hinzufügen, damit
+            * diese auch auf dem Bildschirm angezeigt wird
+            */
             tBody.appendChild(newTR);
         });
 
-        /*Sortieren der Tabelle, falls vom Anwender gewünscht
-        *n entspricht Spaltennummer:
+        /*
+        * Sortieren der Tabelle, falls vom Anwender gewünscht.
+        * Der Parameter n entspricht Spaltennummer:
         * Name = 1, Datum = 2, Distanz = 3, Zeit = 4, Art = 5, Velocity = 6
-        *dir steht für die Sortierreihenfolge:
-        * asc für ascendign und desc für descending
+        * dir steht für die Sortierreihenfolge:
+        * asc für ascending und desc für descending
         *
+        * Falls bereits ascendig sortiert ist, wird descendig sortiert.
+        * Abhängig von der Sortierrichtung wird neben der sortierten Spalte
+        * eine entsprechende Triangle eingeblendet
         */
         let sortTable = (n) => {
-            /*Boolean, ob getauscht wurde --> auf true setzen, damti überhaupt
-            mit tauschen begonnen wird*/
+            /*
+            * Boolean, ob getauscht wurde --> auf true setzen, damti überhaupt
+            * mit tauschen begonnen wird
+            */
             let switching = true;
             //Alle Tabellenzeilen
             let rows = tBody.rows;
@@ -214,48 +251,64 @@ class RunOverview {
             let y;
             //Boolean, ob getauscht werden soll
             let tauschen;
-            //Zaehlervariable für die for-Schleife
-            // Zeile mit Spaltennamen soll nicht mit soritert werden --> i = 1
+            /*
+            * Zaehlervariable für die for-Schleife
+            * Zeile mit Spaltennamen soll nicht mit soritert werden --> i = 1
+            */
             let i;
             //Standardmäßig wird ascendig sortiert, daher dir auf asc setzen
             let dir = "asc";
-            /*Zähler, wie oft getauscht wurde
-            * wird benötigt, damit, wenn kein Tausch bei "asc" vorgenommen wurde,
-            * descendig sortiert werden kann*/
+            /*
+            * Zähler, wie oft getauscht wurde, wird benötigt, damit descending
+            * sortiert werden kann, wenn kein Tausch bei "asc" vorgenommen
+            * wurde. Wenn bei Ascending kein Tausch vorgenommen wurde, bedeutet
+            * dies, dass bereits ascendig sortiert ist.
+            */
             let zaehler = 0;
 
-            //Bevor das Tauschen beginnen kann, müssen die alten Triangle wieder
-            //versteckt werden
+            /*
+            * Bevor das Tauschen beginnen kann, müssen die alten Triangle wieder
+            * entfernt werden.
+            */
             let triangles = document.getElementsByClassName("display");
             for(i=0; i < triangles.length; i++) {
                 triangles[i].className = "hidden";
             }
 
-
             //While-Schleife bis nicht mehr getauscht wurde
             while(switching) {
-                //Es wurde nicht getauscht
+                //switching auf false setzen, da noch kein Tausch
                 switching = false;
-                /*Über alle Zeilen drübergehen (außer die erste Zeile mit
-                *den Spaltennamen)*/
+                /*
+                * Über alle Zeilen drübergehen (außer die erste Zeile mit
+                * den Spaltennamen)
+                */
                 for(i = 1; i < (rows.length -1); i++) {
                     tauschen = false;
-                    //Zellen holen, die verglichen werden scrollen
+                    //Zellen holen, die verglichen werden sollen
                     x = rows[i].getElementsByTagName("TD")[n];
                     y = rows[i+1].getElementsByTagName("TD")[n];
 
+                    //Zelleninhalt in einer Stringvariablen speichern
                     let stringX = x.firstChild.innerHTML.toLowerCase();
                     let stringY = y.firstChild.innerHTML.toLowerCase();
 
-                    /*Datum können im Format TT.MM.YYYY nicht richtig Vergleichen.
+                    /*
+                    * Datum können im Format TT.MM.YYYY nicht richtig Vergleichen.
                     * Daher muss das Datum in YYYYMMTT umgewandelt werden.
+                    * Die Daten stehen in der 2. Spalte (n == 1). Wenn es sich
+                    * diese Spalte handelt wird das Datum mittels subString in
+                    * das geforderte Format umgewandelt.
                     */
                     if(n == 1) {
                         stringX = stringX.substring(6,10)+stringX.substring(3,5)+stringX.substring(0,2);
                         stringY = stringY.substring(6,10)+stringY.substring(3,5)+stringY.substring(0,2);
                     }
-                    /*Überprüfen, ob getasucht werden sollen in Abhängigkeit
-                    *der Sortierreihenfolge*/
+
+                    /*
+                    * Überprüfen, ob getasucht werden sollen in Abhängigkeit
+                    * der Sortierreihenfolge
+                    */
                     if (dir == "asc") {
                         if(stringX > stringY) {
                             //Elemente sollen getauscht werden --> markieren
@@ -271,14 +324,20 @@ class RunOverview {
                         }
                     }
                 }
-                //Ende for-Schleife
+
+                /*
+                * Falls Elemente zum Tausch markiert wurden, wird der Tausch
+                * hier vollzogen.
+                */
                 if(tauschen) {
                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                     switching = true;
                     zaehler++;
                 }else{
-                    //Wenn kein Tausch erfolgt ist und dir Richtung "asc" ist,
-                    //soll descendig sortiert werden
+                    /*
+                    * Wenn kein Tausch erfolgt ist und die Richtung "asc" ist,
+                    * soll descendig sortiert werden.
+                    */
                     if(zaehler == 0 && dir == "asc") {
                         dir = "desc";
                         switching = true;
@@ -288,17 +347,21 @@ class RunOverview {
 
             //Abhängig von der Sortierrichtung die entsprechende Triangle einblenden
             if(dir == "asc") {
-                //Triangle nach unten
+                //Triangle nach unten einblenden und nach oben ausblendne
                 rows[0].getElementsByTagName("TD")[n].querySelector("#asc").className="display";
                 rows[0].getElementsByTagName("TD")[n].querySelector("#desc").className="hidden";
             }else{
-                //Triangle nach oben
+                //Triangle nach unten einblenden und nach oben ausbelden
                 rows[0].getElementsByTagName("TD")[n].querySelector("#desc").className="display";
                 rows[0].getElementsByTagName("TD")[n].querySelector("#asc").className="hidden";
             }
         };
 
-        //EventListener für jede Spalte registrieren
+        /*
+        * EventListener für jede Tabellenzelle registrieren, damit der Sortier-
+        * algorithmus auch mit dem passenden Parameter aufgerufen wird.
+        * Achtung: n wie beim Array --> 1. Spalte hat den Wert 0, usw.
+        */
         section.querySelector("#tdName").addEventListener("click",() => { sortTable(0)});
         section.querySelector("#tdDatum").addEventListener("click",() => { sortTable(1)} );
         section.querySelector("#tdDistanz").addEventListener("click",() => { sortTable(2)});
@@ -313,10 +376,11 @@ class RunOverview {
         };
     }
 
-    /**
-     * Von der Klasse App aufgerufene Methode, um festzustellen, ob der Wechsel
-     * auf eine neue Seite erlaubt ist. Wird hier true zurückgegeben, wird der
-     * Seitenwechsel ausgeführt.
+    /*
+     * Diese Methode wird von der Klasse App aufgerufen, um festzustellen, ob
+     * der Seitenwechsel von der aktuellen Seite weg erlaubt ist.
+     * Gibt diese Methode den Wert true zurück, kann der Seitenwechsel
+     * vollzogen werden.
      *
      * @param  {Function} goon Callback, um den Seitenwechsel zu einem späteren
      * Zeitpunkt fortzuführen, falls wir hier false zurückgeben
