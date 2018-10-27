@@ -103,8 +103,12 @@ class RunDisplayEdit {
         section.querySelector('#Art').value=run.art;
         section.querySelector('#Zeit').value=run.dauer;
         section.querySelector('#minutenPerKm').value=run.minutenPerKm;
+
+        //wenn Beschreibungstext undefined, leeren String anzeigen
+        if(run.beschreibungstext == undefined){
+           run.beschreibungstext = "";
+        }
         section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
-        //TODO: wenn Beschreibungstext undefined, leeren String anzeigen
 
         /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
         let meter = run.strecke.replace( /,/,"." );
@@ -112,9 +116,10 @@ class RunDisplayEdit {
         let sekunde = run.dauer.replace( /,/,"." );
             sekunde = parseFloat(run.dauer)*60;
         let kmPerStd = ((meter/sekunde)/1000)/(1/3600);
+            kmPerStd = parseInt(kmPerStd);
 
         /*document.getElementById('kilometerPerStd').value=kmPerStd;*/
-        document.querySelector('#kilometerPerStd').value=kmPerStd;
+        section.querySelector('#kilometerPerStd').value=kmPerStd;
 
         //document.getElementById('Beschreibung').value=
         //document.getElementById('Bewertung').value=
