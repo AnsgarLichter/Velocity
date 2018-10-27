@@ -56,7 +56,7 @@ import Dexie from "dexie/dist/dexie.js";
  let database = new Dexie("Velocity");
 
  database.version(1).stores({
-    runs: "++id, name, strecke, dauer, minutenPerKm, art, datum",
+    runs: "++id, name, strecke, dauer, minutenPerKm, art, datum, beschreibungstext",
  });
 
  /*

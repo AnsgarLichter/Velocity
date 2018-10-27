@@ -103,6 +103,7 @@ class RunDisplayEdit {
         section.querySelector('#Art').value=run.art;
         section.querySelector('#Zeit').value=run.dauer;
         section.querySelector('#minutenPerKm').value=run.minutenPerKm;
+        section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
 
         //alert(run.strecke);
 
@@ -180,6 +181,7 @@ class RunDisplayEdit {
                 minutenPerKm: changeMinutenPerKm,
                 art: changeArt,
                 datum: changeDatum,
+                beschreibungstext: changeBeschreibung,
             });
 
             //alert(run);
