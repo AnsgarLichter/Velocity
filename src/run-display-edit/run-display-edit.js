@@ -118,6 +118,10 @@ class RunDisplayEdit {
         let kmPerStd = ((meter/sekunde)/1000)/(1/3600);
             kmPerStd = parseInt(kmPerStd);
 
+        /*Berechnung Minuten pro Kilometer*/
+        let minPerKm = 3600 / kmPerStd / 60;
+        section.querySelector("#minutenPerKm").value=minPerKm;
+
         /*document.getElementById('kilometerPerStd').value=kmPerStd;*/
         section.querySelector('#kilometerPerStd').value=kmPerStd;
 
@@ -188,11 +192,6 @@ class RunDisplayEdit {
                 beschreibungstext: changeBeschreibung,
             });
 
-            //alert(run);
-            //run.datum.update("1");
-            //alert(run.datum);
-            //update(this._runsDB);
-            //alert(this._runsDB);
 
             /*Eingabefelder nach dem Sichern grau hinterlegen,
             sodass keine Bearbeitung mehr möglich ist*/
