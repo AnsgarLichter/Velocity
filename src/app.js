@@ -185,7 +185,7 @@ class App {
         //Suchfeld in einer Variablen speichern
         let search = document.querySelector("#suche");
         //Dem Suchfeld einen EventLisener hinzufügen
-        search.addEventListener("change", function() {
+        search.addEventListener("change", () => {
             //Definition der search-function
             let search = (element) =>  {
                 if(element.childElementCount > 0) {
@@ -209,16 +209,11 @@ class App {
                 }
             }
 
+
             //Suchbegriff auslesen
             let searchString = document.getElementById("suche").value;
 
             //Alte Ergebnisse löschen
-            /*let oldSearchResult = document.getElementsByClassName("searchResult");
-            if (oldSearchResult.length > 0) {
-                for(let i = 0; i < oldSearchResult.length;) {
-                    oldSearchResult[i].className = "";
-                }
-            }*/
             let oldSearchResults = document.getElementsByTagName("mark");
             if (oldSearchResults.length > 0) {
                 let i = 0;
@@ -241,6 +236,24 @@ class App {
             inhalt.childNodes.forEach(search);
         });
 
+        /*
+        * Dem Suchfeld ein EventListener für das Event "Reset" hinzufügen.
+        * Hier müssen lediglich alte Suchergebnisse wieder gelöscht werden.
+        */
+
+        search.addEventListener("cancel", () => {
+            let oldSearchResults = document.getElementsByTagName("mark");
+            if (oldSearchResults.length > 0) {
+                let i = 0;
+                //for(i; i < oldSearchResults.length;) {
+                while(oldSearchResults.length > 0) {
+                    let innerHTML = oldSearchResults[i].parentNode.innerHTML;
+                    innerHTML = innerHTML.replace("<mark>", "");
+                    innerHTML = innerHTML.replace("</mark>", "");
+                    oldSearchResults[i].parentNode.innerHTML = innerHTML;
+                }
+            }
+        });
         return true;
     }
 
@@ -267,8 +280,6 @@ class App {
      * @param {Object} content Objekt mit den anzuzeigenden DOM-Elementen
      */
     _switchVisibleContent(content) {
-        console.log("_switchVisibleContent", content); // TODO: Entfernen
-
         // <header> und <main> des HTML-Grundgerüsts ermitteln
         let app = document.querySelector("#app");
         let header = document.querySelector("#app > header");

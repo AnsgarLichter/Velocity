@@ -104,8 +104,7 @@ class RunDisplayEdit {
         section.querySelector('#Zeit').value=run.dauer;
         section.querySelector('#minutenPerKm').value=run.minutenPerKm;
         section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
-
-        //alert(run.strecke);
+        //TODO: wenn Beschreibungstext undefined, leeren String anzeigen
 
         /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
         let meter = run.strecke.replace( /,/,"." );

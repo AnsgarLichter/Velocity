@@ -144,7 +144,7 @@ class RunOverview {
         * Innerhalb dieser forEach-Schleife wird pro vorhandenem Trainings-
         * ergebnis eine Zeile mit den entsprechenden Daten hinzugefügt.
         */
-        runsList.forEach(function(run) {
+        runsList.forEach((run) => {
             //Tabellenzeile für jedes Ergebnis erstellen
             let newTR = document.createElement("TR");
 
