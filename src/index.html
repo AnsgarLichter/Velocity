@@ -123,35 +123,25 @@
                     <input type="string" id="minutenPerKm" disabled/><br />
                     <label for="kilometerPerStd">Velocity km/h:</label>
                     <input type="string" id="kilometerPerStd" disabled/><br />
-                    <label for="Beschreibung">Beschreibung:</label>
-                    <textarea id="Beschreibungstext" name="Beschreibungstext" disabled></textarea> <br />
                     <label for="Bewertung:">Bewertung:(1-5)</label>
                     <input id="Rating" type="range" min="1" max="5" step="1" /> <br />
+                    <label for="Beschreibung">Beschreibung:</label>
+                    <textarea id="Beschreibungstext" name="Beschreibungstext" disabled></textarea> <br />
 
 
-                    <!--<iframe style="height:50px; width:100%;" id="pageSternecode1" name="page"
-                        src="https://websynthesis.org/tools/stars/iframe.php?quantity=5&color=000000&img1=&img2=&name=Sternecode1"
-                        frameborder="0" scrolling="no">
-                    </iframe>
-                    <script type="text/javascript" src="https://websynthesis.org/tools/stars/js.php?id=Sternecode1"></script>-->
-
+                <div class="buttongroup">
 
                         <button type="button" id="loeschen">Löschen </button>
-
-                        <!--<input type="button" id="loeschen" value="löschen"
-                        onClick="return confirm('Möchtest du die Eingaben wirklich löschen?')">-->
-
-
-                    <button type="button" id="bearbeiten">Bearbeiten</button>
+                        <button type="button" id="bearbeiten">Bearbeiten</button>
 
                     <div id ="div_aendern" style="display: none">
                         <button type="button" id="abbrechen">Abbrechen</button>
                         <button type="button" id="sichern">Sichern</button>
                     </div>
-
+                </div>
                     <div id ="div_ergebnis_wechseln" style="display: block">
-                        <button type="button" id="vorherige">Vorherige</button>
-                        <button type="button" id="naechste">Nächste</button>
+                        <button class="button" id="vorherige">Vorherige</button>
+                        <button class="button" id="naechste">Nächste</button>
                     </div>
 
             </main>

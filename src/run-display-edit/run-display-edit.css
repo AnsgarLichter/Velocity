@@ -62,22 +62,88 @@
 
 .detailview textarea {
     width:400px;
-    height: 3rem;
+    height: 5rem;
     display: block;
     float: left;
     font-size: 15pt;
     font-family: sans-serif;
 }
 
-.detailview button {
-    display: block;
-    float: left;
-}
+/*.buttongroup {
+background-color: green;
+width: 100%;
+height: 3rem;
+display: block;
+margin-bottom: 1em;
+float: left;
+    }*/
 
-#loeschen {
+
+/*#loeschen {
     background-color: red;
 }
 
 #bearbeiten {
     background-color: green;
+}*/
+
+
+/*#div_ergebnis_wechseln {
+    background-color: red;
+    width: 100%;
+    height: 3rem;
+    display: inline-block;
+    margin-bottom: 1em;
+    float: right;
+}
+
+#div_aendern {
+    background-color: red;
+    width: 100%;
+    height: 3rem;
+    display: inline-block;
+    margin-bottom: 1em;
+    float: right;
+}*/
+
+#bearbeiten {
+    background-color: green;
+    position: absolute;
+    top: 550px;
+    left: 10px;
+}
+
+#abbrechen {
+    position: absolute;
+    top: 550px;
+    left: 10px;
+}
+
+#loeschen {
+    background-color: red;
+    position: absolute;
+    top: 550px;
+    left: 100px;
+}
+
+#sichern {
+    position: absolute;
+    top: 550px;
+    left: 180px;
+}
+
+#vorherige {
+    position: absolute;
+    top: 550px;
+    left: 650px;
+}
+
+#vorherige: hover {
+    background-color: #FF1234;
+}
+
+#naechste {
+    position: absolute;
+    top: 550px;
+    left: 750px;
 }

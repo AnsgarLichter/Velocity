@@ -143,6 +143,7 @@ class RunDisplayEdit {
             document.getElementById('div_aendern').style.display="block";
             document.getElementById('div_ergebnis_wechseln').style.display="none";
             document.getElementById('bearbeiten').style.display="none";
+            document.getElementById('abbrechen').style.display="block";
 
 
 
