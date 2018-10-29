@@ -71,7 +71,7 @@ class RunDisplayEdit {
     async onShow() {
         let section = document.querySelector("#run-display-edit").cloneNode(true);
 
-        //TODO: Datenbank auslesen für Anzeige bei mode == display oder edit
+        //Datenbank auslesen für Anzeige bei mode == display oder edit
         /*Laufergbis aus Übersichtstabelle auslesen*/
 
         //let url = document.URL;
@@ -82,20 +82,6 @@ class RunDisplayEdit {
         /*while(run == undefined){
             run = await this._runsDB.getByID(this._id-1);
         }*/
-
-        /*alert(run.name);
-        alert(run.datum);
-        alert(run.strecke);
-        alert(run.dauer);
-        alert(run.art);
-        alert(run.minutenPerKm);*/
-
-        /*section.getElementById('Name').value=run.name;
-        section.getElementById('Datum').value=run.datum;
-        section.getElementById('Distanz').value=run.strecke;
-        section.getElementById('Art').value=run.art;
-        section.getElementById('Zeit').value=run.dauer;
-        section.getElementById('minutenPerKm').value=run.minutenPerKm;*/
 
         section.querySelector('#Name').value=run.name;
         section.querySelector('#Datum').value=run.datum;
@@ -124,9 +110,52 @@ class RunDisplayEdit {
 
         /*document.getElementById('kilometerPerStd').value=kmPerStd;*/
         section.querySelector('#kilometerPerStd').value=kmPerStd;
+        section.querySelector('#output').value = run.rating;
+        //wenn Rating undefined, leeren String anzeigen
+        if(run.rating == undefined){
+           run.rating = "";
+        }
+        section.querySelector('#Rating').value = run.rating;
 
-        //document.getElementById('Beschreibung').value=
-        //document.getElementById('Bewertung').value=
+        //Icon für Rating anzeigen
+        /*let iconAnzahl = run.rating;
+        if (iconAnzahl == 1){
+        document.getElementById('icon1').style.display ="block";
+        document.getElementById('icon2').style.display ="none";
+        document.getElementById('icon3').style.display ="none";
+        document.getElementById('icon4').style.display ="none";
+        document.getElementById('icon5').style.display ="none";
+        }
+        else if (iconAnzahl == 2){
+        document.getElementById('icon1').style.display ="none";
+        document.getElementById('icon2').style.display ="block";
+        document.getElementById('icon3').style.display ="none";
+        document.getElementById('icon4').style.display ="none";
+        document.getElementById('icon5').style.display ="none";
+        }
+        else if (iconAnzahl == 3){
+        document.getElementById('icon1').style.display ="none";
+        document.getElementById('icon2').style.display ="none";
+        document.getElementById('icon3').style.display ="block";
+        document.getElementById('icon4').style.display ="none";
+        document.getElementById('icon5').style.display ="none";
+        }
+        else if (iconAnzahl == 4){
+        document.getElementById('icon1').style.display ="none";
+        document.getElementById('icon2').style.display ="none";
+        document.getElementById('icon3').style.display ="none";
+        document.getElementById('icon4').style.display ="block";
+        document.getElementById('icon5').style.display ="none";
+        }
+        else if (iconAnzahl == 5){
+        document.getElementById('icon1').style.display ="none";
+        document.getElementById('icon2').style.display ="none";
+        document.getElementById('icon3').style.display ="none";
+        document.getElementById('icon4').style.display ="none";
+        document.getElementById('icon5').style.display ="block";
+        }
+        alert(iconAnzahl);*/
+
 
         /*Event für Bearbeiten-Button*/
         section.querySelector("#bearbeiten").addEventListener("click",() => {
@@ -138,6 +167,7 @@ class RunDisplayEdit {
             document.getElementById('minutenPerKm').setAttribute('disabled', true);
             document.getElementById('kilometerPerStd').setAttribute('disabled', true);
             document.getElementById('Beschreibungstext').removeAttribute('disabled');
+            document.getElementById('Rating').removeAttribute('disabled');
 
             document.getElementById('sichern').style.display="block";
             document.getElementById('div_aendern').style.display="block";
@@ -158,11 +188,19 @@ class RunDisplayEdit {
             document.getElementById('minutenPerKm').setAttribute('disabled', true);
             document.getElementById('kilometerPerStd').setAttribute('disabled', true);
             document.getElementById('Beschreibungstext').setAttribute('disabled', true);
+            document.getElementById('Rating').setAttribute('disabled', true);
 
             document.getElementById('div_aendern').style.display="none";
             document.getElementById('div_ergebnis_wechseln').style.display="block";
             document.getElementById('bearbeiten').style.display="block";
         });
+
+
+        section.querySelector("#Rating").addEventListener("click", () => {
+            let rate = document.querySelector("#Rating").value;
+            document.getElementById('output').value = rate;
+        });
+
         /*Event für Sichern-Button*/
         section.querySelector("#sichern").addEventListener("click",() => {
             let changeName = document.querySelector("#Name").value;
@@ -171,8 +209,25 @@ class RunDisplayEdit {
             let changeZeit = document.querySelector("#Zeit").value;
             let changeArt = document.querySelector("#Art").value;
             let changeMinutenPerKm = document.querySelector("#minutenPerKm").value;
+
             //let changeKilometerperStd = document.querySelector("#KilometerPerStd").value;
             let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
+
+
+
+            /*section.querySelector("#Rating").addEventListener("click", () => {
+                let rate = document.querySelector("#Rating").value;
+                document.getElementById('output').value = rate;
+            });*/
+
+            let changeRating = document.querySelector("#Rating").value;
+            alert(changeRating);
+            if (changeRating == undefined){
+                run.rating = "";
+            }
+
+            changeRating=parseInt(changeRating);
+
             document.getElementById('div_ergebnis_wechseln').style.display="block";
             document.getElementById('bearbeiten').style.display="block";
             document.getElementById('sichern').style.display="none";
@@ -191,6 +246,7 @@ class RunDisplayEdit {
                 art: changeArt,
                 datum: changeDatum,
                 beschreibungstext: changeBeschreibung,
+                rating: changeRating,
             });
 
 
@@ -234,69 +290,11 @@ class RunDisplayEdit {
 
 
         section.querySelector("#vorherige").addEventListener("click",() => {
-            //let url = document.URL;
-            //let changeId = url.substring(url.lastIndexOf('/') + 1);
-            //    changeId = parseInt(changeId);
-
-            //let getList = async () => {
-            //    return await this._runsDB.search();
-            //}
-            //let listId = getList();
-            //let current = parseInt(listId[0].id);
             let redirectID = this._predId;
             this._app.navigate("/run/display/"+ redirectID + "/");
-
-                /*alert(changeId);
-            let preId = changeId-1;
-
-             while (typeof(preId) == "undefined"){
-                 preId = preId-1;
-                 alert("keine ID vorhanden");
-             }
-            alert("PreId"+preId);
-             preId = parseInt(preId);
-             let preRun = this._runsDB.getByID(preId);
-             alert("PreRun:"+preRun.name);*/
-/*
-             document.getElementById('Name').value=preRun.name;
-             document.getElementById('Datum').value=preRun.datum;
-             document.getElementById('Distanz').value=preRun.strecke;
-             document.getElementById('Art').value=preRun.art;
-             document.getElementById('Zeit').value=preRun.dauer;
-             document.getElementById('minutenPerKm').value=preRun.minutenPerKm;
-
-             /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
-            /* let meter = preRun.strecke.replace( /,/,"." );
-                 meter = parseFloat(meter)*1000;
-             let sekunde = preRun.dauer.replace( /,/,"." );
-                 sekunde = parseFloat(preRun.dauer)*60;
-             let kmPerStd = ((meter/sekunde)/1000)/(1/3600);
-
-             document.getElementById('kilometerPerStd').value=kmPerStd;*/
-
-
          });
 
          //Nachster
-
-          /*current = parseInt(listId[0].id);
-         listId.forEach((run) =>{
-             let runId = parseInt(run.id);
-             if ((current-this._id) > (runId-this._id)){
-                 if (runId > this._id){
-                     current = runId;
-                 }
-             }
-         });
-         this._postId = current;
-
-         section.querySelector("#naechste").addEventListener("click",() => {
-
-             let redirectID = this._postId;
-             this._app.navigate("/run/display/"+ redirectID + "/");
-        });*/
-
-
         listId = await this._runsDB.search();
          current = 100000;
          listId.forEach((run) =>{
@@ -335,7 +333,6 @@ class RunDisplayEdit {
         };
 
     }
-
 
     /*let getRunsList = async () => {
         let runsList = await runsDB.search();
