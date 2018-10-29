@@ -118,43 +118,71 @@ class RunDisplayEdit {
         section.querySelector('#Rating').value = run.rating;
 
         //Icon für Rating anzeigen
-        /*let iconAnzahl = run.rating;
+        let iconAnzahl = run.rating;
         if (iconAnzahl == 1){
-        document.getElementById('icon1').style.display ="block";
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "block");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
+
+        /*document.getElementById('icon1').style.display ="block";
         document.getElementById('icon2').style.display ="none";
         document.getElementById('icon3').style.display ="none";
         document.getElementById('icon4').style.display ="none";
-        document.getElementById('icon5').style.display ="none";
+        document.getElementById('icon5').style.display ="none";*/
         }
         else if (iconAnzahl == 2){
-        document.getElementById('icon1').style.display ="none";
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "block");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
+
+        /*document.getElementById('icon1').style.display ="none";
         document.getElementById('icon2').style.display ="block";
         document.getElementById('icon3').style.display ="none";
         document.getElementById('icon4').style.display ="none";
-        document.getElementById('icon5').style.display ="none";
+        document.getElementById('icon5').style.display ="none";*/
         }
         else if (iconAnzahl == 3){
-        document.getElementById('icon1').style.display ="none";
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "block");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
+        /*document.getElementById('icon1').style.display ="none";
         document.getElementById('icon2').style.display ="none";
         document.getElementById('icon3').style.display ="block";
         document.getElementById('icon4').style.display ="none";
-        document.getElementById('icon5').style.display ="none";
+        document.getElementById('icon5').style.display ="none";*/
         }
         else if (iconAnzahl == 4){
-        document.getElementById('icon1').style.display ="none";
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "block");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
+
+        /*document.getElementById('icon1').style.display ="none";
         document.getElementById('icon2').style.display ="none";
         document.getElementById('icon3').style.display ="none";
         document.getElementById('icon4').style.display ="block";
-        document.getElementById('icon5').style.display ="none";
+        document.getElementById('icon5').style.display ="none";*/
         }
         else if (iconAnzahl == 5){
-        document.getElementById('icon1').style.display ="none";
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "block");
+        /*document.getElementById('icon1').style.display ="none";
         document.getElementById('icon2').style.display ="none";
         document.getElementById('icon3').style.display ="none";
         document.getElementById('icon4').style.display ="none";
-        document.getElementById('icon5').style.display ="block";
+        document.getElementById('icon5').style.display ="block";*/
         }
-        alert(iconAnzahl);*/
+        alert(iconAnzahl);
 
 
         /*Event für Bearbeiten-Button*/
@@ -235,8 +263,14 @@ class RunDisplayEdit {
 
 
             let url = document.URL;
-            let changeId = url.substring(url.lastIndexOf('/') + 1);
+            /*let changeId = url.substring(url.lastIndexOf('/') + 1);*/
+            let changeId = this._id;
                 changeId = parseInt(changeId);
+
+                if(changeName == "" || changeDatum == "" || changeDistanz == "" || changeZeit == "" || changeArt == "" || changeMinutenPerKm == "" || changeBeschreibung == "") {
+                return;
+            }
+
             this._runsDB.update({
                 id: changeId,
                 name: changeName,

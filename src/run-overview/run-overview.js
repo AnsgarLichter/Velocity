@@ -174,6 +174,10 @@ class RunOverview {
             tdArt.textContent       = run.art;
             tdVelocity.textContent  = run.minutenPerKm;
 
+            //Datum Format auf die duetsche Schreibweise verändern
+            tdDatum.textContent = tdDatum.textContent.substring(8) + '.' + tdDatum.textContent.substring(5,7) + '.' + tdDatum.textContent.substring(0,4);
+
+
             /*
             * Einzelne <TD>-Elemente der Tabellenzeile als Kind hinzufügen:
             * Achtung: Reihenfolge der Tabellenspalten sollte mit der
