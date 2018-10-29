@@ -66,13 +66,10 @@ class RunOverview {
     async onShow() {
 
         //Test der Datenbankklasse für Laufergebnisse
-        /*console.log("1", this._runsDB);
-        await this._runsDB.clear();
-        console.log("2");
+        /*await this._runsDB.clear();
 
         let runs = await this._runsDB.search();
         console.log("Alle Ergebnisse: ", runs);
-        console.log("3");
 
         if(runs.length == 0) {
             console.log("Bisher noch keine Trainningsdaten vorhanden, lege daher Testdaten an");
@@ -84,7 +81,8 @@ class RunOverview {
                     dauer: "30:00",
                     minutenPerKm: "5:00",
                     art: "Joggen",
-                    datum: "09.10.2018",
+                    datum: "2018-10-09",
+                    rating: "1",
                 }),
                 this._runsDB.saveNew({
                     name: "Test2",
@@ -92,7 +90,8 @@ class RunOverview {
                     dauer: "35:00",
                     minutenPerKm: "4:30",
                     art: "Joggen",
-                    datum: "09.11.2017",
+                    datum: "2017-11-09",
+                    rating: "3",
                 }),
                 this._runsDB.saveNew({
                     name: "Test3",
@@ -100,7 +99,8 @@ class RunOverview {
                     dauer: "50:10",
                     minutenPerKm: "5:01",
                     art: "Joggen",
-                    datum: "03.10.2018",
+                    datum: "2017-10-03",
+                    rating: "4",
                 }),
                 this._runsDB.saveNew({
                     name: "Test4",
@@ -108,7 +108,8 @@ class RunOverview {
                     dauer: "90:34",
                     minutenPerKm: "5:54",
                     art: "Joggen",
-                    datum: "03.01.2017",
+                    datum: "2018-01-03",
+                    rating: "5",
                 }),
             ]);
 
@@ -118,8 +119,8 @@ class RunOverview {
 
         runs = await this._runsDB.search("6km");
         console.log("Suche nach 6km", runs);
-        //Ende des Testcodes
-*/
+        //Ende des Testcodes*/
+
         //Passende Elemente vom HTML suchen und eine Kopie in Section speichern
         let section = document.querySelector("#run-overview").cloneNode(true);
         /*
