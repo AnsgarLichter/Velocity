@@ -96,7 +96,7 @@ class RunDisplayEdit {
         }
         section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
 
-        /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
+        /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln test*/
         let meter = run.strecke.replace( /,/,"." );
             meter = parseFloat(meter)*1000;
         let sekunde = run.dauer.replace( /,/,"." );
