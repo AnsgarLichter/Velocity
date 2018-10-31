@@ -41,6 +41,7 @@
 .run-overview main {
     font-color: #3c3c3c;
     background-color: #B7DFDD;
+    text-align: center;
 }
 
 .run-overview table{

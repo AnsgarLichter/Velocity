@@ -70,13 +70,15 @@
 }
 .run-display-edit .rating {
     display: inline;
-    text-align: left !important;
+    text-align: left;
     font-size: 100%;
 }
 
 .run-display-edit #labelRange {
-    color: #3c3c3c;
-    font-color: #3c3c3c;
+    /*color: #3c3c3c;*/
+    font-color: black !important;
+    font-size: 15pt;
+    text-align: center;
 }
 
 .run-display-edit .hidden{
@@ -122,32 +124,32 @@ float: left;
 #bearbeiten {
     background-color: green;
     position: absolute;
-    top: 550px;
+    top: 750px;
     left: 10px;
 }
 
 #abbrechen {
     position: absolute;
-    top: 550px;
+    top: 750px;
     left: 10px;
 }
 
 #loeschen {
     background-color: red;
     position: absolute;
-    top: 550px;
+    top: 750px;
     left: 100px;
 }
 
 #sichern {
     position: absolute;
-    top: 550px;
+    top: 750px;
     left: 180px;
 }
 
 #vorherige {
     position: absolute;
-    top: 550px;
+    top: 750px;
     left: 650px;
 }
 
@@ -157,6 +159,6 @@ float: left;
 
 #naechste {
     position: absolute;
-    top: 550px;
+    top: 750px;
     left: 750px;
 }

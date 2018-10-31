@@ -159,7 +159,8 @@
     color: #3c3c3c;
     font-size: 200%;
     font-weight: bold;
-    text-align: center;
+    /*span: not(.rating) { text-align: left; };*/
+    /*text-align: center;*/
 }
 
 /*
