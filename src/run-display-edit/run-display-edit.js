@@ -82,8 +82,7 @@ class RunDisplayEdit {
         section.querySelector('#Art').value=run.art;
         section.querySelector('#Zeit').value=run.dauer;
         section.querySelector('#minutenPerKm').value=run.minutenPerKm;
-        section.querySelector('#kilometerPerStd').value = run.kmPerStd;
-
+        //section.querySelector().value = run.kmh;
         //Wenn Beschreibungstext undefined, leeren String anzeigen
         if(run.beschreibungstext == undefined){
            run.beschreibungstext = "";
@@ -185,7 +184,7 @@ class RunDisplayEdit {
             document.getElementById('bearbeiten').style.display="block";
         });
 
-        //Event für Rating, bei dem der Rating-Wert ausgelesen wird
+
         section.querySelector("#Rating").addEventListener("click", () => {
             let rate = document.querySelector("#Rating").value;
         });
@@ -201,7 +200,7 @@ class RunDisplayEdit {
             let changeName = document.querySelector("#Name").value;
             let changeDatum = document.querySelector("#Datum").value;
             let changeDistanz = document.querySelector("#Distanz").value;
-            let distFloat = parseFloat(changeDistanz).toFixed(3);
+                changeDistanz = parseFloat(changeDistanz).toFixed(3);
             let changeZeit = document.querySelector("#Zeit").value;
             let changeArt = document.querySelector("#Art").value;
             let changeRating = document.querySelector("#Rating").value;
@@ -235,7 +234,7 @@ class RunDisplayEdit {
                 //Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln
                 let min      = changeZeit.split(":")
                 let sekunden = parseFloat(parseFloat(min[0]*60)+parseFloat(min[1]));
-                let meter    = distFloat * 1000;
+                let meter    = changeDistanz * 1000;
                 let kmPerStd = ((meter/sekunden)/1000)/(1/3600);
                     kmPerStd = parseFloat(kmPerStd).toFixed(2);
 
@@ -275,7 +274,6 @@ class RunDisplayEdit {
                 document.getElementById('minutenPerKm').setAttribute('disabled', true);
                 document.getElementById('kilometerPerStd').setAttribute('disabled', true);
                 document.getElementById('Beschreibungstext').setAttribute('disabled', true);
-
                 /*
                 * Die Buttons Sichern und abbrechen wieder verstecken und die
                 * Buttons für die detaillierte Ansicht wieder anzeigen.
@@ -289,14 +287,14 @@ class RunDisplayEdit {
 
         /*Loeschen-Event Deatailergebnis löschen aus Datenbank*/
         section.querySelector("#loeschen").addEventListener("click",() => {
-
+            //Sicherheitsabfrage vor dem endgültigen Löschen
             let feedback = confirm("Wollen Sie die Eingabe wirklich löschen?");
             if (feedback == true){
             let url = document.URL;
             let changeId = url.substring(url.lastIndexOf('/') + 1);
                 changeId = parseInt(changeId);
             this._runsDB.delete(changeId);
-            alert("Die Id "+changeId+" wurde gelöscht!");
+        //  Navigation auf die Übersichtsseite
             window.location.href = "/run/display/";
             }
         });
