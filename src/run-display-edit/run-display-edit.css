@@ -37,13 +37,20 @@
   * beginnen. Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen
   * der Anwendung überschrieben werden.
   */
-.run-display-edit main {
+
+
+.padding {
+    text-align: center;
+}
+
+  /*@media (4)*/
+.detailview main {
     color: black !important;
     background-color: #B7DFDD !important;
     line-height: 1.0;
 }
 
-.detailview label {
+.run-display-edit label {
     width: 10em;
     display: block;
     float: left;
@@ -51,7 +58,7 @@
     font-family: sans-serif;
 }
 
-.detailview input {
+.run-display-edit input {
     width: 10em;
     display: block;
     float: left;
@@ -60,7 +67,7 @@
 
 }
 
-.detailview textarea {
+.run-display-edit textarea {
     width:400px;
     height: 5rem;
     display: block;
@@ -68,7 +75,7 @@
     font-size: 15pt;
     font-family: sans-serif;
 }
-.run-display-edit .rating {
+.rating {
     display: inline;
     text-align: left;
     font-size: 100%;
@@ -78,8 +85,13 @@
     /*color: #3c3c3c;*/
     font-color: black !important;
     font-size: 15pt;
-    text-align: center;
+    /*text-align: center;*/
 }
+
+.run-display-edit #Rating {
+    text-align: left;
+}
+
 
 .run-display-edit .hidden{
     display: none;
@@ -121,44 +133,40 @@ float: left;
     float: right;
 }*/
 
-#bearbeiten {
+.run-display-edit #bearbeiten {
     background-color: green;
     position: absolute;
-    top: 750px;
+    top: 850px;
     left: 10px;
 }
 
-#abbrechen {
+.run-display-edit #abbrechen {
     position: absolute;
-    top: 750px;
+    top: 850px;
     left: 10px;
 }
 
-#loeschen {
+.run-display-edit #loeschen {
     background-color: red;
     position: absolute;
-    top: 750px;
+    top: 850px;
     left: 100px;
 }
 
-#sichern {
+.run-display-edit #sichern {
     position: absolute;
-    top: 750px;
+    top: 850px;
     left: 180px;
 }
 
-#vorherige {
+.run-display-edit #vorherige {
     position: absolute;
-    top: 750px;
+    top: 850px;
     left: 650px;
 }
 
-#vorherige: hover {
-    background-color: #FF1234;
-}
-
-#naechste {
+.run-display-edit #naechste {
     position: absolute;
-    top: 750px;
+    top: 850px;
     left: 750px;
 }

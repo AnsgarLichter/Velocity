@@ -74,35 +74,23 @@ class RunDisplayEdit {
         /*Laufergbnisse aus Datenbank auslesen*/
         this._id = parseInt(this._id);
         let run = await this._runsDB.getByID(this._id);
-
+        run.strecke = run.strecke.replace(",", ".");
+        run.strecke = parseFloat(run.strecke);
         section.querySelector('#Name').value=run.name;
         section.querySelector('#Datum').value=run.datum;
         section.querySelector('#Distanz').value=run.strecke;
         section.querySelector('#Art').value=run.art;
         section.querySelector('#Zeit').value=run.dauer;
         section.querySelector('#minutenPerKm').value=run.minutenPerKm;
-
-        //wenn Beschreibungstext undefined, leeren String anzeigen
+        //section.querySelector().value = run.kmh;
+        //Wenn Beschreibungstext undefined, leeren String anzeigen
         if(run.beschreibungstext == undefined){
            run.beschreibungstext = "";
+        }else{
+           section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
         }
-        section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
 
-        /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
-        let meter = run.strecke.replace( /,/,"." );
-            meter = parseFloat(meter)*1000;
-        let sekunde = run.dauer.replace( /,/,"." );
-            sekunde = parseFloat(run.dauer)*60;
-        let kmPerStd = ((meter/sekunde)/1000)/(1/3600);
-            kmPerStd = parseInt(kmPerStd);
-
-        /*Berechnung Minuten pro Kilometer*/
-        let minPerKm = 3600 / kmPerStd / 60;
-        section.querySelector("#minutenPerKm").value=minPerKm;
-        section.querySelector('#kilometerPerStd').value=kmPerStd;
-        //section.querySelector('#output').value = run.rating;
-
-        //Wenn Rating undefined, leeren String anzeigen
+        //Wenn Rating undefined, keinen Stern anzeigen
         if(run.rating == undefined){
            run.rating = "";
         }
@@ -199,72 +187,102 @@ class RunDisplayEdit {
 
         section.querySelector("#Rating").addEventListener("click", () => {
             let rate = document.querySelector("#Rating").value;
-            //document.getElementById('output').value = rate;
         });
 
         /*Event für Sichern-Button*/
         section.querySelector("#sichern").addEventListener("click",() => {
+            /*
+            * Eingebebene Werte aus den Eingabefeldern auslesen und
+            * anschließend die Eingabe überprüfen.
+            * Die Beschreibung ist dabei optional und muss nicht überprüft
+            * werden.
+            */
             let changeName = document.querySelector("#Name").value;
             let changeDatum = document.querySelector("#Datum").value;
             let changeDistanz = document.querySelector("#Distanz").value;
+            let distFloat = parseFloat(changeDistanz).toFixed(3);
             let changeZeit = document.querySelector("#Zeit").value;
             let changeArt = document.querySelector("#Art").value;
-            let changeMinutenPerKm = document.querySelector("#minutenPerKm").value;
-
-            //let changeKilometerperStd = document.querySelector("#KilometerPerStd").value;
-            let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
-
-            /*section.querySelector("#Rating").addEventListener("click", () => {
-                let rate = document.querySelector("#Rating").value;
-                document.getElementById('output').value = rate;
-            });*/
-
             let changeRating = document.querySelector("#Rating").value;
-            alert(changeRating);
-            if (changeRating == undefined){
-                run.rating = "";
+                changeRating=parseInt(changeRating);
+            let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
+            //Regex zur Überprüfung der Zeit
+            let regexZeit = new RegExp("^\\d{1,3}:\\d{1,2}$");
+
+            //Prüfen des Namens
+            if(!changeName) {
+                alert("Bitte den Namen ausfüllen!");
             }
-
-            changeRating=parseInt(changeRating);
-
-            document.getElementById('div_ergebnis_wechseln').style.display="block";
-            document.getElementById('bearbeiten').style.display="block";
-            document.getElementById('sichern').style.display="none";
-            document.getElementById('abbrechen').style.display="none";
-
-
-            let url = document.URL;
-            /*let changeId = url.substring(url.lastIndexOf('/') + 1);*/
-            let changeId = this._id;
-                changeId = parseInt(changeId);
-
-                if(changeName == "" || changeDatum == "" || changeDistanz == "" || changeZeit == "" || changeArt == "" || changeMinutenPerKm == "" || changeBeschreibung == "") {
-                return;
+            //Prüfen des Datums
+            else if(!changeDatum) {
+                alert("Bitte ein korrektes Datum eingeben!");
             }
+            //Prüfen der Distanz
+            else if(!changeDistanz) {
+                alert("Eingabefehler bei der Distanz, bitte einen korrekten Wert eingeben");
+            }
+            else if(!changeZeit.match(regexZeit)) {
+                alert("Bitte eine korrekte Zeit (mm:ss) eingeben!")
+            }
+            else{
+                /*
+                * Hier ist nun sichergestellt, dass alle Eingaben korrekt sind.
+                * Nun sollen die Durchschnittsgeschwindigkeit und die
+                * Geschwindigkeit in Minuten pro Kilometer berechnet werden.
+                */
 
-            this._runsDB.update({
-                id: changeId,
-                name: changeName,
-                strecke: changeDistanz,
-                dauer: changeZeit,
-                minutenPerKm: changeMinutenPerKm,
-                art: changeArt,
-                datum: changeDatum,
-                beschreibungstext: changeBeschreibung,
-                rating: changeRating,
-            });
+                //Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln
+                let min      = changeZeit.split(":")
+                let sekunden = parseFloat(parseFloat(min[0]*60)+parseFloat(min[1]));
+                let meter    = distFloat * 1000;
+                let kmPerStd = ((meter/sekunden)/1000)/(1/3600);
+                    kmPerStd = parseFloat(kmPerStd).toFixed(2);
 
+                //Berechnung Minuten pro Kilometer
+                let minPerKm = 3600 / kmPerStd / 60;
+                let minPerKmDecimals = minPerKm - Math.floor(minPerKm);
+                    minPerKmDecimals = parseInt(minPerKmDecimals * 60);
+                    minPerKm = "" + minPerKm.toFixed(0) + ":" + minPerKmDecimals;
 
-            /*Eingabefelder nach dem Sichern grau hinterlegen,
-            sodass keine Bearbeitung mehr möglich ist*/
-            document.getElementById('Name').setAttribute('disabled', true);
-            document.getElementById('Datum').setAttribute('disabled', true);
-            document.getElementById('Distanz').setAttribute('disabled', true);
-            document.getElementById('Zeit').setAttribute('disabled', true);
-            document.getElementById('Art').setAttribute('disabled', true);
-            document.getElementById('minutenPerKm').setAttribute('disabled', true);
-            document.getElementById('kilometerPerStd').setAttribute('disabled', true);
-            document.getElementById('Beschreibungstext').setAttribute('disabled', true);
+                //Berechnete Werte in Eingabefelder schreiben
+                document.querySelector("#minutenPerKm").value    = minPerKm;
+                document.querySelector('#kilometerPerStd').value = kmPerStd;
+
+                //Alle Werte in der Datenbank speichern.
+                this._runsDB.update({
+                    id: this._id,
+                    name: changeName,
+                    strecke: changeDistanz,
+                    dauer: changeZeit,
+                    minutenPerKm: minPerKm,
+                    kmPerStd: kmPerStd,
+                    art: changeArt,
+                    datum: changeDatum,
+                    beschreibungstext: changeBeschreibung,
+                    rating: changeRating,
+                });
+
+                /*
+                * Eingabefelder nach dem Sichern grau hinterlegen,
+                * sodass keine Bearbeitung mehr möglich ist.
+                */
+                document.getElementById('Name').setAttribute('disabled', true);
+                document.getElementById('Datum').setAttribute('disabled', true);
+                document.getElementById('Distanz').setAttribute('disabled', true);
+                document.getElementById('Zeit').setAttribute('disabled', true);
+                document.getElementById('Art').setAttribute('disabled', true);
+                document.getElementById('minutenPerKm').setAttribute('disabled', true);
+                document.getElementById('kilometerPerStd').setAttribute('disabled', true);
+                document.getElementById('Beschreibungstext').setAttribute('disabled', true);
+                /*
+                * Die Buttons Sichern und abbrechen wieder verstecken und die
+                * Buttons für die detaillierte Ansicht wieder anzeigen.
+                */
+                document.getElementById('div_ergebnis_wechseln').style.display="block";
+                document.getElementById('bearbeiten').style.display="block";
+                document.getElementById('sichern').style.display="none";
+                document.getElementById('abbrechen').style.display="none";
+            }
         });
 
         /*Loeschen-Event Deatailergebnis löschen aus Datenbank*/

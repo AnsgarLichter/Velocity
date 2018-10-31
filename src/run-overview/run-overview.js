@@ -66,7 +66,7 @@ class RunOverview {
     async onShow() {
 
         //Test der Datenbankklasse für Laufergebnisse
-        await this._runsDB.clear();
+        /*await this._runsDB.clear();
 
         let runs = await this._runsDB.search();
         console.log("Alle Ergebnisse: ", runs);
@@ -118,8 +118,8 @@ class RunOverview {
         }
 
         runs = await this._runsDB.search("6km");
-        console.log("Suche nach 6km", runs);
-        //Ende des Testcodes*/
+        console.log("Suche nach 6km", runs);*/
+        //Ende des Testcodes
 
         //Passende Elemente vom HTML suchen und eine Kopie in Section speichern
         let section = document.querySelector("#run-overview").cloneNode(true);
