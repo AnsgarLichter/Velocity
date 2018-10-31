@@ -198,7 +198,9 @@
                   <input type="string" id="minutenPerKm" disabled/><br />
                   <label for="kilometerPerStd">Velocity km/h:</label>
                   <input type="string" id="kilometerPerStd"disabled/><br />
-
+                  <label for="Beschreibung">Beschreibung:</label>
+                  <textarea id="Beschreibungstext" name="Beschreibungstext"></textarea> <br />
+                  </br>
                   <label>Bewertung:</label>
                   <span class="rating" id="icon1">★</span>
                   <span class="rating" id="icon2">★</span>
@@ -207,8 +209,11 @@
                   <span class="rating" id="icon5">★</span>
                   <br />
                   <p id="labelRange"></p>
-                  <input id="Rating" type="range" min="1" max="5" step="1" style="display: none"/>
+                  <input id="Rating" type="range" min="1" max="5" step="1"/>
                   <br / />
+                  <div class="rating">
+                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                  </div>
 
                   <!--<span class="icon1" id="icon1">★</span><br/>
                   <span class="icon2" id="icon2">★★</span><br />
@@ -219,8 +224,7 @@
                   !-->
 
 
-                  <label for="Beschreibung">Beschreibung:</label>
-                  <textarea id="Beschreibungstext" name="Beschreibungstext"></textarea> <br />
+
 
 
               <div class="buttongroup">
