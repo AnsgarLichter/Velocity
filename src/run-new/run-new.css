@@ -60,6 +60,70 @@
     font-family: sans-serif;
 
 }
+.full{
+  display: inline-block;
+  width: 20px;
+}
+.run-new .rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating span {
+  display: inline;
+}
+.run-new .rating > span:hover:before,
+.run-new .rating > span:hover ~ span:before {
+   content: "\2605";
+}
+
+.run-new .rating {
+  border: none;
+  float: left;
+}
+
+.run-new .rating>input {
+  display: none;
+}
+
+.run-new .rating>label:before {
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline;
+  content: "\f005";
+}
+
+.run-new .rating>label {
+  color: #ddd;
+  float: right;
+}
+
+.run-new .rating>input:checked~label,
+
+/* show gold star when clicked */
+
+.run-new .rating:not(:checked)>label:hover,
+
+/* hover current star */
+
+.run-new .rating:not(:checked)>label:hover~label {
+  color: #FFD700;
+}
+
+
+/* hover previous stars in list */
+
+.run-new .rating>input:checked+label:hover,
+
+/* hover current star when changing rating */
+
+.run-new .rating>input:checked~label:hover,
+.run-new .rating>label:hover~input:checked~label,
+
+/* lighten current selection */
+
+.run-new .rating>input:checked~label:hover~label {
+  color: #FFED85;
+}
 
 .run-new textarea {
     width:400px;
@@ -114,8 +178,8 @@ float: left;
     left: 10px;
 }*/
 
-#abbrechen {
-    top: 650px;
+.run-new #abbrechen {
+    top: 800px;
     left: 10px;
 }
 
@@ -126,8 +190,8 @@ float: left;
     left: 100px;
 }*/
 
-#sichern {
-    top: 650px;
+.run-new #sichern {
+    top: 800px;
     left: 180px;
 }
 

@@ -199,17 +199,35 @@
                   <input type="string" id="minutenPerKm" disabled/><br />
                   <label for="kilometerPerStd">Velocity km/h:</label>
                   <input type="string" id="kilometerPerStd"disabled/><br />
-
+                  <label for="Beschreibung">Beschreibung:</label>
+                  <textarea id="Beschreibungstext" name="Beschreibungstext"></textarea> <br />
+                  </br>
                   <label>Bewertung:</label>
-                  <span class="rating" id="icon1">★</span>
-                  <span class="rating" id="icon2">★</span>
-                  <span class="rating" id="icon3">★</span>
-                  <span class="rating" id="icon4">★</span>
-                  <span class="rating" id="icon5">★</span>
+                  <fieldset class="rating">
+
+                    <input type="radio" id="5star" name="rating" value="5" />
+                    <label class="full" for="5star" title="Excellent"></label>
+
+                    <input type="radio" id="4star" name="rating" value="4" />
+                    <label class="full" for="4star" title="Pretty good"></label>
+
+                    <input type="radio" id="3star" name="rating" value="3" />
+                    <label class="full" for="3star" title="Ok"></label>
+
+                    <input type="radio" id="2star" name="rating" value="2" />
+                    <label class="full" for="2star" title="Pretty bad"></label>
+
+                    <input type="radio" id="1star" name="rating" value="1" />
+                    <label class="full" for="1star" title="Bad"></label>
+
+                  </fieldset>
                   <br />
-                  <p id="labelRange"></p>
-                  <input id="Rating" type="range" min="1" max="5" step="1" style="display: none"/>
-                  <br / />
+                  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+
+
+
+
 
                   <!--<span class="icon1" id="icon1">★</span><br/>
                   <span class="icon2" id="icon2">★★</span><br />
@@ -220,8 +238,7 @@
                   !-->
 
 
-                  <label for="Beschreibung">Beschreibung:</label>
-                  <textarea id="Beschreibungstext" name="Beschreibungstext"></textarea> <br />
+
 
 
               <div class="buttongroup">
