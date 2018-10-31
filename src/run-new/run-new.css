@@ -37,7 +37,7 @@
   * beginnen. Denn wir wollen nicht, dass hier Eigenschaften aus anderen Bereichen
   * der Anwendung überschrieben werden.
   */
-.run-display-edit main {
+.run-new main {
     color: black !important;
     background-color: #B7DFDD !important;
     line-height: 1.0;
@@ -68,20 +68,7 @@
     font-size: 15pt;
     font-family: sans-serif;
 }
-.run-display-edit .rating {
-    display: inline;
-    text-align: left !important;
-    font-size: 100%;
-}
 
-.run-display-edit #labelRange {
-    color: #3c3c3c;
-    font-color: #3c3c3c;
-}
-
-.run-display-edit .hidden{
-    display: none;
-}
 /*.buttongroup {
 background-color: green;
 width: 100%;

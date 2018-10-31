@@ -124,14 +124,24 @@
                     <label for="kilometerPerStd">Velocity km/h:</label>
                     <input type="string" id="kilometerPerStd" disabled/><br />
 
-                    <label for="Bewertung:">Bewertung:(1-5)</label>
-                    <input id="Rating" type="range" min="1" max="5" step="1" /> <br />
-                    <span class="icon1" id="icon1">★</span><br/>
+                    <label>Bewertung:</label>
+                    <span class="rating" id="icon1">★</span>
+                    <span class="rating" id="icon2">★</span>
+                    <span class="rating" id="icon3">★</span>
+                    <span class="rating" id="icon4">★</span>
+                    <span class="rating" id="icon5">★</span>
+                    <br />
+                    <p id="labelRange">Rating: </p>
+                    <input id="Rating" type="range" min="1" max="5" step="1" style="display: none"/>
+                    <br / />
+
+                    <!--<span class="icon1" id="icon1">★</span><br/>
                     <span class="icon2" id="icon2">★★</span><br />
                     <span class="icon3" id="icon3">★★★</span><br />
                     <span class="icon4" id="icon4">★★★★</span><br />
                     <span class="icon5" id="icon5">★★★★★</span><br />
                     <output id="output" for="volume"></output>
+                    !-->
 
 
                     <label for="Beschreibung">Beschreibung:</label>

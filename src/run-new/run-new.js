@@ -1,7 +1,7 @@
 /*
- * Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
+ * My Songbook - Beispielanwendung der Anleitung zur Entwicklung einer Browser App
  *
- * © 2018 Ansgar Lichter, Patrick Fichtner, Toni Coric
+ * © 2018 Dennis Schulmeister-Zimolong <dhbw@windows3.de>
  * Lizenz: Creative Commons Namensnennung 4.0 International
  *
  * Sie dürfen:
@@ -33,14 +33,14 @@
  */
  "use strict";
 
-import stylesheet from "./run-display-edit.css";
+import stylesheet from "./run-new.css";
 
 import Database from "../database.js";
 
  /**
   * View zur Anzeige oder zum Bearbeiten eines Songs.
   */
-class RunDisplayEdit {
+class RunNew {
     /**
      * Konstruktor.
      *
@@ -71,9 +71,17 @@ class RunDisplayEdit {
     async onShow() {
         let section = document.querySelector("#run-display-edit").cloneNode(true);
 
-        /*Laufergbnisse aus Datenbank auslesen*/
+        //Datenbank auslesen für Anzeige bei mode == display oder edit
+        /*Laufergbis aus Übersichtstabelle auslesen*/
+
+        //let url = document.URL;
+        //let id = url.substring(url.lastIndexOf('/') + 1);
+        //alert(id);
         this._id = parseInt(this._id);
         let run = await this._runsDB.getByID(this._id);
+        /*while(run == undefined){
+            run = await this._runsDB.getByID(this._id-1);
+        }*/
 
         section.querySelector('#Name').value=run.name;
         section.querySelector('#Datum').value=run.datum;
@@ -88,7 +96,7 @@ class RunDisplayEdit {
         }
         section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
 
-        /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
+        /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln test*/
         let meter = run.strecke.replace( /,/,"." );
             meter = parseFloat(meter)*1000;
         let sekunde = run.dauer.replace( /,/,"." );
@@ -99,65 +107,85 @@ class RunDisplayEdit {
         /*Berechnung Minuten pro Kilometer*/
         let minPerKm = 3600 / kmPerStd / 60;
         section.querySelector("#minutenPerKm").value=minPerKm;
-        section.querySelector('#kilometerPerStd').value=kmPerStd;
-        //section.querySelector('#output').value = run.rating;
 
-        //Wenn Rating undefined, leeren String anzeigen
+        /*document.getElementById('kilometerPerStd').value=kmPerStd;*/
+        section.querySelector('#kilometerPerStd').value=kmPerStd;
+        section.querySelector('#output').value = run.rating;
+        //wenn Rating undefined, leeren String anzeigen
         if(run.rating == undefined){
            run.rating = "";
         }
         section.querySelector('#Rating').value = run.rating;
 
-        /*
-        * Sterne entsprechend dem Rating anzeigen lassen. Bei Rating von 5
-        * werden 5 Sterne angezeigt, bei einem Rating von 3 3 Sterne, usw.
-        */
+        //Icon für Rating anzeigen
         let iconAnzahl = run.rating;
         if (iconAnzahl == 1){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "block");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
+
+        /*document.getElementById('icon1').style.display ="block";
+        document.getElementById('icon2').style.display ="none";
+        document.getElementById('icon3').style.display ="none";
+        document.getElementById('icon4').style.display ="none";
+        document.getElementById('icon5').style.display ="none";*/
         }
         else if (iconAnzahl == 2){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "block");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
+
+        /*document.getElementById('icon1').style.display ="none";
+        document.getElementById('icon2').style.display ="block";
+        document.getElementById('icon3').style.display ="none";
+        document.getElementById('icon4').style.display ="none";
+        document.getElementById('icon5').style.display ="none";*/
         }
         else if (iconAnzahl == 3){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "block");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
+        /*document.getElementById('icon1').style.display ="none";
+        document.getElementById('icon2').style.display ="none";
+        document.getElementById('icon3').style.display ="block";
+        document.getElementById('icon4').style.display ="none";
+        document.getElementById('icon5').style.display ="none";*/
         }
         else if (iconAnzahl == 4){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "block");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
+
+        /*document.getElementById('icon1').style.display ="none";
+        document.getElementById('icon2').style.display ="none";
+        document.getElementById('icon3').style.display ="none";
+        document.getElementById('icon4').style.display ="block";
+        document.getElementById('icon5').style.display ="none";*/
         }
         else if (iconAnzahl == 5){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "inline");
+            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
+            document.querySelectorAll(".icon5").forEach(e => e.style.display = "block");
+        /*document.getElementById('icon1').style.display ="none";
+        document.getElementById('icon2').style.display ="none";
+        document.getElementById('icon3').style.display ="none";
+        document.getElementById('icon4').style.display ="none";
+        document.getElementById('icon5').style.display ="block";*/
         }
-        else{
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
-        }
+        alert(iconAnzahl);
 
 
-        /*Event für Bearbeiten-Button*/
+        /*Event für Bearbeiten-Button
         section.querySelector("#bearbeiten").addEventListener("click",() => {
             document.getElementById('Name').removeAttribute('disabled');
             document.getElementById('Datum').removeAttribute('disabled');
@@ -169,12 +197,11 @@ class RunDisplayEdit {
             document.getElementById('Beschreibungstext').removeAttribute('disabled');
             document.getElementById('Rating').removeAttribute('disabled');
 
-            document.getElementById('Rating').style.display= "inline";
             document.getElementById('sichern').style.display="block";
             document.getElementById('div_aendern').style.display="block";
             document.getElementById('div_ergebnis_wechseln').style.display="none";
             document.getElementById('bearbeiten').style.display="none";
-            document.getElementById('abbrechen').style.display="block";
+            document.getElementById('abbrechen').style.display="block";*/
 
 
 
@@ -199,7 +226,7 @@ class RunDisplayEdit {
 
         section.querySelector("#Rating").addEventListener("click", () => {
             let rate = document.querySelector("#Rating").value;
-            //document.getElementById('output').value = rate;
+            document.getElementById('output').value = rate;
         });
 
         /*Event für Sichern-Button*/
@@ -213,6 +240,8 @@ class RunDisplayEdit {
 
             //let changeKilometerperStd = document.querySelector("#KilometerPerStd").value;
             let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
+
+
 
             /*section.querySelector("#Rating").addEventListener("click", () => {
                 let rate = document.querySelector("#Rating").value;
@@ -277,7 +306,7 @@ class RunDisplayEdit {
                 changeId = parseInt(changeId);
             this._runsDB.delete(changeId);
             alert("Die Id "+changeId+" wurde gelöscht!");
-            window.location.href = "/run/display/";
+            window.location.href = "/run/new/";
             }
         });
 
@@ -296,7 +325,7 @@ class RunDisplayEdit {
 
         section.querySelector("#vorherige").addEventListener("click",() => {
             let redirectID = this._predId;
-            this._app.navigate("/run/display/"+ redirectID + "/");
+            this._app.navigate("/run/new/"+ redirectID + "/");
          });
 
          //Nachster
@@ -327,17 +356,24 @@ class RunDisplayEdit {
             }else{
                 redirectID = this._postId;
             }
-             this._app.navigate("/run/display/"+ redirectID + "/");
+             this._app.navigate("/run/new/"+ redirectID + "/");
         });
 
 
         return {
-            className: "run-display-edit",
+            className: "RunNew",
             topbar: section.querySelectorAll("header > *"),
             main: section.querySelectorAll("main > *"),
         };
 
     }
+
+    /*let getRunsList = async () => {
+        let runsList = await runsDB.search();
+        return runsList;
+    }
+    let runsList = getRunsList();*/
+
 
     /**
      * Von der Klasse App aufgerufene Methode, um festzustellen, ob der Wechsel
@@ -368,4 +404,4 @@ class RunDisplayEdit {
     }
 }
 
-export default RunDisplayEdit;
+export default RunNew;
