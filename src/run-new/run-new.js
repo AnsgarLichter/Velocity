@@ -113,18 +113,15 @@ class RunNew {
             document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
             document.querySelectorAll(".icon5").forEach(e => e.style.display = "block");
 
-      }
+    }
 
         });
-        Event für Abbrechen-Button*/
+        /*Event für Abbrechen-Button*/
         section.querySelector("#abbrechen").addEventListener("click",() => {
 
         });
 
 
-        section.querySelector("#Rating").addEventListener("click", () => {
-            let rate = document.querySelector("#Rating").value;
-        });
 
         /*Event für Sichern-Button*/
         section.querySelector("#sichern").addEventListener("click",() => {
