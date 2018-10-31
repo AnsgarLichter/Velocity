@@ -66,7 +66,7 @@ class RunOverview {
     async onShow() {
 
         //Test der Datenbankklasse für Laufergebnisse
-        /*await this._runsDB.clear();
+        await this._runsDB.clear();
 
         let runs = await this._runsDB.search();
         console.log("Alle Ergebnisse: ", runs);

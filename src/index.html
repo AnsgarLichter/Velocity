@@ -164,5 +164,72 @@
 
             </main>
         </section>
+        <section id="run-new" class="hidden">
+          <!-- Topbar -->
+          <header>
+              <div class="left">
+                  <div class="item">
+                      <a href="/" data-navigo>
+                          Übersicht
+                      </a>
+                  </div>
+              </div>
+              <div class="right">
+                  <input type="search" id="suche" placeholder="Suchen" />
+              </div>
+          </header>
+          <main>
+              <div class="padding">
+                  Dein neues Laufergebnis eingeben:
+              </div>
+
+              <div class="run-new" >
+                  <label for="Name">Name:</label>
+                  <input type="string"id="Name"/><br />
+                  <label for="Datum">Datum:</label>
+                  <input type="date" id="Datum"/><br />
+                  <label for="Distanz">Distanz (Kilometer):</label>
+                  <input type="number" id="Distanz"/><br />
+                  <label for="Zeit">Zeit (Minuten):</label>
+                  <input type="string" id="Zeit"/><br />
+                  <label for="Art">Art:</label>
+                  <input type="string" id="Art"/><br />
+                  <label for="minutenPerKm">Velocity min/km:</label>
+                  <input type="string" id="minutenPerKm" disabled/><br />
+                  <label for="kilometerPerStd">Velocity km/h:</label>
+                  <input type="string" id="kilometerPerStd"disabled/><br />
+
+                  <label>Bewertung:</label>
+                  <span class="rating" id="icon1">★</span>
+                  <span class="rating" id="icon2">★</span>
+                  <span class="rating" id="icon3">★</span>
+                  <span class="rating" id="icon4">★</span>
+                  <span class="rating" id="icon5">★</span>
+                  <br />
+                  <p id="labelRange"></p>
+                  <input id="Rating" type="range" min="1" max="5" step="1" style="display: none"/>
+                  <br / />
+
+                  <!--<span class="icon1" id="icon1">★</span><br/>
+                  <span class="icon2" id="icon2">★★</span><br />
+                  <span class="icon3" id="icon3">★★★</span><br />
+                  <span class="icon4" id="icon4">★★★★</span><br />
+                  <span class="icon5" id="icon5">★★★★★</span><br />
+                  <output id="output" for="volume"></output>
+                  !-->
+
+
+                  <label for="Beschreibung">Beschreibung:</label>
+                  <textarea id="Beschreibungstext" name="Beschreibungstext"></textarea> <br />
+
+
+              <div class="buttongroup">
+                      <button type="button" id="abbrechen">Abbrechen</button>
+                      <button type="button" id="sichern">Sichern</button>
+
+              </div>
+
+          </main>
+        </section>
     </body>
 </html>

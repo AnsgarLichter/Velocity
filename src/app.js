@@ -37,6 +37,7 @@ import stylesheet from "./app.css";
 import Navigo from "navigo/lib/navigo.js";
 import RunDisplayEdit from "./run-display-edit/run-display-edit.js";
 import RunOverview from "./run-overview/run-overview.js";
+import RunNew from "./run-new/run-new.js"
 import Database from "./database.js";
 
 /**
@@ -61,8 +62,8 @@ class App {
 
         //TODO: Aufruf für /run/new ändern, sobald Klasse für Run hinzufügen existiert
         this._router.on({
-            "*":                      () => this.showRunOverview(),
-            "/run/new/":              () => this.showRunDisplayEdit("", "new"),
+            "*":                  () => this.showRunOverview(),
+            "/run/new/":          () => this.showRunNew(),
             "/run/display/:id/":  params => this.showRunDisplayEdit(params.id, "display"),
             "/run/edit/:id/":     params => this.showRunDisplayEdit(params.id, "edit"),
         });
@@ -125,8 +126,11 @@ class App {
         let view = new RunDisplayEdit(this, id, mode);
         this._switchVisibleView(view);
     }
-
-    //TODO: Methode showRunNew() hinzufügen
+    //Aufruf der Seite zur Erstellung eines neuen Laufergebnisses
+    showRunNew() {
+        let view = new RunNew(this);
+        this._switchVisibleView(view);
+    }
 
     /**
      * Hilfsmethoden zum Anzeigen einer einer neuen Seite, falls diese
