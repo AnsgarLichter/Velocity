@@ -60,13 +60,11 @@
     font-family: sans-serif;
 
 }
-.full{
-  display: inline-block;
-  width: 20px;
-}
+
 .run-new .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
+  padding: 0.0em;
 }
 .rating span {
   display: inline;
@@ -210,3 +208,6 @@ float: left;
     top: 550px;
     left: 750px;
 }*/
+.run-new .full{
+  width: 2.0em;
+}
