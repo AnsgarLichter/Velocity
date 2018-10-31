@@ -75,6 +75,14 @@
     font-size: 15pt;
     font-family: sans-serif;
 }
+
+.run-display-edit #Art {
+    height: 30px;
+    width: 204px;
+    display: block;
+    float: left;
+}
+
 .rating {
     display: inline;
     text-align: left;
@@ -96,77 +104,59 @@
 .run-display-edit .hidden{
     display: none;
 }
-/*.buttongroup {
-background-color: green;
-width: 100%;
-height: 3rem;
-display: block;
-margin-bottom: 1em;
-float: left;
-    }*/
-
-
-/*#loeschen {
-    background-color: red;
-}
-
-#bearbeiten {
-    background-color: green;
-}*/
-
-
-/*#div_ergebnis_wechseln {
-    background-color: red;
-    width: 100%;
-    height: 3rem;
-    display: inline-block;
-    margin-bottom: 1em;
-    float: right;
-}
-
-#div_aendern {
-    background-color: red;
-    width: 100%;
-    height: 3rem;
-    display: inline-block;
-    margin-bottom: 1em;
-    float: right;
-}*/
 
 .run-display-edit #bearbeiten {
     background-color: green;
     position: absolute;
-    top: 850px;
+    top: 900px;
     left: 10px;
+    width: 80px;
+    height: 30px;
+    font-weight: bold;
 }
 
 .run-display-edit #abbrechen {
     position: absolute;
-    top: 850px;
+    top: 900px;
     left: 10px;
+    width: 80px;
+    height: 30px;
+    font-weight: bold;
 }
 
 .run-display-edit #loeschen {
     background-color: red;
     position: absolute;
-    top: 850px;
+    top: 900px;
     left: 100px;
+    width: 80px;
+    height: 30px;
+    font-weight: bold;
 }
 
 .run-display-edit #sichern {
     position: absolute;
-    top: 850px;
-    left: 180px;
+    top: 900px;
+    left: 190px;
+    width: 80px;
+    height: 30px;
+    font-weight: bold;
 }
 
 .run-display-edit #vorherige {
     position: absolute;
-    top: 850px;
-    left: 650px;
+    top: 900px;
+    left: 450px;
+    width: 80px;
+    height: 30px;
+    font-weight: bold;
 }
 
 .run-display-edit #naechste {
     position: absolute;
-    top: 850px;
-    left: 750px;
+    top: 900px;
+    left: 550px;
+    width: 80px;
+    height: 30px;
+    font-weight: bold;
 }

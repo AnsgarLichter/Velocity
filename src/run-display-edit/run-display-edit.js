@@ -82,7 +82,8 @@ class RunDisplayEdit {
         section.querySelector('#Art').value=run.art;
         section.querySelector('#Zeit').value=run.dauer;
         section.querySelector('#minutenPerKm').value=run.minutenPerKm;
-        //section.querySelector().value = run.kmh;
+        section.querySelector('#kilometerPerStd').value = run.kmPerStd;
+
         //Wenn Beschreibungstext undefined, leeren String anzeigen
         if(run.beschreibungstext == undefined){
            run.beschreibungstext = "";
@@ -184,7 +185,7 @@ class RunDisplayEdit {
             document.getElementById('bearbeiten').style.display="block";
         });
 
-
+        //Event für Rating, bei dem der Rating-Wert ausgelesen wird
         section.querySelector("#Rating").addEventListener("click", () => {
             let rate = document.querySelector("#Rating").value;
         });
@@ -274,6 +275,7 @@ class RunDisplayEdit {
                 document.getElementById('minutenPerKm').setAttribute('disabled', true);
                 document.getElementById('kilometerPerStd').setAttribute('disabled', true);
                 document.getElementById('Beschreibungstext').setAttribute('disabled', true);
+
                 /*
                 * Die Buttons Sichern und abbrechen wieder verstecken und die
                 * Buttons für die detaillierte Ansicht wieder anzeigen.
