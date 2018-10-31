@@ -1,7 +1,7 @@
 /*
- * My Songbook - Beispielanwendung der Anleitung zur Entwicklung einer Browser App
+ * Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
  *
- * © 2018 Dennis Schulmeister-Zimolong <dhbw@windows3.de>
+ * © 2018 Ansgar Lichter, Patrick Fichtner, Toni Coric
  * Lizenz: Creative Commons Namensnennung 4.0 International
  *
  * Sie dürfen:
@@ -71,17 +71,9 @@ class RunDisplayEdit {
     async onShow() {
         let section = document.querySelector("#run-display-edit").cloneNode(true);
 
-        //Datenbank auslesen für Anzeige bei mode == display oder edit
-        /*Laufergbis aus Übersichtstabelle auslesen*/
-
-        //let url = document.URL;
-        //let id = url.substring(url.lastIndexOf('/') + 1);
-        //alert(id);
+        /*Laufergbnisse aus Datenbank auslesen*/
         this._id = parseInt(this._id);
         let run = await this._runsDB.getByID(this._id);
-        /*while(run == undefined){
-            run = await this._runsDB.getByID(this._id-1);
-        }*/
 
         section.querySelector('#Name').value=run.name;
         section.querySelector('#Datum').value=run.datum;
@@ -96,7 +88,7 @@ class RunDisplayEdit {
         }
         section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
 
-        /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln test*/
+        /*Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln*/
         let meter = run.strecke.replace( /,/,"." );
             meter = parseFloat(meter)*1000;
         let sekunde = run.dauer.replace( /,/,"." );
@@ -107,82 +99,62 @@ class RunDisplayEdit {
         /*Berechnung Minuten pro Kilometer*/
         let minPerKm = 3600 / kmPerStd / 60;
         section.querySelector("#minutenPerKm").value=minPerKm;
-
-        /*document.getElementById('kilometerPerStd').value=kmPerStd;*/
         section.querySelector('#kilometerPerStd').value=kmPerStd;
-        section.querySelector('#output').value = run.rating;
-        //wenn Rating undefined, leeren String anzeigen
+        //section.querySelector('#output').value = run.rating;
+
+        //Wenn Rating undefined, leeren String anzeigen
         if(run.rating == undefined){
            run.rating = "";
         }
         section.querySelector('#Rating').value = run.rating;
 
-        //Icon für Rating anzeigen
+        /*
+        * Sterne entsprechend dem Rating anzeigen lassen. Bei Rating von 5
+        * werden 5 Sterne angezeigt, bei einem Rating von 3 3 Sterne, usw.
+        */
         let iconAnzahl = run.rating;
         if (iconAnzahl == 1){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "block");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
-
-        /*document.getElementById('icon1').style.display ="block";
-        document.getElementById('icon2').style.display ="none";
-        document.getElementById('icon3').style.display ="none";
-        document.getElementById('icon4').style.display ="none";
-        document.getElementById('icon5').style.display ="none";*/
+            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon2").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon3").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
         }
         else if (iconAnzahl == 2){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "block");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
-
-        /*document.getElementById('icon1').style.display ="none";
-        document.getElementById('icon2').style.display ="block";
-        document.getElementById('icon3').style.display ="none";
-        document.getElementById('icon4').style.display ="none";
-        document.getElementById('icon5').style.display ="none";*/
+            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon3").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
         }
         else if (iconAnzahl == 3){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "block");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
-        /*document.getElementById('icon1').style.display ="none";
-        document.getElementById('icon2').style.display ="none";
-        document.getElementById('icon3').style.display ="block";
-        document.getElementById('icon4').style.display ="none";
-        document.getElementById('icon5').style.display ="none";*/
+            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon3").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
         }
         else if (iconAnzahl == 4){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "block");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
-
-        /*document.getElementById('icon1').style.display ="none";
-        document.getElementById('icon2').style.display ="none";
-        document.getElementById('icon3').style.display ="none";
-        document.getElementById('icon4').style.display ="block";
-        document.getElementById('icon5').style.display ="none";*/
+            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon3").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon4").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
         }
         else if (iconAnzahl == 5){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "block");
-        /*document.getElementById('icon1').style.display ="none";
-        document.getElementById('icon2').style.display ="none";
-        document.getElementById('icon3').style.display ="none";
-        document.getElementById('icon4').style.display ="none";
-        document.getElementById('icon5').style.display ="block";*/
+            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon3").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon4").forEach(e => e.style.display = "inline");
+            section.querySelectorAll("#icon5").forEach(e => e.style.display = "inline");
         }
-        alert(iconAnzahl);
+        else{
+            section.querySelectorAll("#icon1").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon2").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon3").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
+            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
+        }
 
 
         /*Event für Bearbeiten-Button*/
@@ -197,6 +169,7 @@ class RunDisplayEdit {
             document.getElementById('Beschreibungstext').removeAttribute('disabled');
             document.getElementById('Rating').removeAttribute('disabled');
 
+            document.getElementById('Rating').style.display= "inline";
             document.getElementById('sichern').style.display="block";
             document.getElementById('div_aendern').style.display="block";
             document.getElementById('div_ergebnis_wechseln').style.display="none";
@@ -226,7 +199,7 @@ class RunDisplayEdit {
 
         section.querySelector("#Rating").addEventListener("click", () => {
             let rate = document.querySelector("#Rating").value;
-            document.getElementById('output').value = rate;
+            //document.getElementById('output').value = rate;
         });
 
         /*Event für Sichern-Button*/
@@ -240,8 +213,6 @@ class RunDisplayEdit {
 
             //let changeKilometerperStd = document.querySelector("#KilometerPerStd").value;
             let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
-
-
 
             /*section.querySelector("#Rating").addEventListener("click", () => {
                 let rate = document.querySelector("#Rating").value;
@@ -367,13 +338,6 @@ class RunDisplayEdit {
         };
 
     }
-
-    /*let getRunsList = async () => {
-        let runsList = await runsDB.search();
-        return runsList;
-    }
-    let runsList = getRunsList();*/
-
 
     /**
      * Von der Klasse App aufgerufene Methode, um festzustellen, ob der Wechsel
