@@ -69,7 +69,7 @@ class RunNew {
      * Methode App._switchVisibleContent()
      */
     async onShow() {
-        let section = document.querySelector("#run-display-edit").cloneNode(true);
+        let section = document.querySelector("#run-new").cloneNode(true);
 
         //Datenbank auslesen für Anzeige bei mode == display oder edit
         /*Laufergbis aus Übersichtstabelle auslesen*/
@@ -185,7 +185,7 @@ class RunNew {
         alert(iconAnzahl);
 
 
-        /*Event für Bearbeiten-Button
+        /*Event für Bearbeiten-Button*/
         section.querySelector("#bearbeiten").addEventListener("click",() => {
             document.getElementById('Name').removeAttribute('disabled');
             document.getElementById('Datum').removeAttribute('disabled');
@@ -201,7 +201,7 @@ class RunNew {
             document.getElementById('div_aendern').style.display="block";
             document.getElementById('div_ergebnis_wechseln').style.display="none";
             document.getElementById('bearbeiten').style.display="none";
-            document.getElementById('abbrechen').style.display="block";*/
+            document.getElementById('abbrechen').style.display="block";
 
 
 
