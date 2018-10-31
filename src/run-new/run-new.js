@@ -69,113 +69,107 @@ class RunNew {
     async onShow() {
         let section = document.querySelector("#run-new").cloneNode(true);
 
-        //Icon für Rating anzeigen
-        //let iconAnzahl = run.rating;
-        /*if (iconAnzahl == 1){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "block");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
-
-
-        }
-        else if (iconAnzahl == 2){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "block");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
-
-
-        }
-        else if (iconAnzahl == 3){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "block");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
-
-        }
-       else if (iconAnzahl == 4){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "block");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "none");
-
-
-        }
-        else if (iconAnzahl == 5){
-            document.querySelectorAll(".icon1").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon2").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon3").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon4").forEach(e => e.style.display = "none");
-            document.querySelectorAll(".icon5").forEach(e => e.style.display = "block");
-
-    }
-
-        });
         /*Event für Abbrechen-Button*/
         section.querySelector("#abbrechen").addEventListener("click",() => {
-
+            this._app.navigate("");
         });
 
 
 
         /*Event für Sichern-Button*/
         section.querySelector("#sichern").addEventListener("click",() => {
-            let changeName = document.querySelector("#Name").value;
-            let changeDatum = document.querySelector("#Datum").value;
-            let changeDistanz = document.querySelector("#Distanz").value;
-            let changeZeit = document.querySelector("#Zeit").value;
-            let changeArt = document.querySelector("#Art").value;
-            let changeMinutenPerKm = document.querySelector("#minutenPerKm").value;
+            /*
+            * Eingebebene Werte aus den Eingabefeldern auslesen und
+            * anschließend die Eingabe überprüfen.
+            * Die Beschreibung ist dabei optional und muss nicht überprüft
+            * werden.
+            */
+            let newName = document.querySelector("#Name").value;
+            let newDatum = document.querySelector("#Datum").value;
+            let newDistanz = document.querySelector("#Distanz").value;
+            let distFloat = parseFloat(newDistanz).toFixed(3);
+            let newZeit = document.querySelector("#Zeit").value;
+            let newArt = document.querySelector("#Art").value;
+            let newBeschreibung = document.querySelector("#Beschreibungstext").value;
+            //Regex zur Überprüfung der Zeit
+            let regexZeit = new RegExp("^\\d{1,3}:\\d{1,2}$");
+            //Abfrage der vergebenen Bewertung
+            let star1 = document.getElementById("star1");
+            let star2 = document.getElementById("star2");
+            let star3 = document.getElementById("star3");
+            let star4 = document.getElementById("star4");
+            let star5 = document.getElementById("star5");
 
-            //let changeKilometerperStd = document.querySelector("#KilometerPerStd").value;
-            let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
-
-
-
-            /*section.querySelector("#Rating").addEventListener("click", () => {
-                let rate = document.querySelector("#Rating").value;
-                document.getElementById('output').value = rate;
-            });*/
-
-            let changeRating = document.querySelector("#Rating").value;
-            alert(changeRating);
-            if (changeRating == undefined){
-                run.rating = "";
+            let rating = 0;
+            if(star5.checked) {
+                rating = 5;
+            }
+            else if(star4.checked) {
+                rating = 4;
+            }
+            else if(star3.checked) {
+                rating = 3;
+            }
+            else if(star2.checked) {
+                rating = 2;
+            }
+            else if(star1.checked) {
+                rating = 1;
             }
 
-            changeRating=parseInt(changeRating);
-
-            document.getElementById('div_ergebnis_wechseln').style.display="block";
-            document.getElementById('bearbeiten').style.display="block";
-            document.getElementById('sichern').style.display="none";
-            document.getElementById('abbrechen').style.display="none";
-
-
-            let url = document.URL;
-            /*let changeId = url.substring(url.lastIndexOf('/') + 1);*/
-            let changeId = this._id;
-                changeId = parseInt(changeId);
-
-                if(changeName == "" || changeDatum == "" || changeDistanz == "" || changeZeit == "" || changeArt == "" || changeMinutenPerKm == "" || changeBeschreibung == "") {
-                return;
+            //Prüfen des Namens
+            if(!newName) {
+                alert("Bitte den Namen ausfüllen!");
             }
+            //Prüfen des Datums
+            else if(!newDatum) {
+                alert("Bitte ein korrektes Datum eingeben!");
+            }
+            //Prüfen der Distanz
+            else if(!newDistanz) {
+                alert("Eingabefehler bei der Distanz, bitte einen korrekten Wert eingeben");
+            }
+            else if(!newZeit.match(regexZeit)) {
+                alert("Bitte eine korrekte Zeit (mm:ss) eingeben!")
+            }
+            else{
+                /*
+                * Hier ist nun sichergestellt, dass alle Eingaben korrekt sind.
+                * Nun sollen die Durchschnittsgeschwindigkeit und die
+                * Geschwindigkeit in Minuten pro Kilometer berechnet werden.
+                */
 
-      /*      this._runsDB.update({
-                id: changeId,
-                name: changeName,
-                strecke: changeDistanz,
-                dauer: changeZeit,
-                minutenPerKm: changeMinutenPerKm,
-                art: changeArt,
-                datum: changeDatum,
-                beschreibungstext: changeBeschreibung,
-                rating: changeRating,
-            });*/
+                //Kommazahl zur Berechnung der Km/h in Wert mit Punkt umwandeln
+                let min      = newZeit.split(":")
+                let sekunden = parseFloat(parseFloat(min[0]*60)+parseFloat(min[1]));
+                let meter    = distFloat * 1000;
+                let kmPerStd = ((meter/sekunden)/1000)/(1/3600);
+                    kmPerStd = parseFloat(kmPerStd).toFixed(2);
+
+                //Berechnung Minuten pro Kilometer
+                let minPerKm = 3600 / kmPerStd / 60;
+                let minPerKmDecimals = minPerKm - Math.floor(minPerKm);
+                    minPerKmDecimals = minPerKmDecimals * 60;
+                    minPerKmDecimals = parseInt(minPerKmDecimals);
+                    minPerKm = "" + minPerKm.toFixed(0) + ":" + minPerKmDecimals;
+
+                //Berechnete Werte in Eingabefelder schreiben
+                document.querySelector("#minutenPerKm").value    = minPerKm;
+                document.querySelector('#kilometerPerStd').value = kmPerStd;
+
+                //Alle Werte in der Datenbank speichern.
+                this._runsDB.saveNew({
+                    name: newName,
+                    strecke: newDistanz,
+                    dauer: newZeit,
+                    minutenPerKm: minPerKm,
+                    kmPerStd: kmPerStd,
+                    art: newArt,
+                    datum: newDatum,
+                    beschreibungstext: newBeschreibung,
+                    rating: rating,
+                });
+            }
         });
 
         return {

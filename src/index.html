@@ -106,35 +106,48 @@
             <main>
                 <div class="padding">
                     Dein Laufergebnis
-                    <br/>
-                </div>
+                </div><br/>
 
                 <div class="run-display-edit" >
                     <label for="Name">Name:</label>
-                    <input type="string"id="Name" disabled /><br />
+                    <input type="string"id="Name"/><br />
                     <label for="Datum">Datum:</label>
-                    <input type="date" id="Datum" disabled/><br />
+                    <input type="date" id="Datum"/><br />
                     <label for="Distanz">Distanz (Kilometer):</label>
-                    <input type="number" id="Distanz" disabled/><br />
+                    <input type="number" id="Distanz"/><br />
                     <label for="Zeit">Zeit (Minuten):</label>
-                    <input type="string" id="Zeit" disabled/><br />
+                    <input type="string" id="Zeit"/><br />
                     <label for="Art">Art:</label>
-                    <input type="string" id="Art" disabled/><br />
+                    <input type="string" id="Art"/><br />
                     <label for="minutenPerKm">Velocity min/km:</label>
                     <input type="string" id="minutenPerKm" disabled/><br />
                     <label for="kilometerPerStd">Velocity km/h:</label>
-                    <input type="string" id="kilometerPerStd" disabled/><br />
-
+                    <input type="string" id="kilometerPerStd"disabled/><br />
+                    <label for="Beschreibung">Beschreibung:</label>
+                    <textarea id="Beschreibungstext" name="Beschreibungstext"></textarea> <br />
+                    </br>
                     <label>Bewertung:</label>
-                    <span class="rating" id="icon1">★</span>
-                    <span class="rating" id="icon2">★</span>
-                    <span class="rating" id="icon3">★</span>
-                    <span class="rating" id="icon4">★</span>
-                    <span class="rating" id="icon5">★</span>
+                    <fieldset class="rating">
+
+                      <input type="radio" id="star5" name="rating" value="5" />
+                      <label class="full" for="star5" title="Excellent"></label>
+
+                      <input type="radio" id="star4" name="rating" value="4" />
+                      <label class="full" for="star4" title="Pretty good"></label>
+
+                      <input type="radio" id="star3" name="rating" value="3" />
+                      <label class="full" for="star3" title="Ok"></label>
+
+                      <input type="radio" id="star2" name="rating" value="2" />
+                      <label class="full" for="star2" title="Pretty bad"></label>
+
+                      <input type="radio" id="star1" name="rating" value="1" />
+                      <label class="full" for="star1" title="Bad"></label>
+
+                    </fieldset>
                     <br />
-                    <p id="labelRange">Rating: </p>
-                    <input id="Rating" type="range" min="1" max="5" step="1"/>
-                    <br / />
+                    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+
 
                     <!--<span class="icon1" id="icon1">★</span><br/>
                     <span class="icon2" id="icon2">★★</span><br />
@@ -143,11 +156,6 @@
                     <span class="icon5" id="icon5">★★★★★</span><br />
                     <output id="output" for="volume"></output>
                     !-->
-
-
-                    <label for="Beschreibung">Beschreibung:</label>
-                    <textarea id="Beschreibungstext" name="Beschreibungstext" disabled></textarea> <br />
-
 
                 <div class="buttongroup">
                         <button type="button" id="loeschen">Löschen </button>
@@ -165,6 +173,8 @@
 
             </main>
         </section>
+
+
         <section id="run-new" class="hidden">
           <!-- Topbar -->
           <header>
@@ -205,20 +215,20 @@
                   <label>Bewertung:</label>
                   <fieldset class="rating">
 
-                    <input type="radio" id="5star" name="rating" value="5" />
-                    <label class="full" for="5star" title="Excellent"></label>
+                      <input type="radio" id="star5" name="rating" value="5" />
+                      <label class="full" for="star5" title="Excellent"></label>
 
-                    <input type="radio" id="4star" name="rating" value="4" />
-                    <label class="full" for="4star" title="Pretty good"></label>
+                      <input type="radio" id="star4" name="rating" value="4" />
+                      <label class="full" for="star4" title="Pretty good"></label>
 
-                    <input type="radio" id="3star" name="rating" value="3" />
-                    <label class="full" for="3star" title="Ok"></label>
+                      <input type="radio" id="star3" name="rating" value="3" />
+                      <label class="full" for="star3" title="Ok"></label>
 
-                    <input type="radio" id="2star" name="rating" value="2" />
-                    <label class="full" for="2star" title="Pretty bad"></label>
+                      <input type="radio" id="star2" name="rating" value="2" />
+                      <label class="full" for="star2" title="Pretty bad"></label>
 
-                    <input type="radio" id="1star" name="rating" value="1" />
-                    <label class="full" for="1star" title="Bad"></label>
+                      <input type="radio" id="star1" name="rating" value="1" />
+                      <label class="full" for="star1" title="Bad"></label>
 
                   </fieldset>
                   <br />
