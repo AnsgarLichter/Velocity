@@ -43,7 +43,8 @@
     line-height: 1.0;
 }
 
-.detailview label {
+.run-new label {
+    text-align: center;
     width: 10em;
     display: block;
     float: left;
@@ -51,7 +52,7 @@
     font-family: sans-serif;
 }
 
-.detailview input {
+.run-new input {
     width: 10em;
     display: block;
     float: left;
@@ -60,7 +61,7 @@
 
 }
 
-.detailview textarea {
+.run-new textarea {
     width:400px;
     height: 5rem;
     display: block;
@@ -106,44 +107,42 @@ float: left;
     float: right;
 }*/
 
-#bearbeiten {
+/*#bearbeiten {
     background-color: green;
     position: absolute;
     top: 550px;
     left: 10px;
-}
+}*/
 
 #abbrechen {
-    position: absolute;
-    top: 550px;
+    top: 650px;
     left: 10px;
 }
 
-#loeschen {
+/*#loeschen {
     background-color: red;
     position: absolute;
     top: 550px;
     left: 100px;
-}
+}*/
 
 #sichern {
-    position: absolute;
-    top: 550px;
+    top: 650px;
     left: 180px;
 }
 
-#vorherige {
+/*#vorherige {
     position: absolute;
     top: 550px;
     left: 650px;
-}
+}*/
 
-#vorherige: hover {
+/*#vorherige: hover {
     background-color: #FF1234;
-}
+}*/
 
-#naechste {
+/*#naechste {
     position: absolute;
     top: 550px;
     left: 750px;
-}
+}*/

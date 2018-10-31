@@ -128,7 +128,7 @@ class App {
     }
     //Aufruf der Seite zur Erstellung eines neuen Laufergebnisses
     showRunNew() {
-        let view = new RunNew(this,id,mode);
+        let view = new RunNew(this);
         this._switchVisibleView(view);
     }
 
