@@ -110,37 +110,33 @@
 
                 <div class="run-display-edit" >
                     <label for="Name">Name:</label>
-                    <input type="string"id="Name"/><br />
+                    <input type="string"id="Name" disabled/><br />
                     <label for="Datum">Datum:</label>
-                    <input type="date" id="Datum"/><br />
+                    <input type="date" id="Datum" disabled/><br />
                     <label for="Distanz">Distanz (Kilometer):</label>
-                    <input type="number" id="Distanz"/><br />
+                    <input type="number" id="Distanz" disabled/><br />
                     <label for="Zeit">Zeit (Minuten):</label>
-<<<<<<< HEAD
-                    <input type="string" id="Zeit"/><br />
-                    <label for="Art">Art:</label>
-                    <input type="string" id="Art"/><br />
-=======
                     <input type="string" id="Zeit" disabled/><br />
+                    <label for="Art">Art:</label>
 
                     <label for="Art">Art:</label>
-                    <select id="Art">
+                    <select id="Art" disabled>
                         <option value="Joggen">Joggen</option>
                         <option value="Halbmarathon">Halbmarathon</option>
                         <option value="Marathon">Marathon</option>
                         <option value="Andere">Andere</option>
                     </select><br />
                     <!--<input type="string" id="Art" disabled/><br />-->
+                    <!--asd-->
 
->>>>>>> c5c54e388688301c449ceb2d4d10724dd5254610
                     <label for="minutenPerKm">Velocity min/km:</label>
                     <input type="string" id="minutenPerKm" disabled/><br />
                     <label for="kilometerPerStd">Velocity km/h:</label>
                     <input type="string" id="kilometerPerStd"disabled/><br />
                     <label for="Beschreibung">Beschreibung:</label>
-                    <textarea id="Beschreibungstext" name="Beschreibungstext"></textarea> <br />
+                    <textarea id="Beschreibungstext" name="Beschreibungstext" disabled></textarea> <br />
                     </br>
-                    <label>Bewertung:</label>
+                    <label for="Bewertung">Bewertung:</label>
                     <fieldset class="rating">
 
                       <input type="radio" id="star5" name="rating" value="5" />
@@ -169,7 +165,19 @@
                     <span class="icon4" id="icon4">★★★★</span><br />
                     <span class="icon5" id="icon5">★★★★★</span><br />
                     <output id="output" for="volume"></output>
-                    !-->
+
+
+                    <label>Bewertung:</label>
+                    <span class="rating" id="icon1">★</span>
+                    <span class="rating" id="icon2">★</span>
+                    <span class="rating" id="icon3">★</span>
+                    <span class="rating" id="icon4">★</span>
+                    <span class="rating" id="icon5">★</span>
+                    <br />
+                    <p id="labelRange">Rating: </p>
+                    <input id="Rating" type="range" min="1" max="5" step="1"/>
+<br / />!-->
+
 
                 <div class="buttongroup">
                         <button type="button" id="loeschen">Löschen </button>
