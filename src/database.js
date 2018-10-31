@@ -51,12 +51,13 @@ import Dexie from "dexie/dist/dexie.js";
 * nicht definiert werden:
 *  Bewertung
 *  Beschreibung
+*  kilometerPerStd
 */
 
  let database = new Dexie("Velocity");
 
  database.version(1).stores({
-    runs: "++id, name, strecke, dauer, minutenPerKm, art, datum, beschreibungstext, rating",
+    runs: "++id, name, strecke, dauer, minutenPerKm, art, datum, beschreibungstext, rating, kmPerStd",
  });
 
  /*
@@ -82,6 +83,7 @@ class Runs {
      *     datum: "Datum des Trainings"
      *     beschreibung: "Beschreibung zum Training"
      *     bewertung: "Bewertung des Trainings"
+     *     kmPerStd: "Kilometer pro Stunde"
      * }
      *
      * @param  {Object}  run Zu speicherndes Trainingsergebnis
@@ -104,6 +106,7 @@ class Runs {
      *     datum: "Datum des Trainings"
      *     beschreibung: "Beschreibung zum Training"
      *     bewertung: "Bewertung des Trainings"
+     *     kmPerStd: "Kilometer pro Stunde"
      * }
      *
      * @param  {Object}  run Zu speicherndes Trainingsergebnis
