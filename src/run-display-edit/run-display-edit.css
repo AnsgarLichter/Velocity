@@ -39,10 +39,7 @@
   */
 
 
-/*min-width: 768, min-width: 992px, min-width:1200*/
-@media and (max-width: 768px){
 
-}
 
 
 .padding {
@@ -51,7 +48,7 @@
 
 .detailview main {
     color: black !important;
-    background-color: #B7DFDD !important;
+    background-image: linear-gradient(to bottom, #045262, #007686, #009ca9, #00c5c9, #11eee5) !important;
     line-height: 1.0;
 }
 
@@ -79,6 +76,11 @@
     float: left;
     font-size: 15pt;
     font-family: sans-serif;
+}
+
+
+.run-display-edit select {
+    font-size: 14pt;
 }
 
 .run-display-edit #Art {
@@ -110,61 +112,128 @@
     display: none;
 }
 
+
+.run-display-edit #loeschen {
+    background-color: red;
+    position: relative;
+    float: left;
+    left: 10px;
+    width: 90px;
+    height: 30px;
+    font-weight: bold;
+}
+
 .run-display-edit #bearbeiten {
     background-color: green;
-    position: absolute;
-    top: 900px;
-    left: 10px;
-    width: 80px;
+    position: relative;
+    float: left;
+    left: 20px;
+    width: 90px;
     height: 30px;
     font-weight: bold;
 }
 
 .run-display-edit #abbrechen {
-    position: absolute;
-    top: 900px;
-    left: 10px;
-    width: 80px;
-    height: 30px;
-    font-weight: bold;
-}
-
-.run-display-edit #loeschen {
-    background-color: red;
-    position: absolute;
-    top: 900px;
-    left: 100px;
-    width: 80px;
+    position: relative;
+    float: left;
+    left: 20px;
+    width: 90px;
     height: 30px;
     font-weight: bold;
 }
 
 .run-display-edit #sichern {
-    position: absolute;
-    top: 900px;
-    left: 190px;
-    width: 80px;
+    position: relative;
+    float: left;
+    left: 30px;
+    width: 90px;
+    height: 30px;
+    font-weight: bold;
+}
+
+.run-display-edit #vorherigeMobile {
+    display: inline;
+    position: relative;
+    float: left;
+    left: 150px;
+    width: 90px;
+    height: 30px;
+    font-weight: bold;
+}
+
+.run-display-edit #naechsteMobile {
+    display: inline;
+    position: relative;
+    float: left;
+    left: 250px;
+    width: 90px;
     height: 30px;
     font-weight: bold;
 }
 
 .run-display-edit #vorherige {
-    position: absolute;
-    top: 900px;
-    left: 450px;
-    width: 80px;
+    display: none;
+    position: relative;
+    float: left;
+    left: 150px;
+    width: 90px;
     height: 30px;
     font-weight: bold;
 }
 
 .run-display-edit #naechste {
-    position: absolute;
-    top: 900px;
-    left: 550px;
-    width: 80px;
+    display: none;
+    position: relative;
+    float: left;
+    left: 250px;
+    width: 90px;
     height: 30px;
     font-weight: bold;
 }
+
+@media screen and (min-width: 768px) {
+    .run-display-edit #vorherigeMobile {
+        display: none;
+        position: relative;
+        float: left;
+        left: 150px;
+        width: 90px;
+        height: 30px;
+        font-weight: bold;
+    }
+
+    .run-display-edit #naechsteMobile {
+        display: none;
+        position: relative;
+        float: left;
+        left: 250px;
+        width: 90px;
+        height: 30px;
+        font-weight: bold;
+    }
+
+    .run-display-edit #vorherige {
+        display: inline;
+        position: relative;
+        float: left;
+        left: 150px;
+        width: 90px;
+        height: 30px;
+        font-weight: bold;
+    }
+
+    .run-display-edit #naechste {
+        display: inline;
+        position: relative;
+        float: left;
+        left: 250px;
+        width: 90px;
+        height: 30px;
+        font-weight: bold;
+    }
+}
+
+
 
 .run-display-edit .rating {
   unicode-bidi: bidi-override;

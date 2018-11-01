@@ -92,7 +92,7 @@ class RunDisplayEdit {
         section.querySelector('#Art').value=run.art;
         section.querySelector('#Zeit').value=run.dauer;
         section.querySelector('#minutenPerKm').value=run.minutenPerKm;
-        //section.querySelector().value = run.kmh;
+        section.querySelector('#kilometerPerStd').value = run.kmPerStd;
         //Wenn Beschreibungstext undefined, leeren String anzeigen
         if(run.beschreibungstext == undefined){
            run.beschreibungstext = "";
@@ -276,7 +276,7 @@ class RunDisplayEdit {
         /*Loeschen-Event Deatailergebnis löschen aus Datenbank*/
         section.querySelector("#loeschen").addEventListener("click",() => {
             //Sicherheitsabfrage vor dem endgültigen Löschen
-            let feedback = confirm("Wollen Sie die Eingabe wirklich löschen?");
+            let feedback = confirm("Wollen Sie das Ergebnis wirklich löschen?");
             if (feedback == true){
             let url = document.URL;
             let changeId = url.substring(url.lastIndexOf('/') + 1);
