@@ -149,8 +149,8 @@ class App {
         /*
         * Callback, mit dem die noch sichtbare View den Seitenwechsel zu einem
         * späteren Zeitpunkt fortführen kann, wenn sie in der Methode onLeave()
-        * false zurückliefert. Dadurch erhält sie die Möglichkeit, den Anwender
-        * zum Beispiel zu fragen, ob er ungesicherte Daten speichern will,
+        * false zurückliefert. Dadurch erhält sie die Möglichkeit, den Benutzer
+        * zum Beispiel zu fragen, ob er ungesicherte Daten speichern möchte,
         * bevor er die Seite verlässt.
         */
         let newUrl = this._router.lastRouteResolved().url;

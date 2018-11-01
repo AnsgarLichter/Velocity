@@ -39,7 +39,6 @@
   */
 .run-new main {
     color: black !important;
-    /*background-color: #B7DFDD !important;*/
     background-image: linear-gradient(to bottom, #045262, #007686, #009ca9, #00c5c9, #11eee5);
     line-height: 1.0;
 }
@@ -60,6 +59,12 @@
     font-size: 15pt;
     font-family: sans-serif;
 
+}
+.run-new #Art {
+    height: 30px;
+    width: 204px;
+    display: block;
+    float: left;
 }
 
 .run-new .rating {
@@ -135,8 +140,8 @@
 
 
 .run-new #abbrechen {
-  position: absolute;
-  top: 900px;
+  position: relative;
+  float:left;
   left: 75px;
   width: 90px;
   height: 30px;
@@ -144,9 +149,9 @@
 }
 
 .run-new #sichern {
-  position: absolute;
-  top: 900px;
-  left: 190px;
+  position: relative;
+  float: left;
+  left: 175px;
   width: 90px;
   height: 30px;
   font-weight: bold;

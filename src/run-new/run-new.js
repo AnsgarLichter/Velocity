@@ -71,7 +71,7 @@ class RunNew {
 
         /*Event für Abbrechen-Button*/
         section.querySelector("#abbrechen").addEventListener("click",() => {
-            this._app.navigate("");
+            this._app.navigate("/");
         });
 
 
@@ -169,6 +169,7 @@ class RunNew {
                     beschreibungstext: newBeschreibung,
                     rating: rating,
                 });
+                this._app.navigate("/");
             }
         });
 

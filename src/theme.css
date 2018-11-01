@@ -1,7 +1,7 @@
 /*
- * My Songbook - Beispielanwendung der Anleitung zur Entwicklung einer Browser App
- *
- * © 2018 Dennis Schulmeister-Zimolong <dhbw@windows3.de>
+* Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
+*
+* © 2018 Ansgar Lichter, Patrick Fichtner, Toni Coric
  * Lizenz: Creative Commons Namensnennung 4.0 International
  *
  * Sie dürfen:
@@ -48,6 +48,6 @@ html {
 
     --header-normal-background-color: rgba(0,0,0,1.0);
     --header-normal-font-color:       rgba(255,255,255, 0.8);
-    --header-active-background-color: rgba(255,255,255, 0.2);
-    --header-active-font-color:       rgba(255,255,255, 0.9);
+    --header-active-background-color: rgba(104, 181, 179, 0.2);
+    --header-active-font-color:       rgba(255,255,255, 1.0);
 }
