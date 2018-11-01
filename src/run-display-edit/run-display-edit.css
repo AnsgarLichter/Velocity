@@ -39,9 +39,6 @@
   */
 
 
-
-
-
 .padding {
     text-align: center;
 }
@@ -233,6 +230,10 @@
     }
 }
 
+
+    .run-display-edit #div_aendern {
+    display: none;
+    }
 
 
 .run-display-edit .rating {
