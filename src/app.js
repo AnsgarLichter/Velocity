@@ -191,10 +191,10 @@ class App {
         //Dem Suchfeld einen EventLisener hinzufügen
         search.addEventListener("change", () => {
             //Definition der search-function
-            let search = (element) =>  {
+            let search = (element,zaehler) =>  {
                 if(element.childElementCount > 0) {
                     //Element hat Kinder
-                    element.childNodes.forEach(search);
+                    element.childNodes.forEach(e=>zaehler=search(e,zaehler));
                 }
 
                 if(element.childElementCount == 0 || element.nodeName == "#text") {
@@ -204,13 +204,16 @@ class App {
                         //element.className = "searchResult";
                         if(element.nodeName == "#text") {
                             let index = element.parentNode.innerHTML.indexOf(searchString);
+                            zaehler++;
                             element.parentNode.innerHTML = element.parentNode.innerHTML.substring(0, index) + "<mark>" + element.parentNode.innerHTML.substring(index, index+searchString.length) + "</mark>" + element.parentNode.innerHTML.substring(index+searchString.length);
                         }else{
                             let index = element.innerHTML.indexOf(searchString);
+                            zaehler++;
                             element.innerHTML = element.innerHTML.substring(0, index) + "<mark>" + element.innerHTML.substring(index, index+searchString.length) + "</mark>" + element.innerHTML.substring(index+searchString.length);
                         }
                     }
                 }
+                return zaehler;
             }
 
 
@@ -237,7 +240,11 @@ class App {
 
             //In aktueller HTML-Seite nach dem Suchbegriff suchen
             let inhalt = document.querySelector("main");
-            inhalt.childNodes.forEach(search);
+            let zaehler= 0;
+            inhalt.childNodes.forEach(e=>zaehler=search(e,zaehler));
+            if(zaehler==0){
+              alert("Kein Treffer!");
+            }
         });
 
         /*
