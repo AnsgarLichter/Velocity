@@ -299,11 +299,17 @@ class RunDisplayEdit {
         });
         this._predId = current;
 
-
+        /*Vorher-Button für Desktop-Darstellung*/
         section.querySelector("#vorherige").addEventListener("click",() => {
             let redirectID = this._predId;
             this._app.navigate("/run/display/"+ redirectID + "/");
          });
+
+        /*Vorher-Button für Mobile Darstellung */
+         section.querySelector("#vorherigeMobile").addEventListener("click",() => {
+             let redirectID = this._predId;
+             this._app.navigate("/run/display/"+ redirectID + "/");
+          });
 
          //Nachster
         listId = await this._runsDB.search();
@@ -325,7 +331,7 @@ class RunDisplayEdit {
          }else{
             this._postId = current;
          }
-
+         /*Nächste-Button für Desktop-Darstellung*/
         section.querySelector("#naechste").addEventListener("click",() => {
             let redirectID;
             if(this._postId == undefined) {
@@ -336,6 +342,17 @@ class RunDisplayEdit {
              this._app.navigate("/run/display/"+ redirectID + "/");
         });
 
+        /*Nächste-Button für Mobile Darstellung */
+        section.querySelector("#naechsteMobile").addEventListener("click",() => {
+            let redirectID;
+            if(this._postId == undefined) {
+                redirectID = this._id;
+            }else{
+                redirectID = this._postId;
+            }
+             this._app.navigate("/run/display/"+ redirectID + "/");
+        });
+        
 
         return {
             className: "run-display-edit",

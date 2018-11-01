@@ -131,17 +131,21 @@
 }
 
 .run-display-edit #vorherigeMobile {
-
-
+    font-size: 27pt;
     width: 90px;
     height: 30px;
     font-weight: bold;
+    background-color: transparent;
+    border: 0;
 }
 
 .run-display-edit #naechsteMobile {
+    font-size: 27pt;
     width: 90px;
     height: 30px;
     font-weight: bold;
+    background-color: transparent;
+    border: 0;
 }
 
 .run-display-edit #vorherige {
@@ -189,7 +193,7 @@
         display: inline;
         position: relative;
         float: left;
-        left: 150px;
+        left: 170px;
         width: 90px;
         height: 30px;
         font-weight: bold;
@@ -209,7 +213,7 @@
         background-color: red;
         position: relative;
         float: left;
-        left: 250px;
+        left: 30px;
         width: 90px;
         height: 30px;
         font-weight: bold;
@@ -220,7 +224,7 @@
         background-color: green;
         position: relative;
         float: left;
-        left: 250px;
+        left: 50px;
         width: 90px;
         height: 30px;
         font-weight: bold;
@@ -230,7 +234,7 @@
     .run-display-edit #abbrechen {
         position: relative;
         float: left;
-        left: 250px;
+        left: 50px;
         width: 90px;
         height: 30px;
         font-weight: bold;
@@ -240,14 +244,13 @@
     .run-display-edit #sichern {
         position: relative;
         float: left;
-        left: 250px;
+        left: 70px;
         width: 90px;
         height: 30px;
         font-weight: bold;
         font-weight: bold;
     }
 }
-
 
     .run-display-edit #div_aendern {
     display: none;
