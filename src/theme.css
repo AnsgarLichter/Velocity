@@ -48,6 +48,6 @@ html {
 
     --header-normal-background-color: rgba(0,0,0,1.0);
     --header-normal-font-color:       rgba(255,255,255, 0.8);
-    --header-active-background-color: rgba(255,255,255, 0.2);
-    --header-active-font-color:       rgba(255,255,255, 0.9);
+    --header-active-background-color: rgba(104, 181, 179, 0.2);
+    --header-active-font-color:       rgba(255,255,255, 1.0);
 }

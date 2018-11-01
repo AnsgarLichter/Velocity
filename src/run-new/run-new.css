@@ -135,8 +135,8 @@
 
 
 .run-new #abbrechen {
-  position: absolute;
-  top: 900px;
+  position: relative;
+  float:left;
   left: 75px;
   width: 90px;
   height: 30px;
@@ -144,9 +144,9 @@
 }
 
 .run-new #sichern {
-  position: absolute;
-  top: 900px;
-  left: 190px;
+  position: relative;
+  float: left;
+  left: 175px;
   width: 90px;
   height: 30px;
   font-weight: bold;

@@ -134,7 +134,7 @@
 
 #app header a:hover {
     color: var(--header-active-font-color);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 #app header input {
