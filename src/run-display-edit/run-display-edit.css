@@ -101,13 +101,11 @@
 .run-display-edit .hidden{
     display: none;
 }
-.run-display-edit .div_bearbeiten {
-    display: block;
-}
+
 .run-display-edit #loeschen {
     background-color: red;
-
-
+    grid-column: 1;
+    left: 75px;
     width: 90px;
     height: 30px;
     font-weight: bold;
@@ -115,8 +113,7 @@
 
 .run-display-edit #bearbeiten {
     background-color: green;
-
-
+    left: 150px;
     width: 90px;
     height: 30px;
     font-weight: bold;
@@ -208,6 +205,48 @@
         left: 250px;
         width: 90px;
         height: 30px;
+        font-weight: bold;
+    }
+
+    .run-display-edit #loeschen {
+        background-color: red;
+        position: relative;
+        float: left;
+        left: 250px;
+        width: 90px;
+        height: 30px;
+        font-weight: bold;
+        font-weight: bold;
+    }
+
+    .run-display-edit #bearbeiten {
+        background-color: green;
+        position: relative;
+        float: left;
+        left: 250px;
+        width: 90px;
+        height: 30px;
+        font-weight: bold;
+        font-weight: bold;
+    }
+
+    .run-display-edit #abbrechen {
+        position: relative;
+        float: left;
+        left: 250px;
+        width: 90px;
+        height: 30px;
+        font-weight: bold;
+        font-weight: bold;
+    }
+
+    .run-display-edit #sichern {
+        position: relative;
+        float: left;
+        left: 250px;
+        width: 90px;
+        height: 30px;
+        font-weight: bold;
         font-weight: bold;
     }
 }

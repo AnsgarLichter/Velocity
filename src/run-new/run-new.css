@@ -82,7 +82,7 @@
 
 .run-new .rating {
   border: none;
-  float: left;
+  display: inline;
 }
 
 .run-new .rating>input {

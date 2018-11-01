@@ -136,11 +136,11 @@ class RunDisplayEdit {
             document.getElementById('star4').removeAttribute('disabled');
             document.getElementById('star5').removeAttribute('disabled');
 
-            document.getElementById('sichern').style.display="block";
-            document.getElementById('div_aendern').style.display="block";
+            document.getElementById('sichern').style.display="inline";
+            document.getElementById('div_aendern').style.display="inline";
             document.getElementById('div_ergebnis_wechseln').style.display="none";
             document.getElementById('bearbeiten').style.display="none";
-            document.getElementById('abbrechen').style.display="block";
+            document.getElementById('abbrechen').style.display="inline";
 
 
 
@@ -157,8 +157,8 @@ class RunDisplayEdit {
             document.getElementById('Beschreibungstext').setAttribute('disabled', true);
 
             document.getElementById('div_aendern').style.display="none";
-            document.getElementById('div_ergebnis_wechseln').style.display="block";
-            document.getElementById('bearbeiten').style.display="block";
+            document.getElementById('div_ergebnis_wechseln').style.display="inline";
+            document.getElementById('bearbeiten').style.display="inline";
         });
 
         /*Event für Sichern-Button*/
@@ -266,8 +266,8 @@ class RunDisplayEdit {
                 * Die Buttons Sichern und abbrechen wieder verstecken und die
                 * Buttons für die detaillierte Ansicht wieder anzeigen.
                 */
-                document.getElementById('div_ergebnis_wechseln').style.display="block";
-                document.getElementById('bearbeiten').style.display="block";
+                document.getElementById('div_ergebnis_wechseln').style.display="inline";
+                document.getElementById('bearbeiten').style.display="inline";
                 document.getElementById('sichern').style.display="none";
                 document.getElementById('abbrechen').style.display="none";
             }
