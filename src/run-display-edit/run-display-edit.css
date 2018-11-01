@@ -50,11 +50,12 @@
     color: black !important;
     background-image: linear-gradient(to bottom, #045262, #007686, #009ca9, #00c5c9, #11eee5) !important;
     line-height: 1.0;
+    display: grid;
 }
 
 .run-display-edit label {
     width: 10em;
-    display: block;
+
     float: left;
     font-size: 15pt;
     font-family: sans-serif;
@@ -62,7 +63,7 @@
 
 .run-display-edit input {
     width: 10em;
-    display: block;
+
     float: left;
     font-size: 15pt;
     font-family: sans-serif;
@@ -72,7 +73,7 @@
 .run-display-edit textarea {
     width:400px;
     height: 5rem;
-    display: block;
+
     float: left;
     font-size: 15pt;
     font-family: sans-serif;
@@ -86,38 +87,27 @@
 .run-display-edit #Art {
     height: 30px;
     width: 204px;
-    display: block;
+
     float: left;
 }
 
 .rating {
-    display: inline;
+
     text-align: left;
     font-size: 100%;
-}
-
-.run-display-edit #labelRange {
-    /*color: #3c3c3c;*/
-    font-color: black !important;
-    font-size: 15pt;
-    /*text-align: center;*/
-}
-
-.run-display-edit #Rating {
-    text-align: left;
 }
 
 
 .run-display-edit .hidden{
     display: none;
 }
-
-
+.run-display-edit .div_bearbeiten {
+    display: block;
+}
 .run-display-edit #loeschen {
     background-color: red;
-    position: relative;
-    float: left;
-    left: 10px;
+
+
     width: 90px;
     height: 30px;
     font-weight: bold;
@@ -125,47 +115,36 @@
 
 .run-display-edit #bearbeiten {
     background-color: green;
-    position: relative;
-    float: left;
-    left: 20px;
+
+
     width: 90px;
     height: 30px;
     font-weight: bold;
 }
 
 .run-display-edit #abbrechen {
-    position: relative;
-    float: left;
-    left: 20px;
+
     width: 90px;
     height: 30px;
     font-weight: bold;
 }
 
 .run-display-edit #sichern {
-    position: relative;
-    float: left;
-    left: 30px;
+
     width: 90px;
     height: 30px;
     font-weight: bold;
 }
 
 .run-display-edit #vorherigeMobile {
-    display: inline;
-    position: relative;
-    float: left;
-    left: 150px;
+
+
     width: 90px;
     height: 30px;
     font-weight: bold;
 }
 
 .run-display-edit #naechsteMobile {
-    display: inline;
-    position: relative;
-    float: left;
-    left: 250px;
     width: 90px;
     height: 30px;
     font-weight: bold;
@@ -250,7 +229,7 @@
 
 .run-display-edit .rating {
   border: none;
-  float: left;
+  display: inline;
 }
 
 .run-display-edit .rating>input {
