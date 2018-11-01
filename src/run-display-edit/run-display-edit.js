@@ -70,7 +70,17 @@ class RunDisplayEdit {
      */
     async onShow() {
         let section = document.querySelector("#run-display-edit").cloneNode(true);
-
+        //Input Felder für die Sternebewertung holen und speichern
+        let star1 = section.querySelector("#star1");
+        let star2 = section.querySelector("#star2");
+        let star3 = section.querySelector("#star3");
+        let star4 = section.querySelector("#star4");
+        let star5 = section.querySelector("#star5");
+        star1.setAttribute("disabled", true);
+        star2.setAttribute("disabled", true);
+        star3.setAttribute("disabled", true);
+        star4.setAttribute("disabled", true);
+        star5.setAttribute("disabled", true);
         /*Laufergbnisse aus Datenbank auslesen*/
         this._id = parseInt(this._id);
         let run = await this._runsDB.getByID(this._id);
@@ -89,60 +99,24 @@ class RunDisplayEdit {
         }else{
            section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
         }
+        //Rating auslesen
+        run.rating = parseInt(run.rating);
+        if(run.rating == 5) {
+            star5.checked = true;
+        }
+        else if(run.rating == 4) {
+            star4.checked = true;
+        }
+        else if(run.rating == 3) {
+            star3.checked = true;
+        }
+        else if(run.rating == 2) {
+            star2.checked = true;
+        }
+        else if(run.rating == 1) {
+            star1.checked = true;
+        }
 
-        //Wenn Rating undefined, keinen Stern anzeigen
-        if(run.rating == undefined){
-           run.rating = "";
-        }
-        section.querySelector('#Rating').value = run.rating;
-
-        /*
-        * Sterne entsprechend dem Rating anzeigen lassen. Bei Rating von 5
-        * werden 5 Sterne angezeigt, bei einem Rating von 3 3 Sterne, usw.
-        */
-        let iconAnzahl = run.rating;
-        if (iconAnzahl == 1){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
-        }
-        else if (iconAnzahl == 2){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
-        }
-        else if (iconAnzahl == 3){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
-        }
-        else if (iconAnzahl == 4){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
-        }
-        else if (iconAnzahl == 5){
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "inline");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "inline");
-        }
-        else{
-            section.querySelectorAll("#icon1").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon2").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon3").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon4").forEach(e => e.style.display = "none");
-            section.querySelectorAll("#icon5").forEach(e => e.style.display = "none");
-        }
 
 
         /*Event für Bearbeiten-Button*/
@@ -155,9 +129,13 @@ class RunDisplayEdit {
             document.getElementById('minutenPerKm').setAttribute('disabled', true);
             document.getElementById('kilometerPerStd').setAttribute('disabled', true);
             document.getElementById('Beschreibungstext').removeAttribute('disabled');
-            document.getElementById('Rating').removeAttribute('disabled');
 
-            document.getElementById('Rating').style.display= "inline";
+            document.getElementById('star1').removeAttribute('disabled');
+            document.getElementById('star2').removeAttribute('disabled');
+            document.getElementById('star3').removeAttribute('disabled');
+            document.getElementById('star4').removeAttribute('disabled');
+            document.getElementById('star5').removeAttribute('disabled');
+
             document.getElementById('sichern').style.display="block";
             document.getElementById('div_aendern').style.display="block";
             document.getElementById('div_ergebnis_wechseln').style.display="none";
@@ -177,16 +155,10 @@ class RunDisplayEdit {
             document.getElementById('minutenPerKm').setAttribute('disabled', true);
             document.getElementById('kilometerPerStd').setAttribute('disabled', true);
             document.getElementById('Beschreibungstext').setAttribute('disabled', true);
-            document.getElementById('Rating').setAttribute('disabled', true);
 
             document.getElementById('div_aendern').style.display="none";
             document.getElementById('div_ergebnis_wechseln').style.display="block";
             document.getElementById('bearbeiten').style.display="block";
-        });
-
-
-        section.querySelector("#Rating").addEventListener("click", () => {
-            let rate = document.querySelector("#Rating").value;
         });
 
         /*Event für Sichern-Button*/
@@ -203,11 +175,27 @@ class RunDisplayEdit {
                 changeDistanz = parseFloat(changeDistanz).toFixed(3);
             let changeZeit = document.querySelector("#Zeit").value;
             let changeArt = document.querySelector("#Art").value;
-            let changeRating = document.querySelector("#Rating").value;
-                changeRating=parseInt(changeRating);
             let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
             //Regex zur Überprüfung der Zeit
             let regexZeit = new RegExp("^\\d{1,3}:\\d{1,2}$");
+
+            //Abfrage der vergebenen Bewertung
+            let rating = 0;
+            if(star5.checked) {
+                rating = 5;
+            }
+            else if(star4.checked) {
+                rating = 4;
+            }
+            else if(star3.checked) {
+                rating = 3;
+            }
+            else if(star2.checked) {
+                rating = 2;
+            }
+            else if(star1.checked) {
+                rating = 1;
+            }
 
             //Prüfen des Namens
             if(!changeName) {
@@ -259,7 +247,7 @@ class RunDisplayEdit {
                     art: changeArt,
                     datum: changeDatum,
                     beschreibungstext: changeBeschreibung,
-                    rating: changeRating,
+                    rating: rating,
                 });
 
                 /*
