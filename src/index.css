@@ -54,7 +54,9 @@ body {
     font-size: 11pt;
     line-height: 1.6;
     color: var(--font-color);
-    background-color: #B7DFDD;
+    /*background-color: #B7DFDD;*/
+    background-image: linear-gradient(to bottom, #045262, #007686, #009ca9, #00c5c9, #11eee5);
+    /*-webkit-gradient(linear, 18% 0%, 0% 100%, from(#38A4BA), to(#081624), color-stop(.9,#152F33));*/
 }
 
 /*
