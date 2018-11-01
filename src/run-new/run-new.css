@@ -135,13 +135,21 @@
 
 
 .run-new #abbrechen {
-    top: 800px;
-    left: 100px;
+  position: absolute;
+  top: 900px;
+  left: 75px;
+  width: 90px;
+  height: 30px;
+  font-weight: bold;
 }
 
 .run-new #sichern {
-    top: 800px;
-    left: 280px;
+  position: absolute;
+  top: 900px;
+  left: 190px;
+  width: 90px;
+  height: 30px;
+  font-weight: bold;
 }
 .run-new .full{
   width: 2.0em;
