@@ -40,7 +40,7 @@
 
 .run-overview main {
     font-color: #3c3c3c;
-    background-color: #B7DFDD;
+    background-image: linear-gradient(to bottom, #045262, #007686, #009ca9, #00c5c9, #11eee5);
     text-align: center;
 }
 
@@ -60,7 +60,7 @@
 
 .run-overview a,
 .run-overview a:visited {
-    color: #3c3c3c;
+    color: white;
     text-decoration: none;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .run-overview tr:nth-child(even) {
-    background-color: #FFFFFF;
+    background-color: #0ca7a2;
 }
 
 .run-overview td {
