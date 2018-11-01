@@ -283,7 +283,7 @@ class RunDisplayEdit {
                 changeId = parseInt(changeId);
             this._runsDB.delete(changeId);
         //  Navigation auf die Übersichtsseite
-            window.location.href = "/run/display/";
+            this._app.navigate("/");
             }
         });
 
