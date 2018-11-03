@@ -94,7 +94,6 @@
     font-size: 100%;
 }
 
-
 .run-display-edit .hidden{
     display: none;
 }
@@ -168,6 +167,7 @@
     font-weight: bold;
 }
 
+/*Bei einer Mindestgröße von 768px wird die Buttondarstellung angepasst*/
 @media screen and (min-width: 768px) {
     .run-display-edit #vorherigeMobile {
         display: none;
@@ -252,16 +252,16 @@
     }
 }
 
-    .run-display-edit #div_aendern {
+.run-display-edit #div_aendern {
     display: none;
-    }
-
+}
 
 .run-display-edit .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
   padding: 0.0em;
 }
+
 .rating span {
   display: inline;
 }

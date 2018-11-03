@@ -58,7 +58,6 @@ class RunDisplayEdit {
     }
 
 
-
     /**
      * Von der Klasse App aufgerufene Methode, um die Seite anzuzeigen. Die
      * Methode gibt daher ein passendes Objekt zurück, das an die Methode
@@ -70,6 +69,7 @@ class RunDisplayEdit {
      */
     async onShow() {
         let section = document.querySelector("#run-display-edit").cloneNode(true);
+
         //Input Felder für die Sternebewertung holen und speichern
         let star1 = section.querySelector("#star1");
         let star2 = section.querySelector("#star2");
@@ -81,7 +81,8 @@ class RunDisplayEdit {
         star3.setAttribute("disabled", true);
         star4.setAttribute("disabled", true);
         star5.setAttribute("disabled", true);
-        /*Laufergbnisse aus Datenbank auslesen*/
+
+        /*Attribute zu dem jeweiligen Laufergebnis anhand der ID aus Datenbank auslesen*/
         this._id = parseInt(this._id);
         let run = await this._runsDB.getByID(this._id);
         run.strecke = run.strecke.replace(",", ".");
@@ -93,12 +94,14 @@ class RunDisplayEdit {
         section.querySelector('#Zeit').value=run.dauer;
         section.querySelector('#minutenPerKm').value=run.minutenPerKm;
         section.querySelector('#kilometerPerStd').value = run.kmPerStd;
+
         //Wenn Beschreibungstext undefined, leeren String anzeigen
         if(run.beschreibungstext == undefined){
            run.beschreibungstext = "";
         }else{
            section.querySelector('#Beschreibungstext').value=run.beschreibungstext;
         }
+
         //Rating auslesen
         run.rating = parseInt(run.rating);
         if(run.rating == 5) {
@@ -117,9 +120,7 @@ class RunDisplayEdit {
             star1.checked = true;
         }
 
-
-
-        /*Event für Bearbeiten-Button*/
+        /*Event für Bearbeiten-Button: Alle Felder außer minPerKm und kilometerPerStd können bearbeitet werden*/
         section.querySelector("#bearbeiten").addEventListener("click",() => {
             document.getElementById('Name').removeAttribute('disabled');
             document.getElementById('Datum').removeAttribute('disabled');
@@ -141,11 +142,9 @@ class RunDisplayEdit {
             document.getElementById('div_ergebnis_wechseln').style.display="none";
             document.getElementById('bearbeiten').style.display="none";
             document.getElementById('abbrechen').style.display="inline";
-
-
-
         });
-        /*Event für Abbrechen-Button*/
+
+        /*Event für Abbrechen-Button: Alle Input-Felder werden grau hinterlegt.*/
         section.querySelector("#abbrechen").addEventListener("click",() => {
             document.getElementById('Name').setAttribute('disabled', true);
             document.getElementById('Datum').setAttribute('disabled', true);
@@ -176,6 +175,7 @@ class RunDisplayEdit {
             let changeZeit = document.querySelector("#Zeit").value;
             let changeArt = document.querySelector("#Art").value;
             let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
+
             //Regex zur Überprüfung der Zeit
             let regexZeit = new RegExp("^\\d{1,3}:\\d{1,2}$");
 
@@ -282,11 +282,13 @@ class RunDisplayEdit {
             let changeId = url.substring(url.lastIndexOf('/') + 1);
                 changeId = parseInt(changeId);
             this._runsDB.delete(changeId);
-        //  Navigation auf die Übersichtsseite
+        //Navigation auf die Übersichtsseite
             this._app.navigate("/");
             }
         });
 
+        /*ID finden, die sich direkt vor der aktuell angezeigen ID befindet
+        und durch Vorher-Button aufgerufen werden kann*/
         let listId = await this._runsDB.search();
         let current = parseInt(listId[0].id);
         listId.forEach((run) =>{
@@ -311,7 +313,8 @@ class RunDisplayEdit {
              this._app.navigate("/run/display/"+ redirectID + "/");
           });
 
-         //Nachster
+         /*ID finden, die sich direkt nach der aktuell angezeigen ID befindet
+         und durch Nächste-Button aufgerufen werden kann*/
         listId = await this._runsDB.search();
          current = 100000;
          listId.forEach((run) =>{
@@ -322,15 +325,15 @@ class RunDisplayEdit {
 
                 if (diff1 < diff2) {
                     current = runId;
+                }
             }
-
-             }
          });
          if(current == 100000) {
             this._postID = this._id;
          }else{
             this._postId = current;
          }
+
          /*Nächste-Button für Desktop-Darstellung*/
         section.querySelector("#naechste").addEventListener("click",() => {
             let redirectID;
@@ -352,7 +355,7 @@ class RunDisplayEdit {
             }
              this._app.navigate("/run/display/"+ redirectID + "/");
         });
-        
+
 
         return {
             className: "run-display-edit",
