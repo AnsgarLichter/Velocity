@@ -141,15 +141,18 @@
 
 .run-new #abbrechen {
   position: relative;
+  border-radius: 50%;
   float:left;
   left: 75px;
   width: 90px;
   height: 30px;
   font-weight: bold;
+  font-weight: bold;
 }
 
 .run-new #sichern {
   position: relative;
+  border-radius: 50%;
   float: left;
   left: 175px;
   width: 90px;
