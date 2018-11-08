@@ -177,7 +177,7 @@ class RunDisplayEdit {
             let changeBeschreibung = document.querySelector("#Beschreibungstext").value;
 
             //Regex zur Überprüfung der Zeit
-            let regexZeit = new RegExp("^\\d{1,3}:\\d{1,2}$");
+            let regexZeit = new RegExp("^\\d{1,3}:[0-5][0-9]$");
 
             //Abfrage der vergebenen Bewertung
             let rating = 0;
