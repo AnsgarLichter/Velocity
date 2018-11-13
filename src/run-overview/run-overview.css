@@ -1,3 +1,4 @@
+<<<<<<< current
 /*
  * Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
  *
@@ -103,3 +104,218 @@
         display: inline;
     }
 }
+=======
+<<<<<<< current
+/*
+ * Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
+ *
+ * © 2018 Ansgar Lichter, Patrick Fichtner, Toni Coric
+ * Lizenz: Creative Commons Namensnennung 4.0 International
+ *
+ * Sie dürfen:
+ *
+ *     Teilen — das Material in jedwedem Format oder Medium vervielfältigen
+ *     und weiterverbreiten
+ *
+ *     Bearbeiten — das Material remixen, verändern und darauf aufbauen
+ *     und zwar für beliebige Zwecke, sogar kommerziell.
+ *
+ * Unter folgenden Bedingungen:
+ *
+ *     Namensnennung — Sie müssen angemessene Urheber- und Rechteangaben
+ *     machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen
+ *     vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art
+ *     und Weise gemacht werden, allerdings nicht so, dass der Eindruck
+ *     entsteht, der Lizenzgeber unterstütze gerade Sie oder Ihre Nutzung
+ *     besonders.
+ *
+ *     Keine weiteren Einschränkungen — Sie dürfen keine zusätzlichen Klauseln
+ *     oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas
+ *     untersagen, was die Lizenz erlaubt.
+ *
+ * Es werden keine Garantien gegeben und auch keine Gewähr geleistet.
+ * Die Lizenz verschafft Ihnen möglicherweise nicht alle Erlaubnisse,
+ * die Sie für die jeweilige Nutzung brauchen. Es können beispielsweise
+ * andere Rechte wie Persönlichkeits- und Datenschutzrechte zu beachten
+ * sein, die Ihre Nutzung des Materials entsprechend beschränken.
+ */
+
+ /*
+  * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .run-overview
+  * beginnen. Es sollen nämlich keine Eigenschaften aus anderen Bereichen
+  * überschrieben werden.
+  */
+
+.run-overview main {
+    font-color: #3c3c3c;
+    background-image: linear-gradient(to bottom, #045262, #007686, #009ca9, #00c5c9, #11eee5);
+    text-align: center;
+}
+
+.run-overview table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: small;
+    font-family: sans-serif;
+}
+
+.run-overview td, th {
+    border: 2px solid #3c3c3c;
+    text-align: left;
+    padding: 4px;
+}
+
+.run-overview a,
+.run-overview a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.run-overview #t1 {
+    background-color: #202124;
+    color: white;
+
+}
+
+.run-overview tr:nth-child(even) {
+    background-color: #0ca7a2;
+}
+
+.run-overview td {
+    cursor: pointer;
+}
+.run-overview p {
+    display: inline;
+}
+/*
+* Die Klasse hidden muss hier nochmal implementiert werden, da der Effekt dieser
+* nicht erfolgte. Der Grund dafür war, dass die Eigenschaft der Klasse durch
+* CSS-Anweisungen der Klasse run-overview überschrieben wurde
+*/
+.run-overview .hidden {
+    display: none;
+}
+
+/*
+* Die Triangles sollen bei Bildschirmen mit einer Breite unter 600px nicht
+* angezeigt werden. Daher wird bei der Klasse display die Eigensschaft display
+* auf none gestellt.
+*/
+.run-overview .display {
+    display: none;
+}
+
+@media screen and (min-width: 600px) {
+    .run-overview .display{
+        display: inline;
+    }
+}
+=======
+/*
+ * Velocity - your running companion: Website im Rahmen der Vorlesung "Webprogrammierung"
+ *
+ * © 2018 Ansgar Lichter, Patrick Fichtner, Toni Coric
+ * Lizenz: Creative Commons Namensnennung 4.0 International
+ *
+ * Sie dürfen:
+ *
+ *     Teilen — das Material in jedwedem Format oder Medium vervielfältigen
+ *     und weiterverbreiten
+ *
+ *     Bearbeiten — das Material remixen, verändern und darauf aufbauen
+ *     und zwar für beliebige Zwecke, sogar kommerziell.
+ *
+ * Unter folgenden Bedingungen:
+ *
+ *     Namensnennung — Sie müssen angemessene Urheber- und Rechteangaben
+ *     machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen
+ *     vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art
+ *     und Weise gemacht werden, allerdings nicht so, dass der Eindruck
+ *     entsteht, der Lizenzgeber unterstütze gerade Sie oder Ihre Nutzung
+ *     besonders.
+ *
+ *     Keine weiteren Einschränkungen — Sie dürfen keine zusätzlichen Klauseln
+ *     oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas
+ *     untersagen, was die Lizenz erlaubt.
+ *
+ * Es werden keine Garantien gegeben und auch keine Gewähr geleistet.
+ * Die Lizenz verschafft Ihnen möglicherweise nicht alle Erlaubnisse,
+ * die Sie für die jeweilige Nutzung brauchen. Es können beispielsweise
+ * andere Rechte wie Persönlichkeits- und Datenschutzrechte zu beachten
+ * sein, die Ihre Nutzung des Materials entsprechend beschränken.
+ */
+
+ /*
+  * Dieses Stylesheet darf nur Selektoren beinhalten, die mit .run-overview
+  * beginnen. Es sollen nämlich keine Eigenschaften aus anderen Bereichen
+  * überschrieben werden.
+  */
+
+.run-overview main {
+    font-color: #3c3c3c;
+    background-image: linear-gradient(to bottom, #045262, #007686, #009ca9, #00c5c9, #11eee5);
+    text-align: center;
+}
+
+.run-overview table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: small;
+    font-family: sans-serif;
+}
+
+.run-overview td, th {
+    border: 2px solid #3c3c3c;
+    text-align: left;
+    padding: 4px;
+}
+
+.run-overview a,
+.run-overview a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.run-overview #t1 {
+    background-color: #202124;
+    color: white;
+
+}
+
+.run-overview tr:nth-child(even) {
+    background-color: #0ca7a2;
+}
+
+.run-overview td {
+    cursor: pointer;
+}
+.run-overview p {
+    display: inline;
+}
+/*
+* Die Klasse hidden muss hier nochmal implementiert werden, da der Effekt dieser
+* nicht erfolgte. Der Grund dafür war, dass die Eigenschaft der Klasse durch
+* CSS-Anweisungen der Klasse run-overview überschrieben wurde
+*/
+.run-overview .hidden {
+    display: none;
+}
+
+/*
+* Die Triangles sollen bei Bildschirmen mit einer Breite unter 600px nicht
+* angezeigt werden. Daher wird bei der Klasse display die Eigensschaft display
+* auf none gestellt.
+*/
+.run-overview .display {
+    display: none;
+}
+
+@media screen and (min-width: 600px) {
+    .run-overview .display{
+        display: inline;
+    }
+}
+>>>>>>> before discard
+>>>>>>> before discard

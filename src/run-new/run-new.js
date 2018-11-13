@@ -92,7 +92,7 @@ class RunNew {
             let newArt = document.querySelector("#Art").value;
             let newBeschreibung = document.querySelector("#Beschreibungstext").value;
             //Regex zur Überprüfung der Zeit
-            let regexZeit = new RegExp("^\\d{1,3}:\\d{1,2}$");
+            let regexZeit = new RegExp("^\\d{1,3}:[0-5][0-9]$");
             //Abfrage der vergebenen Bewertung
             let star1 = document.getElementById("star1");
             let star2 = document.getElementById("star2");
