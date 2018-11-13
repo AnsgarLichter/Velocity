@@ -60,7 +60,7 @@ class App {
         this._currentUrl = "";
         this._navAborted = false;
 
-        //TODO: Aufruf für /run/new ändern, sobald Klasse für Run hinzufügen existiert
+        
         this._router.on({
             "*":                  () => this.showRunOverview(),
             "/run/new/":          () => this.showRunNew(),
