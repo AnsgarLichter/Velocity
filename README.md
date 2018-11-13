@@ -58,16 +58,16 @@ kann mit dem Befehl "npm run start" die Anwendung im Browser gestartet werden.
     </tr>
     <tr>
         <td>
-            Mobile Darstellung
+            Übersicht der Laufergebnisse
         </td>
         <td>
-            Übersicht der Songtexte
+            Anzeige eines Laufergbnis
         </td>
         <td>
-            Anzeige eines Songtexts
+            Löschen eines Laufergebnis
         </td>
     </tr>
 </table>
 
-Copyright
+
 ---------
