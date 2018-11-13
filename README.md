@@ -38,7 +38,7 @@ Die App richtet sich an Läufer, die ihre Laufergebnisse dokumentieren und
 verwalten möchten. Dadurch erlangen sie eine Übersicht der vergangenen Trainingsleistungen.
 Zum Start der Anwendung ist es notwendig, dass der Projektordner lokal abgespeichert wird.
 In der Eingabeaufforderung muss danach auf das Projektverzeichnis "Velocity", in dem
-die Dokumente abgelegt sind, gewechselt wechseln.
+die Dokumente abgelegt sind, gewechselt werden.
 Sobald der Dateipfad der Eingabeaufforderung korrekt angezeigt wird,
 kann mit dem Befehl "npm run start" die Anwendung im Browser gestartet werden.
 
