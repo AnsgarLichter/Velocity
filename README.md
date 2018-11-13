@@ -34,10 +34,14 @@ Zusätzlich werden folgende Bibliotheken genutzt:
 UI-Skizzen und Screenshots
 --------------------------
 
-Die App richtet sich an Musiker, die anhand eines Lead Sheets neue Lieder
-üben oder diese auf der Bühne vortragen wollen. Hierfür bietet sie eine
-einfache Verwaltung von Songtexten mit der Möglichkeit, neue Texte online
-zu suchen und der eigenen Sammlung hinzuzufügen.
+Die App richtet sich an Läufer, die ihre Laufergebnisse dokumentieren und
+verwalten möchten. Dadurch erlangen sie eine Übersicht der vergangenen Trainingsleistungen.
+Zum Start der Anwendung ist es notwendig, dass der Projektordner lokal abgespeichert wird.
+In der Eingabeaufforderung muss danach auf das Projektverzeichnis "Velocity", in dem
+die Dokumente abgelegt sind, gewechselt wechseln.
+Sobald der Dateipfad der Eingabeaufforderung korrekt angezeigt wird,
+kann mit dem Befehl "npm run start" die Anwendung im Browser gestartet werden.
+
 
 
 <table style="max-width: 100%;">
@@ -67,8 +71,3 @@ zu suchen und der eigenen Sammlung hinzuzufügen.
 
 Copyright
 ---------
-
-Dieses Projekt ist lizenziert unter
-[_Creative Commons Namensnennung 4.0 International_](http://creativecommons.org/licenses/by/4.0/)
-
-© 2018 Toni Coric, Patrick Fichtner, Ansagar Lichter <br/>
