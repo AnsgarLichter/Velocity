@@ -30,7 +30,7 @@
   "homepage": "https://github.com/DennisSchulmeister/dhbwka-wwi-webprog-my-songbook#readme",
   "devDependencies": {
     "navigo": "^7.1.2",
-    "parcel-bundler": "^1.9.7",
+    "parcel-bundler": "^1.10.0",
     "shelljs": "^0.8.2"
   },
   "dependencies": {
