@@ -31,7 +31,7 @@
   "devDependencies": {
     "navigo": "^7.1.2",
     "parcel-bundler": "^1.10.0",
-    "shelljs": "^0.8.2"
+    "shelljs": "^0.8.5"
   },
   "dependencies": {
     "dexie": "^2.0.4"
